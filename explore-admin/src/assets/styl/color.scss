@@ -1,0 +1,13 @@
+:root {
+  --main-color: #223549;
+  --sub-color: #e0a419;
+  --aside-text-color: #fff;
+  // element
+  --el-menu-bg-color: $main-color;
+  --el-menu-text-color: $aside-text-color;
+  --el-menu-hover-bg-color: var(--sub-color);
+}
+
+$main-color: var(--main-color);
+$sub-color: var(--sub-color);
+$aside-text-color: var(--aside-text-color);
