@@ -22,6 +22,20 @@ router.beforeEach(async (to, from, next) => {
     if (isToLogin) {
       next({ name: 'Layout' })
     } else {
+      if (store.menus.length === 0) {
+        await store.getMenus()
+        const newRouters = generateRouter(store.menus)
+        const layout = router.getRoutes().find((item: RouteRecordRaw) => item.name === 'Layout')
+        if (layout) {
+          layout.redirect = newRouters[0].path
+          layout.children = newRouters
+          const routes = router.getRoutes()
+          routes.forEach((route) => {
+            router.addRoute(route)
+          })
+          router.replace(to.path)
+        }
+      }
       next()
     }
   } else {

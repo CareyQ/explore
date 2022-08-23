@@ -8,7 +8,6 @@ import com.careyq.explore.server.vo.MenuVO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -25,17 +24,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     public List<MenuVO> getAdminMenus(Integer type) {
         List<Menu> menus = this.lambdaQuery().eq(Menu::getType, type).list();
 
-
-        Map<Long, MenuVO> map = menus.stream().collect(Collectors.toMap(Menu::getId, menu -> {
-            MenuVO vo = new MenuVO();
-            vo.setId(menu.getId())
-                    .setName(menu.getName())
-                    .setRoute(menu.getRoute())
-                    .setIcon(menu.getIcon())
-                    .setIsBlank(menu.getIsBlank())
-                    .setTitle(menu.getTitle());
-            return vo;
-        }));
         Map<Long, MenuVO> result = new LinkedHashMap<>();
         for (Menu menu : menus) {
             MenuVO vo = new MenuVO();
@@ -44,7 +32,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                     .setRoute(menu.getRoute())
                     .setIcon(menu.getIcon())
                     .setIsBlank(menu.getIsBlank())
-                    .setTitle(menu.getTitle());
+                    .setTitle(menu.getTitle())
+                    .setParentId(menu.getParentId());
             if (Objects.isNull(result.get(menu.getParentId()))) {
                 result.put(vo.getId(), vo);
             } else {

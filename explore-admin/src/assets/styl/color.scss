@@ -1,11 +1,14 @@
 :root {
-  --main-color: #223549;
-  --sub-color: #e0a419;
-  --aside-text-color: #fff;
+  --body-color: #efedeb;
+  --main-color: #fff;
+  --logo-color: #212533;
+  --sub-color: #f9a647;
+  --aside-text-color: #7a7c85;
   // element
   --el-menu-bg-color: $main-color;
   --el-menu-text-color: $aside-text-color;
   --el-menu-hover-bg-color: var(--sub-color);
+  --el-menu-active-color: var(--sub-color);
 }
 
 $main-color: var(--main-color);

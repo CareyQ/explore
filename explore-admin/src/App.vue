@@ -17,6 +17,6 @@ body,
 }
 
 #app {
-  background-color: #edeff1;
+  background-color: var(--body-color);
 }
 </style>

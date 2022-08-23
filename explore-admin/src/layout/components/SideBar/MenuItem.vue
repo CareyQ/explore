@@ -27,4 +27,8 @@ defineProps<{
 i {
   margin-right: 16px;
 }
+
+.el-menu-item.is-active {
+  color: var(--aside-text-color);
+}
 </style>

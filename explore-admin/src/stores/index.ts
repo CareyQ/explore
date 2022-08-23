@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import { getMenu } from '@/api/menu'
 import type { Menu } from '@/interface/Menu'
 import type { LoginUser } from '@/interface/User'
+import { generateRouter } from '@/utils/menu'
+import router from '@/router'
+import type { RouteRecordRaw } from 'vue-router'
 
 export const useStore = defineStore('user', {
   state: () => ({
@@ -20,7 +23,7 @@ export const useStore = defineStore('user', {
     },
 
     /**
-     * 获取菜单
+     * 获取菜单，构建路由
      */
     async getMenus() {
       const { data } = await getMenu()

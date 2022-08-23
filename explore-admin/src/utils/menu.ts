@@ -2,7 +2,7 @@ import type { Menu } from '@/interface/Menu'
 import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
-const template = import.meta.glob('@/view**.vue')
+const modules = import.meta.glob('../views/**/**.vue')
 
 export const generateRouter = (menus: Menu[]) => {
   const routers: RouteRecordRaw[] = menus.map((menu: Menu) => {
@@ -12,12 +12,17 @@ export const generateRouter = (menus: Menu[]) => {
       meta: {
         icon: menu.icon
       },
-      component: template[/* @vite-ignore */ `../view${menu.route}.vue`]
+      component: modules[`../views${menu.route}/${menu.name}.vue`],
+      redirect: '',
+      children: []
+    }
+
+    if (menu.parentId === 0) {
+      router.component = Layout
     }
 
     if (menu.children && menu.children.length > 0) {
       router.redirect = menu.children[0].route
-      router.component = Layout
     }
     if (router && menu.children) {
       router.children = generateRouter(menu.children)

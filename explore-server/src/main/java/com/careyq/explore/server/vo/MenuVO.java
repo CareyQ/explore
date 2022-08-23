@@ -25,6 +25,11 @@ public class MenuVO {
     private Long id;
 
     /**
+     * 父 ID
+     */
+    private Long parentId;
+
+    /**
      * 菜单标题
      */
     private String title;

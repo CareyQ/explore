@@ -17,11 +17,9 @@ const store = useStore()
 <style lang="scss" scoped>
 .logo {
   padding: 16px 0;
-  text-align: center;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
-  background-color: $sub-color;
-  box-shadow: 10px 10px 20px rgb(33 44 55 / 30%);
+  color: var(--logo-color);
 }
 
 .el-menu {
