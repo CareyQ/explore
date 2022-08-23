@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { ElConfigProvider } from 'element-plus'
-import { useStore } from '@/stores/index'
-
-const store = useStore()
-
-store.getMenus()
 </script>
 
 <template>

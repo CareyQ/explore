@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.entity.User;
+import com.careyq.explore.server.vo.LoginUserVO;
 
 /**
  * <p>
@@ -19,8 +20,8 @@ public interface UserService extends IService<User> {
      * 用户登录
      *
      * @param dto LoginDTO
-     * @return token
+     * @return LoginUserVO
      */
-    Result<String> login(LoginDTO dto);
+    Result<LoginUserVO> login(LoginDTO dto);
 
 }

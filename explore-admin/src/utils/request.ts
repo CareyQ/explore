@@ -1,9 +1,5 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosError,
-  AxiosResponse
-} from 'axios'
+import router from '@/router'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 
 interface Result {
@@ -18,7 +14,8 @@ interface ResultData<T = unknown> extends Result {
 
 enum RequestEnums {
   TIMEOUT = 20000,
-  SUCCESS = 0
+  SUCCESS = 0,
+  UN_LOGIN = 4003
 }
 
 const URL = 'http://127.0.0.1:8888/explore/api'
@@ -57,6 +54,13 @@ class RequestHttp {
     this.service.interceptors.response.use(
       (res: AxiosResponse) => {
         const { data } = res
+
+        if (data.code === RequestEnums.UN_LOGIN) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('login_user')
+          router.replace({ name: 'Login' })
+          return Promise.reject(data)
+        }
 
         if (data.code && data.code != RequestEnums.SUCCESS) {
           ElMessage.error(data.showMsg)

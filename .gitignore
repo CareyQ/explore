@@ -1,4 +1,4 @@
-/target/
+**/target/
 /temp/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -16,6 +16,11 @@
 *.iws
 *.iml
 *.ipr
+*.jar
+*.war
+*.ear
+.rebel.xml
+*.class
 
 ### NetBeans ###
 /nbproject/private/

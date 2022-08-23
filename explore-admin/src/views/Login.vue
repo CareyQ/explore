@@ -2,18 +2,25 @@
 import { reactive } from 'vue'
 import { login } from '@/api/login'
 import { useStore } from '@/stores/index'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 const store = useStore()
+const router = useRouter()
 
 const LoginForm = reactive({
   username: '',
   password: ''
 })
 
-const loginMethod = async () => {
-  const data = await login(LoginForm)
-  store.setToken(data.data)
-  store.getMenus()
+const handleLogin = async () => {
+  const { data } = await login(LoginForm)
+  if (data) {
+    store.loginData(data)
+    router.push({ name: 'Layout' })
+  } else {
+    ElMessage.error('登录失败')
+  }
 }
 </script>
 
@@ -26,16 +33,10 @@ const loginMethod = async () => {
           <input type="text" placeholder="账号" v-model="LoginForm.username" />
         </div>
         <div class="form-itme">
-          <input
-            type="password"
-            placeholder="密码"
-            v-model="LoginForm.password"
-          />
+          <input type="password" placeholder="密码" v-model="LoginForm.password" />
         </div>
         <div class="form-btn">
-          <button type="button" class="login-btn" @click="loginMethod">
-            登 录
-          </button>
+          <button type="button" class="login-btn" @click="handleLogin">登 录</button>
         </div>
       </div>
     </div>

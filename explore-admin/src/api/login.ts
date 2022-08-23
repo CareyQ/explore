@@ -1,4 +1,5 @@
 import axios from '../utils/request'
+import type { LoginUser } from '@/interface/User'
 
 namespace Login {
   export interface LoginDTO {
@@ -8,5 +9,5 @@ namespace Login {
 }
 
 export const login = (params: Login.LoginDTO) => {
-  return axios.post('/user/login', params)
+  return axios.post<LoginUser>('/user/login', params)
 }

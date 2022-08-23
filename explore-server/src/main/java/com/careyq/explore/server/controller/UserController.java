@@ -4,6 +4,7 @@ import com.careyq.explore.common.annotation.IgnoreLogin;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.service.UserService;
+import com.careyq.explore.server.vo.LoginUserVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +31,11 @@ public class UserController {
      * 登录接口
      *
      * @param dto LoginDTO
-     * @return token
+     * @return LoginUserVO
      */
     @IgnoreLogin
     @PostMapping("/login")
-    public Result<String> login(@RequestBody @Validated LoginDTO dto) {
+    public Result<LoginUserVO> login(@RequestBody @Validated LoginDTO dto) {
         return userService.login(dto);
     }
 

@@ -7,17 +7,11 @@ const store = useStore()
 </script>
 
 <template>
-  <div class="sidebar">
-    <div class="logo">Explore</div>
+  <div class="logo">Explore</div>
 
-    <el-menu router>
-      <div class="menus">
-        <div class="menu-item" v-for="item in store.menus" :key="item.id">
-          <MenuItem :item="item" />
-        </div>
-      </div>
-    </el-menu>
-  </div>
+  <el-menu router>
+    <MenuItem :item="item" v-for="item in store.menus" :key="item.id" />
+  </el-menu>
 </template>
 
 <style lang="scss" scoped>

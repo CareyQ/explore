@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ElContainer, ElAside, ElMain } from 'element-plus'
 import SideBar from './components/SideBar/SideBar.vue'
+import { useStore } from '@/stores/index'
+
+const store = useStore()
+store.getMenus()
 </script>
 
 <template>
@@ -17,6 +21,9 @@ import SideBar from './components/SideBar/SideBar.vue'
 .el-aside {
   background-color: $main-color;
   color: $aside-text-color;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .el-container {
   height: 100%;

@@ -7,25 +7,16 @@ defineProps<{
 </script>
 
 <template>
-  <!-- 多级菜单 -->
-  <el-sub-menu
-    v-if="item.children && item.children.length > 0"
-    :index="item.route"
-  >
+  <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.route">
     <template #title>
       <i :class="`icon-${item.icon}`"></i>
       <span>{{ item.title }}</span>
     </template>
-    <el-menu-item
-      v-for="(child, index) in item.children"
-      :key="index"
-      :route="item.route"
-    >
+    <el-menu-item v-for="(child, index) in item.children" :key="index" :route="item.route">
       <template #title>{{ child.title }}</template>
     </el-menu-item>
   </el-sub-menu>
 
-  <!-- 单级菜单 -->
   <el-menu-item v-else :index="item.route" :route="item.route">
     <i :class="'icon-' + item.icon"></i>
     <template #title>{{ item.title }}</template>

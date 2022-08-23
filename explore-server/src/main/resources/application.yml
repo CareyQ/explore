@@ -13,9 +13,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://xxxx:3306/explore?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: xxx
-    password: xxxxxx
+    url: jdbc:mysql://139.155.174.195:3306/explore?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: qk20150303
     druid:
       initial-size: 5
       min-idle: 5
@@ -27,9 +27,9 @@ spring:
   # Redis 配置
   redis:
     database: 0
-    host: xxxxxx
+    host: 139.155.174.195
     port: 6379
-    password: xxxx
+    password: google
     timeout: 10s
     jedis:
       pool:

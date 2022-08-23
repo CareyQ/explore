@@ -8,6 +8,7 @@ import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.entity.User;
 import com.careyq.explore.server.mapper.UserMapper;
 import com.careyq.explore.server.service.UserService;
+import com.careyq.explore.server.vo.LoginUserVO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,16 +25,21 @@ import java.time.LocalDateTime;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Override
-    public Result<String> login(LoginDTO dto) {
-        Long count = this.lambdaQuery()
+    public Result<LoginUserVO> login(LoginDTO dto) {
+        User user = this.lambdaQuery()
                 .eq(User::getUsername, dto.getUsername())
                 .eq(User::getPassword, StrUtil.encrypt(dto.getPassword()))
-                .count();
-        if (count <= 0) {
+                .one();
+        if (user == null) {
             return Result.fail("用户名或密码有误");
         }
         String token = StrUtil.encrypt(dto.getUsername() + LocalDateTime.now());
-        RedisUtil.set("admin_" + token, token, 3600);
-        return Result.success(token, "登录成功");
+        LoginUserVO vo = new LoginUserVO();
+        vo.setUsername(user.getUsername())
+                .setAvatar(user.getAvatar())
+                .setToken(token);
+
+        RedisUtil.set("admin_" + token, vo, 1800);
+        return Result.success(vo, "登录成功");
     }
 }
