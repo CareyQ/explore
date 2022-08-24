@@ -16,6 +16,9 @@ public class StrUtil {
 
     public final String EMPTY = "";
     public final String COMMA = ",";
+    public final String SLASH  = "/";
+    public final String BACKSLASH   = "\\";
+    public final String DOT = ".";
     public final String NULL = "null";
     public final String UNDEFINED = "undefined";
 
@@ -50,6 +53,25 @@ public class StrUtil {
     }
 
     /**
+     * 查找指定字符串中是否包含 字符串数组中的任意一个
+     *
+     * @param val      指定字符串
+     * @param checkVal 需要检查的字符串数组
+     * @return 是否包含
+     */
+    public boolean isContainsStr(CharSequence val, CharSequence... checkVal) {
+        if (isBlank(val) || checkVal == null || checkVal.length == 0) {
+            return false;
+        }
+        for (CharSequence checkStr : checkVal) {
+            if (val.toString().contains(checkStr)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 加密
      *
      * @param val 待加密字符串
@@ -64,7 +86,20 @@ public class StrUtil {
         for (int i = 0; i < bytes.length; i++) {
             builder.append(bytes[i]).append(i);
         }
-        return DigestUtils.md5DigestAsHex(builder.toString().getBytes(StandardCharsets.UTF_8));
+        return md5Hex(builder.toString());
+    }
+
+    /**
+     * MD5 加密
+     *
+     * @param val 待加密字符串
+     * @return 加密后的字符串
+     */
+    public String md5Hex(String val) {
+        if (isBlank(val)) {
+            return EMPTY;
+        }
+        return DigestUtils.md5DigestAsHex(val.getBytes(StandardCharsets.UTF_8));
     }
 
     public static void main(String[] args) {

@@ -13,7 +13,9 @@ store.getMenus()
       <SideBar />
     </el-aside>
 
-    <el-main> main </el-main>
+    <el-main>
+      <RouterView />
+    </el-main>
   </el-container>
 </template>
 

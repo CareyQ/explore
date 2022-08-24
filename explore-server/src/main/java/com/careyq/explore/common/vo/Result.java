@@ -104,6 +104,13 @@ public class Result<T> {
     }
 
     /**
+     * 失败 - 自定义状态码、显示消息
+     */
+    public static <T> Result<T> fail(String showMsg, String msg) {
+        return Result.<T>fail().setCode(ResultCodeEnum.FAIL.getCode()).setShowMsg(showMsg).setMsg(msg);
+    }
+
+    /**
      * 失败 - 携带数据，自定义显示消息
      */
     public static <T> Result<T> fail(T data, String showMsg) {

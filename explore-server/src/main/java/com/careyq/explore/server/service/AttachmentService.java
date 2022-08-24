@@ -20,7 +20,7 @@ public interface AttachmentService extends IService<Attachment> {
      *
      * @param file     文件
      * @param pathEnum FilePathEnum
-     * @return 文件地址
+     * @return 结果
      */
-    String uploadFile(MultipartFile file, FilePathEnum pathEnum);
+    boolean uploadFile(MultipartFile file, FilePathEnum pathEnum);
 }

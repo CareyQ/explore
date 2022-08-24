@@ -28,9 +28,7 @@ router.beforeEach(async (to, from, next) => {
         const layout = router.getRoutes().find((item: RouteRecordRaw) => item.name === 'Layout')
         if (layout) {
           layout.redirect = newRouters[0].path
-          layout.children = newRouters
-          const routes = router.getRoutes()
-          routes.forEach((route) => {
+          newRouters.forEach((route) => {
             router.addRoute(route)
           })
           router.replace(to.path)
@@ -46,26 +44,6 @@ router.beforeEach(async (to, from, next) => {
       next({ name: LOGIN })
     }
   }
-
-  // if (to.name !== 'login' && !token) {
-  //   next({ name: 'Login' })
-  // } else if (to.name !== 'login') {
-  //   if (store.menus.length === 0) {
-  //     await store.getMenus()
-  //     const menus = generateRouter(store.menus)
-  //     console.log(store.menus)
-
-  //     const layout = routes.find((itme: RouteRecordRaw) => itme.name == 'Layout')
-  //     console.log(layout)
-
-  //     if (layout) {
-  //       layout.redirect = menus[0].path
-  //       layout.children = [...menus]
-  //       router.addRoute(layout)
-  //     }
-  //   }
-  //   next()
-  // }
 })
 
 export default router

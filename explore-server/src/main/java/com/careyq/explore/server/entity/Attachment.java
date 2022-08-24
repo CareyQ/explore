@@ -1,6 +1,7 @@
 package com.careyq.explore.server.entity;
 
 import com.careyq.explore.common.entity.BaseModel;
+import com.careyq.explore.common.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,7 +34,7 @@ public class Attachment extends BaseModel<Attachment> {
     /**
      * 文件路径
      */
-    private Integer path;
+    private String path;
 
     /**
      * 文件大小
@@ -50,6 +51,19 @@ public class Attachment extends BaseModel<Attachment> {
      */
     private Integer weight;
 
+    /**
+     * 构建路径
+     *
+     * @param prefix    前缀
+     * @param fileName  文件名
+     * @param extension 扩展名
+     */
+    public void builderPath(String prefix, String fileName, String extension) {
+        this.path = prefix
+                + StrUtil.md5Hex(fileName + System.currentTimeMillis())
+                + StrUtil.DOT
+                + extension;
+    }
 
     @Override
     public Serializable pkVal() {

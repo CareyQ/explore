@@ -32,3 +32,9 @@ i {
   color: var(--aside-text-color);
 }
 </style>
+
+<style lang="scss">
+.el-sub-menu .el-menu-item {
+  padding-left: 52px !important;
+}
+</style>

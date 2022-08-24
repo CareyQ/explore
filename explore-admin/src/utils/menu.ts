@@ -16,6 +16,7 @@ export const generateRouter = (menus: Menu[]) => {
       redirect: '',
       children: []
     }
+    console.log(`@/views${menu.route}/${menu.name}.vue`)
 
     if (menu.parentId === 0) {
       router.component = Layout

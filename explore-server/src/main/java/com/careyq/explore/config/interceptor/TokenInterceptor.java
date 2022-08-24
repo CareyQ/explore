@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
 
+    private static final long FIVE_MINUTES = 300;
+
     @Override
     public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
         // 检查忽略登录注解
@@ -47,10 +49,16 @@ public class TokenInterceptor implements HandlerInterceptor {
             response.getWriter().write(result);
             return false;
         }
-        String cache = RedisUtil.get("admin_" + token);
+        String key = "admin_" + token;
+        String cache = RedisUtil.get(key);
         if (StrUtil.isBlank(cache)) {
             response.getWriter().write(result);
             return false;
+        }
+        // 检查 token 有效期，小于 5 分钟则自动延长
+        Long expire = RedisUtil.expire(key);
+        if (expire != null && expire < FIVE_MINUTES) {
+            RedisUtil.expire(key, FIVE_MINUTES);
         }
         return true;
     }

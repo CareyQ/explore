@@ -108,4 +108,17 @@ public class RedisUtil {
         return value == null ? null : JSON.parseObject(value, clazz);
     }
 
+    /**
+     * 查看过期时间
+     */
+    public static Long expire(String key) {
+        return instance.redisTemplate.getExpire(key);
+    }
+
+    /**
+     * 延长过期时间
+     */
+    public static void expire(String key, long expire) {
+        instance.redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+    }
 }

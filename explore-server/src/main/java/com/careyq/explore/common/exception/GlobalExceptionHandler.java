@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.MessageFormat;
+
 /**
  * <p>
  * 全局异常处理
@@ -23,6 +26,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @ResponseStatus(HttpStatus.ACCEPTED)
 public class GlobalExceptionHandler {
+
+    /**
+     * 其他异常
+     */
+    @ExceptionHandler(Exception.class)
+    public Result<?> exception(Exception e) {
+        log.error("全局异常", e);
+        return Result.fail("服务维护中...", getOutMsg(e));
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<?> exception(MethodArgumentNotValidException e) {
@@ -37,10 +49,19 @@ public class GlobalExceptionHandler {
         return Result.fail(e.getMessage());
     }
 
+    /**
+     * 获取异常消息
+     */
     private String getOutMsg(final Throwable e) {
         if (e != null) {
             return e.getClass().getCanonicalName();
         }
         return StrUtil.EMPTY;
     }
+
+    private String buildContent(HttpServletRequest request, Exception e) {
+        final String platform = request.getHeader("Platform");
+        return MessageFormat.format("Error：{0}, Platform：{1}", getOutMsg(e), platform);
+    }
+
 }
