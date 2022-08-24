@@ -17,6 +17,7 @@ body,
 }
 
 #app {
+  background-image: var(--bg-image);
   background-color: var(--body-color);
 }
 </style>

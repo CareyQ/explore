@@ -102,12 +102,12 @@ create table if not exists article_tag
     key idx_tagId (tag_id) using btree
 ) comment '文章标签关联表';
 
-create table if not exists file
+create table if not exists attachment
 (
     id          bigint unsigned not null auto_increment comment '主键',
     name        varchar(50)     not null comment '文件名称',
-    fid         varchar(50)     not null comment '文件 fid',
     type        varchar(50)     not null comment '文件类型',
+    path        int             not null comment '文件路径',
     size        bigint          not null comment '文件大小',
     height      int             null     default null comment '图片高度',
     weight      int             null     default null comment '图片宽度',

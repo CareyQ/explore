@@ -19,6 +19,7 @@ store.getMenus()
 
 <style lang="scss" scoped>
 .el-aside {
+  background-image: var(--bg-image);
   background-color: $main-color;
   color: $aside-text-color;
   &::-webkit-scrollbar {

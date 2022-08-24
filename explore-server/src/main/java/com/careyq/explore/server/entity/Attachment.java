@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class File extends BaseModel<File> {
+public class Attachment extends BaseModel<Attachment> {
 
     /**
      * 文件名称
@@ -26,14 +26,14 @@ public class File extends BaseModel<File> {
     private String name;
 
     /**
-     * 文件 fid
-     */
-    private String fid;
-
-    /**
      * 文件类型
      */
     private String type;
+
+    /**
+     * 文件路径
+     */
+    private Integer path;
 
     /**
      * 文件大小

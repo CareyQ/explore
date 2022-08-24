@@ -1,6 +1,6 @@
 package com.careyq.explore.server.controller;
 
-import com.careyq.explore.server.service.FileService;
+import com.careyq.explore.server.service.AttachmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/file")
-public class FileController {
+public class AttachmentController {
 
-    private final FileService fileService;
+    private final AttachmentService fileService;
 
 }
 

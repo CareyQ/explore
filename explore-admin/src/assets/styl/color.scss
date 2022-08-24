@@ -1,9 +1,11 @@
 :root {
-  --body-color: #efedeb;
-  --main-color: #fff;
-  --logo-color: #212533;
+  --body-color: #ddd;
+  --main-color: #12a182;
+  --logo-color: #fff;
   --sub-color: #f9a647;
-  --aside-text-color: #7a7c85;
+  --aside-text-color: #fff;
+
+  --bg-image: url(http://zhongguose.com/img/texture.png);
   // element
   --el-menu-bg-color: $main-color;
   --el-menu-text-color: $aside-text-color;
