@@ -9,6 +9,8 @@ const getRouter = async () => {
   const routerStore = useRouterStore()
   await routerStore.asyncRouter()
   const asyncRouters = routerStore.routes
+  console.log('加载路由')
+
   asyncRouters.forEach((asyncRouter) => {
     router.addRoute(asyncRouter)
   })
@@ -16,63 +18,69 @@ const getRouter = async () => {
 
 router.beforeEach(async (to, from, next) => {
   console.log('从' + from.path + '到' + to.path)
+  console.log(router.getRoutes())
 
   const userStore = useUserStore()
+  const routerStore = useRouterStore()
   const token = userStore.token
   const isToLogin = to.name === 'Login'
-
-  if (token) {
-    if (isToLogin) {
-      next({ name: 'Dashboard' })
-    } else {
-    }
-  }
 
   // 前往登录界面的
   if (isToLogin) {
     // 已登录
     if (token) {
-      await getRouter()
+      console.log('去往登录，有 token')
       if (userStore.userInfo) {
-        return { name: 'Dashboard' }
+        console.log('有用户')
+        await getRouter()
+        next({ name: 'Dashboard' })
       } else {
+        console.log('没用户')
         userStore.ClearStorage()
-        return { name: 'Login' }
+        next({ name: 'Login' })
       }
     } else {
-      return true
+      console.log('直接去登录')
+      next()
     }
   } else {
     // 前往其他界面，已登录
     if (token) {
-      if (from.name && !isToLogin) {
-        await getRouter()
-        if (userStore.token) {
-          console.log('replace')
+      const fromHome = from.path === '/'
+      if (!isToLogin) {
+        if (fromHome) {
+          console.log('来自 /')
+          if (routerStore.routes.length <= 0) {
+            await getRouter()
+            next({ name: 'Dashboard', replace: true })
+          } else {
+            console.log('来自 / 没有加载路由')
 
-          return { ...to, replace: true }
-        } else {
-          return {
-            name: 'Login',
-            query: { redirect: to.path }
+            next()
           }
+        } else if (userStore.token) {
+          console.log('replace')
+          next()
+        } else {
+          console.log('一登陆，去 login')
+          next({ name: 'Login', query: { redirect: to.path } })
         }
       } else {
         if (to.matched.length) {
-          return true
+          next()
         } else {
-          return { path: '/login' }
+          console.log('一登陆，去 login 222')
+          next({ name: 'Login' })
         }
       }
-    }
+    } else {
+      console.log('去往其他，无 token')
 
-    if (!token) {
-      return {
+      next({
         name: 'Login',
-        query: {
-          redirect: document.location.hash
-        }
-      }
+        replace: true
+      })
+      console.log('去往其他，无 token')
     }
   }
 })

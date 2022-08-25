@@ -2,6 +2,7 @@
 import { ElSubMenu, ElMenuItem } from 'element-plus'
 import type { Menu } from '@/interface/Menu'
 import type { RouteRecordRaw } from 'vue-router'
+
 defineProps<{
   item: RouteRecordRaw
 }>()
@@ -13,14 +14,12 @@ defineProps<{
       <i v-if="item.meta" :class="`icon-${item.meta.icon}`"></i>
       <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
-    <el-menu-item v-for="(child, index) in item.children" :key="index" :route="item.path">
-      <template #title>
-        <span v-if="child.meta">{{ child.meta.title }}</span>
-      </template>
-    </el-menu-item>
+    <div v-for="(child, index) of item.children" :key="index">
+      <menu-item :item="child" />
+    </div>
   </el-sub-menu>
 
-  <el-menu-item v-else :index="item.path" :route="item.path">
+  <el-menu-item v-else :index="item.path">
     <i v-if="item.meta" :class="'icon-' + item.meta.icon"></i>
     <template #title>
       <span v-if="item.meta">{{ item.meta.title }}</span>
