@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { ElMenu } from 'element-plus'
-import { useStore } from '@/stores/index'
+import { useRouterStore } from '@/stores/modules/router'
 import MenuItem from './MenuItem.vue'
 
-const store = useStore()
+const routerStore = useRouterStore()
 </script>
 
 <template>
   <div class="user">
-    <img class="avatar" src="http://127.0.0.1/avatar/1512021413c8df5ebc2161f2391c9030.jpg" alt="" />
+    <img
+      class="avatar"
+      src="https://lh3.googleusercontent.com/a-/AFdZucpjbUVr3flArvqxYRkyJPX7Zm5HXSq1veda0H6LYA=s96-c-rg-br100"
+      alt=""
+    />
 
     <div class="user-info">
       <h2>CareyQ</h2>
@@ -17,7 +21,7 @@ const store = useStore()
   </div>
 
   <el-menu router>
-    <MenuItem :item="item" v-for="item in store.menus" :key="item.id" />
+    <MenuItem :item="item" v-for="item in routerStore.routes[0].children" :key="item.path" />
   </el-menu>
 </template>
 

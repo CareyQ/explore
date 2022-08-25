@@ -1,26 +1,17 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { login } from '@/api/login'
-import { useStore } from '@/stores/index'
-import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/modules/user'
+import type { LoginInfo } from '@/interface/User'
 
-const store = useStore()
-const router = useRouter()
+const userStore = useUserStore()
 
-const LoginForm = reactive({
+const loginInfo: LoginInfo = reactive({
   username: '',
   password: ''
 })
 
 const handleLogin = async () => {
-  const { data } = await login(LoginForm)
-  if (data) {
-    store.loginData(data)
-    router.push({ name: 'Layout' })
-  } else {
-    ElMessage.error('登录失败')
-  }
+  await userStore.Login(loginInfo)
 }
 </script>
 
@@ -30,10 +21,10 @@ const handleLogin = async () => {
       <h1 class="title">Explore</h1>
       <div class="login-form">
         <div class="form-itme">
-          <input type="text" placeholder="账号" v-model="LoginForm.username" />
+          <input type="text" placeholder="账号" v-model="loginInfo.username" />
         </div>
         <div class="form-itme">
-          <input type="password" placeholder="密码" v-model="LoginForm.password" />
+          <input type="password" placeholder="密码" v-model="loginInfo.password" />
         </div>
         <div class="form-btn">
           <button type="button" class="login-btn" @click="handleLogin">登 录</button>

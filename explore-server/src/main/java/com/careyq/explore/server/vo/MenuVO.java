@@ -25,11 +25,6 @@ public class MenuVO {
     private Long id;
 
     /**
-     * 父 ID
-     */
-    private Long parentId;
-
-    /**
      * 菜单标题
      */
     private String title;
@@ -40,6 +35,11 @@ public class MenuVO {
     private String name;
 
     /**
+     * 路由组件
+     */
+    private String component;
+
+    /**
      * 是否外链
      */
     private Boolean isBlank;
@@ -47,7 +47,7 @@ public class MenuVO {
     /**
      * 路由地址
      */
-    private String route;
+    private String router;
 
     /**
      * 菜单图标

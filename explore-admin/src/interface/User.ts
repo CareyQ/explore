@@ -3,3 +3,8 @@ export interface LoginUser {
   avatar: string
   token: string
 }
+
+export interface LoginInfo {
+  username: ''
+  password: ''
+}

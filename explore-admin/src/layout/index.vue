@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { ElContainer, ElAside, ElMain } from 'element-plus'
 import SideBar from './components/SideBar/SideBar.vue'
-import { useStore } from '@/stores/index'
-
-const store = useStore()
-store.getMenus()
 </script>
 
 <template>
@@ -14,7 +10,11 @@ store.getMenus()
     </el-aside>
 
     <el-main>
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition mode="out-in" name="el-fade-in-linear">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </el-main>
   </el-container>
 </template>

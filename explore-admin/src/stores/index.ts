@@ -1,33 +1,5 @@
-import { defineStore } from 'pinia'
-import { getMenu } from '@/api/menu'
-import type { Menu } from '@/interface/Menu'
-import type { LoginUser } from '@/interface/User'
-import { generateRouter } from '@/utils/menu'
-import router from '@/router'
-import type { RouteRecordRaw } from 'vue-router'
+import { createPinia } from 'pinia'
 
-export const useStore = defineStore('user', {
-  state: () => ({
-    menus: [] as Menu[]
-  }),
+const store = createPinia()
 
-  getters: {},
-
-  actions: {
-    /**
-     * 登录返回的数据
-     */
-    loginData(loginUser: LoginUser) {
-      localStorage.setItem('token', loginUser.token)
-      localStorage.setItem('login_user', JSON.stringify(loginUser))
-    },
-
-    /**
-     * 获取菜单，构建路由
-     */
-    async getMenus() {
-      const { data } = await getMenu()
-      this.menus = data as Menu[]
-    }
-  }
-})
+export { store }

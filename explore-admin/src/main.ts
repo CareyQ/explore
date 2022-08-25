@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import './router/permission'
 
 import 'element-plus/theme-chalk/index.css'
 import './assets/styl/base.scss'

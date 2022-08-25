@@ -39,11 +39,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             MenuVO vo = new MenuVO();
             vo.setId(menu.getId())
                     .setName(menu.getName())
-                    .setRoute(menu.getRoute())
+                    .setRouter(menu.getRouter())
                     .setIcon(menu.getIcon())
                     .setIsBlank(menu.getIsBlank())
                     .setTitle(menu.getTitle())
-                    .setParentId(menu.getParentId());
+                    .setComponent(menu.getComponent());
             if (Objects.isNull(result.get(menu.getParentId()))) {
                 result.put(vo.getId(), vo);
             } else {

@@ -1,25 +1,30 @@
 <script setup lang="ts">
 import { ElSubMenu, ElMenuItem } from 'element-plus'
 import type { Menu } from '@/interface/Menu'
+import type { RouteRecordRaw } from 'vue-router'
 defineProps<{
-  item: Menu
+  item: RouteRecordRaw
 }>()
 </script>
 
 <template>
-  <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.route">
+  <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
     <template #title>
-      <i :class="`icon-${item.icon}`"></i>
-      <span>{{ item.title }}</span>
+      <i v-if="item.meta" :class="`icon-${item.meta.icon}`"></i>
+      <span v-if="item.meta">{{ item.meta.title }}</span>
     </template>
-    <el-menu-item v-for="(child, index) in item.children" :key="index" :route="item.route">
-      <template #title>{{ child.title }}</template>
+    <el-menu-item v-for="(child, index) in item.children" :key="index" :route="item.path">
+      <template #title>
+        <span v-if="child.meta">{{ child.meta.title }}</span>
+      </template>
     </el-menu-item>
   </el-sub-menu>
 
-  <el-menu-item v-else :index="item.route" :route="item.route">
-    <i :class="'icon-' + item.icon"></i>
-    <template #title>{{ item.title }}</template>
+  <el-menu-item v-else :index="item.path" :route="item.path">
+    <i v-if="item.meta" :class="'icon-' + item.meta.icon"></i>
+    <template #title>
+      <span v-if="item.meta">{{ item.meta.title }}</span>
+    </template>
   </el-menu-item>
 </template>
 

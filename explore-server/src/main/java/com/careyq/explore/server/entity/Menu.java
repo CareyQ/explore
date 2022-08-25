@@ -21,14 +21,24 @@ import java.io.Serializable;
 public class Menu extends BaseModel<Menu> {
 
     /**
+     * 菜单标题
+     */
+    private String title;
+
+    /**
      * 菜单名称
      */
     private String name;
 
     /**
-     * 菜单标题
+     * 路由地址
      */
-    private String title;
+    private String router;
+
+    /**
+     * 路由组件
+     */
+    private String component;
 
     /**
      * 是否外链
@@ -44,11 +54,6 @@ public class Menu extends BaseModel<Menu> {
      * 父级 ID
      */
     private Long parentId;
-
-    /**
-     * 路由地址
-     */
-    private String route;
 
     /**
      * 菜单图标
