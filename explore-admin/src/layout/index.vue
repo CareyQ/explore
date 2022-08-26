@@ -22,8 +22,8 @@ import SideBar from './components/SideBar/SideBar.vue'
 <style lang="scss" scoped>
 .el-aside {
   background-image: var(--bg-image);
-  background-color: $main-color;
-  color: $aside-text-color;
+  background-color: var(--main-color);
+  color: var(--aside-text-color);
   &::-webkit-scrollbar {
     display: none;
   }

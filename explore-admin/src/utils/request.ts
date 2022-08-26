@@ -1,6 +1,7 @@
 import router from '@/router'
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/modules/user'
 
 interface Result {
   code: number
@@ -35,7 +36,8 @@ class RequestHttp {
      */
     this.service.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        const token = localStorage.getItem('token') || ''
+        const sotre = useUserStore()
+        const token = sotre.token
         return {
           ...config,
           headers: {
@@ -56,20 +58,23 @@ class RequestHttp {
         const { data } = res
 
         if (data.code === RequestEnums.UN_LOGIN) {
-          localStorage.removeItem('token')
-          localStorage.removeItem('login_user')
-          router.replace({ name: 'Login' })
-          return Promise.reject(data)
+          ElMessage.error(data.showMsg)
+          router.replace({ name: 'Login', replace: true })
+          return
         }
 
         if (data.code && data.code != RequestEnums.SUCCESS) {
           ElMessage.error(data.showMsg)
-          return Promise.reject(data)
+          return
         }
         return data
       },
       (err: AxiosError) => {
-        console.log('err: ' + err)
+        if (err.toString().includes('timeout')) {
+          ElMessage.error('网络繁忙，请稍后再试')
+        } else {
+          ElMessage.error(`请求失败：${err.message}`)
+        }
       }
     )
   }

@@ -1,18 +1,14 @@
 :root {
   --body-color: #fefefe;
   --main-color: #12a182;
-  --logo-color: #fff;
-  --sub-color: #f9a647;
+  --sub-color: #50b694;
   --aside-text-color: #fff;
 
   --bg-image: url(http://zhongguose.com/img/texture.png);
   // element
-  --el-menu-bg-color: $main-color;
-  --el-menu-text-color: $aside-text-color;
+  --el-menu-bg-color: transparent;
+  --el-menu-text-color: var(--aside-text-color);
   --el-menu-hover-bg-color: var(--sub-color);
-  --el-menu-active-color: var(--sub-color);
-}
+  --el-menu-active-color: var(--aside-text-color);
 
-$main-color: var(--main-color);
-$sub-color: var(--sub-color);
-$aside-text-color: var(--aside-text-color);
+}

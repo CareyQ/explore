@@ -1,69 +1,50 @@
 import { defineStore } from 'pinia'
 import { login } from '@/api/login'
-import type { LoginUser, LoginInfo } from '@/interface/User'
-import { ref, watch } from 'vue'
+import type { LoginInfo } from '@/interface/User'
 import { useRouterStore } from './router'
 import router from '@/router/index'
+import cookie from 'js-cookie'
 
-export const useUserStore = defineStore('user', () => {
-  const token = ref(window.localStorage.getItem('token') || '')
-  const userInfo = ref({
-    name: '',
-    avatar: ''
-  })
+const TOKEN = 'token'
 
-  const setToken = (val: string) => {
-    token.value = val
-  }
-
-  const setUserInfo = (val: LoginUser) => {
-    userInfo.value = val
-  }
-
-  /**
-   *
-   * @param loginInfo 登录
-   * @returns
-   */
-  const Login = async (loginInfo: LoginInfo) => {
-    const { data } = await login(loginInfo)
-
-    if (data) {
-      setUserInfo(data)
-      setToken(data.token)
-
-      const routerStore = useRouterStore()
-      await routerStore.asyncRouter()
-      const asyncRouters = routerStore.routes
-      asyncRouters.forEach((item) => {
-        router.addRoute(item)
-      })
-      await router.push({ name: 'Dashboard' })
+export const useUserStore = defineStore({
+  id: 'user',
+  state: () => {
+    return {
+      token: '',
+      userInfo: {}
     }
-  }
+  },
 
-  /**
-   * 清除登陆数据
-   */
-  const ClearStorage = async () => {
-    token.value = ''
-    sessionStorage.clear()
-    localStorage.clear()
-  }
+  getters: {},
+  actions: {
+    /**
+     *
+     * @param loginInfo 登录
+     * @returns
+     */
+    async Login(loginInfo: LoginInfo) {
+      const { data } = await login(loginInfo)
 
-  watch(
-    () => token.value,
-    () => {
-      window.localStorage.setItem('token', token.value)
+      if (data) {
+        this.userInfo = data
+        this.token = data.token
+        cookie.set(TOKEN, this.token)
+
+        const routerStore = useRouterStore()
+        await routerStore.asyncRouter()
+        const asyncRouters = routerStore.routes
+        asyncRouters.forEach((item) => {
+          router.addRoute(item)
+        })
+        await router.push({ name: 'Dashboard' })
+      }
+    },
+
+    async clearInfo() {
+      this.token = ''
+      this.userInfo = {}
+      cookie.remove(TOKEN)
     }
-  )
-
-  return {
-    Login,
-    token,
-    userInfo,
-    setToken,
-    setUserInfo,
-    ClearStorage
   }
 })

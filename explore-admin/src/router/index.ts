@@ -3,17 +3,26 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/login',
+    meta: {
+      requireAuth: false
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Login.vue')
+    component: () => import('@/views/login/login.vue'),
+    meta: {
+      requireAuth: false
+    }
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'Other',
-    redirect: ''
+    redirect: '',
+    meta: {
+      requireAuth: false
+    }
   }
 ]
 

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ElConfigProvider } from 'element-plus'
-import router from '@/router'
-
-console.log(router.getRoutes())
 </script>
 
 <template>

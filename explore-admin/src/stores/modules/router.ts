@@ -4,6 +4,8 @@ import Layout from '@/layout/index.vue'
 import { generateRouter } from '@/utils/menu'
 import type { RouteRecordRaw } from 'vue-router'
 import { ref, shallowRef } from 'vue'
+import { useUserStore } from '@/stores/modules/user'
+import cookie from 'js-cookie'
 
 export const useRouterStore = defineStore('router', () => {
   // 存放动态路由
@@ -21,12 +23,21 @@ export const useRouterStore = defineStore('router', () => {
         children: [] as RouteRecordRaw[]
       }
     ]
-    const { data } = await getMenu()
-    if (data) {
-      const asyncRoutes = generateRouter(data)
-      baseRouter[0].children = asyncRoutes
-      routes.value = baseRouter
+
+    try {
+      const { data } = await getMenu()
+      if (data) {
+        const asyncRoutes = generateRouter(data)
+        baseRouter[0].children = asyncRoutes
+        routes.value = baseRouter
+      }
+    } catch (err) {
+      const userStore = useUserStore()
+      cookie.remove('token')
+      userStore.token = ''
+      userStore.userInfo = ''
     }
+
     return true
   }
 

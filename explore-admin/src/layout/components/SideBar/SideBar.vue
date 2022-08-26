@@ -2,6 +2,11 @@
 import { ElMenu } from 'element-plus'
 import { useRouterStore } from '@/stores/modules/router'
 import MenuItem from './MenuItem.vue'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const router = useRouter()
+const defaultRouter = ref(router.currentRoute.value.path)
 
 const routerStore = useRouterStore()
 </script>
@@ -20,14 +25,14 @@ const routerStore = useRouterStore()
     </div>
   </div>
 
-  <el-menu router>
+  <el-menu router :default-active="defaultRouter">
     <MenuItem :item="item" v-for="item in routerStore.routes[0].children" :key="item.path" />
   </el-menu>
 </template>
 
 <style lang="scss" scoped>
 .user {
-  padding: 30px 20px 20px;
+  padding: 30px 20px;
   display: flex;
   align-items: center;
 }
