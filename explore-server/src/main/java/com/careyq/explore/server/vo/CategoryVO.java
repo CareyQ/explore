@@ -1,25 +1,26 @@
-package com.careyq.explore.server.entity;
+package com.careyq.explore.server.vo;
 
-import com.careyq.explore.common.entity.BaseModel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 /**
  * <p>
- * 分类表
+ * 分类 VO
  * </p>
  *
  * @author CareyQ
- * @since 2022-08-19
+ * @since 2022-08-27
  */
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class Category extends BaseModel<Category> {
+public class CategoryVO {
+
+    /**
+     * 主键
+     */
+    private Long id;
 
     /**
      * 分类名称
@@ -28,7 +29,7 @@ public class Category extends BaseModel<Category> {
     private String name;
 
     /**
-     * 分类别名，路径标识
+     * 分类别名
      */
     @NotBlank(message = "分类别名不能为空")
     private String alias;
@@ -42,11 +43,5 @@ public class Category extends BaseModel<Category> {
      * 排序
      */
     private Integer sort;
-
-
-    @Override
-    public Serializable pkVal() {
-        return this.getId();
-    }
 
 }

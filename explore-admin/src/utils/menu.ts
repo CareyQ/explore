@@ -8,11 +8,10 @@ export const generateRouter = (menus: Menu[]) => {
       name: menu.name,
       meta: {
         icon: menu.icon,
-        title: menu.title,
-        requireAuth: true
+        title: menu.title
       },
       redirect: '',
-      component: () => import(/* @vite-ignore */ `../views/${menu.component}`),
+      component: getViews(menu.component),
       children: []
     }
 
@@ -25,4 +24,11 @@ export const generateRouter = (menus: Menu[]) => {
     return router
   })
   return routers
+}
+
+function getViews(path: string) {
+  // 首先把你需要动态路由的组件地址全部获取
+  const modules = import.meta.glob('../**/*.vue')
+  // 然后动态路由的时候这样来取
+  return modules['../views/' + path + '.vue']
 }

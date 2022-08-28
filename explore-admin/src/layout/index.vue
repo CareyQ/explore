@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ElContainer, ElAside, ElMain } from 'element-plus'
-import SideBar from './components/SideBar/SideBar.vue'
+import SideBar from './components/sideBar/SideBar.vue'
+import Title from './components/main/Title.vue'
 </script>
 
 <template>
@@ -10,6 +10,7 @@ import SideBar from './components/SideBar/SideBar.vue'
     </el-aside>
 
     <el-main>
+      <Title />
       <router-view v-slot="{ Component }">
         <transition mode="out-in" name="el-fade-in-linear">
           <component :is="Component" />
@@ -30,5 +31,9 @@ import SideBar from './components/SideBar/SideBar.vue'
 }
 .el-container {
   height: 100%;
+}
+
+.el-main {
+  padding: 40px;
 }
 </style>

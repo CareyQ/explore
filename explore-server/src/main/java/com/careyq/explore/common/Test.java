@@ -1,11 +1,7 @@
 package com.careyq.explore.common;
 
-import com.alibaba.fastjson2.JSON;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -65,7 +61,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        List<Node> initList = initTreeData();
+        /*List<Node> initList = initTreeData();
         Map<String, Node> root = new LinkedHashMap<String, Node>();
         for (Node item : initList) {
             Node parent = root.get(item.getParentCode());
@@ -77,7 +73,11 @@ public class Test {
             parent.addChildren(item);
         }
         Node tree = root.get("0");
-        System.out.println(JSON.toJSON(tree));
+        System.out.println(JSON.toJSON(tree));*/
+
+        int a= 0;
+        long b = 0L;
+        System.out.println(a == b);
     }
 
     static List<Node> initTreeData() {

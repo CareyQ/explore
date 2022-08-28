@@ -6,6 +6,8 @@ import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.entity.User;
 import com.careyq.explore.server.vo.LoginUserVO;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  * 用户表 服务类
@@ -19,9 +21,10 @@ public interface UserService extends IService<User> {
     /**
      * 用户登录
      *
+     * @param request HttpServletRequest
      * @param dto LoginDTO
      * @return LoginUserVO
      */
-    Result<LoginUserVO> login(LoginDTO dto);
+    Result<LoginUserVO> login(HttpServletRequest request,  LoginDTO dto);
 
 }

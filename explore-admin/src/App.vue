@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { ElConfigProvider } from 'element-plus'
-</script>
-
 <template>
   <el-config-provider>
     <RouterView />
@@ -13,6 +9,11 @@ html,
 body,
 #app {
   height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei,
+    Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 #app {

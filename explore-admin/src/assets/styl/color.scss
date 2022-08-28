@@ -1,14 +1,40 @@
 :root {
-  --body-color: #fefefe;
-  --main-color: #12a182;
-  --sub-color: #50b694;
+  --body-color: #f9f9fb;
+
+  --aside-bg-color: #3a3f47;
   --aside-text-color: #fff;
 
-  --bg-image: url(http://zhongguose.com/img/texture.png);
-  // element
-  --el-menu-bg-color: transparent;
-  --el-menu-text-color: var(--aside-text-color);
-  --el-menu-hover-bg-color: var(--sub-color);
-  --el-menu-active-color: var(--aside-text-color);
+  --primary-color: #01adb5;
+  --primary-light-color: rgb(1 173 181 / 80%);
+  --primary-light2-color: rgb(1 173 181 / 20%);
 
+  --border-color: #dcdfe6;
+
+  --main-color: #3a3f47;
+  --sub-color: #01adb5;
+  --main-title-color: #333639;
+  --button-color: #20a162;
+  --focus-color: rgb(58 63 71 / 20%);
+  --bg-image: url(http://zhongguose.com/img/texture.png);
+
+  --el-color-primary: var(--primary-color);
+
+
+  --el-menu-bg-color: transparent;
+  --el-menu-hover-bg-color: var(--primary-light-color);
+
+  --el-menu-text-color: var(--aside-text-color);
+  --el-menu-active-color: var(--aside-text-color);
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--primary-color);
+
+  --el-button-outline-color: var(--primary-light2-color);
+  --el-button-hover-bg-color: var(--primary-light-color);
+  --el-button-active-bg-color: var(--primary-light-color);
+}
+
+.el-link.el-link--primary {
+  --el-link-hover-text-color: var(--primary-light-color);
 }

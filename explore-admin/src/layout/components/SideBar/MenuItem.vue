@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElSubMenu, ElMenuItem } from 'element-plus'
 import type { RouteRecordRaw } from 'vue-router'
 
 defineProps<{
@@ -28,9 +27,14 @@ defineProps<{
 <style lang="scss" scoped>
 i {
   margin-right: 16px;
+  font-size: 16px !important;
 }
 
 .el-menu-item.is-active {
-  background-color: var(--el-menu-hover-bg-color);
+  background-color: var(--primary-color);
+}
+
+.el-sub-menu .el-menu-item {
+  padding-left: 52px !important;
 }
 </style>

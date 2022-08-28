@@ -28,7 +28,7 @@ public enum ResultCodeEnum {
     /**
      * 未登录
      */
-    UN_LOGIN(4003, "用户未登录");
+    UN_LOGIN(4003, "登录已过期");
 
     private final Integer code;
     private final String desc;

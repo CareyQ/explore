@@ -1,7 +1,7 @@
 import router from '@/router'
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
-import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/stores/modules/user'
+import { ElMessage } from 'element-plus'
 
 interface Result {
   code: number
@@ -35,7 +35,7 @@ class RequestHttp {
      * 请求拦截器
      */
     this.service.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      async (config: AxiosRequestConfig) => {
         const sotre = useUserStore()
         const token = sotre.token
         return {
@@ -55,19 +55,13 @@ class RequestHttp {
      */
     this.service.interceptors.response.use(
       (res: AxiosResponse) => {
-        const { data } = res
-
-        if (data.code === RequestEnums.UN_LOGIN) {
-          ElMessage.error(data.showMsg)
+        if (res.data.code === RequestEnums.UN_LOGIN) {
+          ElMessage.error(res.data.showMsg)
           router.replace({ name: 'Login', replace: true })
           return
         }
 
-        if (data.code && data.code != RequestEnums.SUCCESS) {
-          ElMessage.error(data.showMsg)
-          return
-        }
-        return data
+        return res.data
       },
       (err: AxiosError) => {
         if (err.toString().includes('timeout')) {
@@ -85,6 +79,10 @@ class RequestHttp {
 
   post<T>(url: string, params?: object): Promise<ResultData<T>> {
     return this.service.post(url, params)
+  }
+
+  put<T>(url: string, params?: object): Promise<ResultData<T>> {
+    return this.service.put(url, params)
   }
 }
 

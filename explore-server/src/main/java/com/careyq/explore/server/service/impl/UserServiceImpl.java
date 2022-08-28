@@ -11,6 +11,7 @@ import com.careyq.explore.server.service.UserService;
 import com.careyq.explore.server.vo.LoginUserVO;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
@@ -25,7 +26,7 @@ import java.time.LocalDateTime;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Override
-    public Result<LoginUserVO> login(LoginDTO dto) {
+    public Result<LoginUserVO> login(HttpServletRequest request, LoginDTO dto) {
         User user = this.lambdaQuery()
                 .eq(User::getUsername, dto.getUsername())
                 .eq(User::getPassword, StrUtil.encrypt(dto.getPassword()))
@@ -39,7 +40,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .setAvatar(user.getAvatar())
                 .setToken(token);
 
-        RedisUtil.set("admin_" + token, vo, 1800);
+        String ua = request.getHeader("User-Agent");
+        RedisUtil.set(token + "." + StrUtil.encrypt(ua), vo, 1800);
         return Result.success(vo, "登录成功");
     }
 }

@@ -1,0 +1,48 @@
+/* element ui 覆盖 */
+.el-card {
+  border: 0;
+  --el-card-border-radius: 16px
+}
+
+.el-card__header {
+  padding: 30px 30px 20px;
+  border-bottom: 0;
+}
+
+.el-card__body {
+  padding: 10px 30px 30px;
+}
+
+.el-form-item {
+  margin-bottom: 34px;
+}
+
+.el-input__wrapper {
+  box-shadow: none !important;
+  border: 1px solid var(--el-input-border-color) !important;
+}
+
+.el-input__wrapper:hover {
+  border-color: var(--primary-light-color) !important;
+  box-shadow: none !important;
+}
+
+.el-select .el-input__wrapper.is-focus,
+.el-select .el-input.is-focus .el-input__wrapper,
+.el-input__wrapper.is-focus {
+  border-color: var(--primary-light-color) !important;
+  box-shadow: 0 0 0 3px var(--primary-light2-color) !important;
+}
+
+.el-form-item__error {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.el-form .el-form-item:last-child {
+  margin-bottom: 0;
+}
+
+.el-button {
+  border: none !important;
+}

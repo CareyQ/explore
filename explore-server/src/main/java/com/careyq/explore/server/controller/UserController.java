@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  * 用户表 控制层
@@ -35,8 +37,8 @@ public class UserController {
      */
     @IgnoreLogin
     @PostMapping("/login")
-    public Result<LoginUserVO> login(@RequestBody @Validated LoginDTO dto) {
-        return userService.login(dto);
+    public Result<LoginUserVO> login(HttpServletRequest request,  @RequestBody @Validated LoginDTO dto) {
+        return userService.login(request, dto);
     }
 
 }

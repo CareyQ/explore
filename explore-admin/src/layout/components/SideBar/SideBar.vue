@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElMenu } from 'element-plus'
 import { useRouterStore } from '@/stores/modules/router'
 import MenuItem from './MenuItem.vue'
 import { useRouter } from 'vue-router'

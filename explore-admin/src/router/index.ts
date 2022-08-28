@@ -11,18 +11,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/login.vue'),
-    meta: {
-      requireAuth: false
-    }
+    component: () => import('@/views/login/login.vue')
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'Other',
-    redirect: '',
-    meta: {
-      requireAuth: false
-    }
+    redirect: ''
   }
 ]
 
