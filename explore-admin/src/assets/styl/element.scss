@@ -23,14 +23,14 @@
 }
 
 .el-input__wrapper:hover {
-  border-color: var(--primary-light-color) !important;
+  border-color: var(--primary-light8-color) !important;
   box-shadow: none !important;
 }
 
 .el-select .el-input__wrapper.is-focus,
 .el-select .el-input.is-focus .el-input__wrapper,
 .el-input__wrapper.is-focus {
-  border-color: var(--primary-light-color) !important;
+  border-color: var(--primary-light8-color) !important;
   box-shadow: 0 0 0 3px var(--primary-light2-color) !important;
 }
 
@@ -43,6 +43,3 @@
   margin-bottom: 0;
 }
 
-.el-button {
-  border: none !important;
-}

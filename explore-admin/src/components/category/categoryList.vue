@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Draggable from 'vuedraggable'
-import type { Category } from '@/interface/Category'
+import type { Category } from '@/interface/Blog'
 import { ref, watch } from 'vue'
 
 const props = defineProps<{

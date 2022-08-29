@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -23,11 +24,13 @@ public class Tag extends BaseModel<Tag> {
     /**
      * 标签名称
      */
+    @NotBlank(message = "标签名称不能为空")
     private String name;
 
     /**
      * 标签别名，路径标识
      */
+    @NotBlank(message = "标签别名不能为空")
     private String alias;
 
 

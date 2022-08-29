@@ -1,6 +1,8 @@
 import type { Menu } from '@/interface/Menu'
 import type { RouteRecordRaw } from 'vue-router'
 
+const modules = import.meta.glob('../**/**.vue')
+
 export const generateRouter = (menus: Menu[]) => {
   const routers: RouteRecordRaw[] = menus.map((menu: Menu) => {
     const router: RouteRecordRaw = {
@@ -11,7 +13,7 @@ export const generateRouter = (menus: Menu[]) => {
         title: menu.title
       },
       redirect: '',
-      component: getViews(menu.component),
+      component: modules['../views/' + menu.component + '.vue'],
       children: []
     }
 
@@ -24,11 +26,4 @@ export const generateRouter = (menus: Menu[]) => {
     return router
   })
   return routers
-}
-
-function getViews(path: string) {
-  // 首先把你需要动态路由的组件地址全部获取
-  const modules = import.meta.glob('../**/*.vue')
-  // 然后动态路由的时候这样来取
-  return modules['../views/' + path + '.vue']
 }

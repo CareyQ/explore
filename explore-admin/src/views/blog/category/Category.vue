@@ -3,7 +3,7 @@ import { ElCard, ElMessage } from 'element-plus'
 import { reactive, ref, toRefs } from 'vue'
 import { saveCategory, getCategories, exchange } from '@/api/category'
 import CategoryList from '@/components/category/categoryList.vue'
-import type { Category, CategoryData } from '@/interface/Category'
+import type { Category, CategoryData } from '@/interface/Blog'
 
 const categoryRef = ref()
 const data: CategoryData = reactive({
@@ -33,8 +33,6 @@ const submit = () => {
     }
     data.loading = true
     saveCategory(data.form).then((res) => {
-      console.log(res)
-
       if (res.code === 0) {
         ElMessage.success(res.showMsg)
         categoryRef.value.resetFields()

@@ -5,8 +5,11 @@
   --aside-text-color: #fff;
 
   --primary-color: #01adb5;
-  --primary-light-color: rgb(1 173 181 / 80%);
+  --primary-light1-color: rgb(1 173 181 / 10%);
   --primary-light2-color: rgb(1 173 181 / 20%);
+  --primary-light4-color: rgb(1 173 181 / 40%);
+  --primary-light5-color: rgb(1 173 181 / 50%);
+  --primary-light8-color: rgb(1 173 181 / 80%);
 
   --border-color: #dcdfe6;
 
@@ -21,7 +24,7 @@
 
 
   --el-menu-bg-color: transparent;
-  --el-menu-hover-bg-color: var(--primary-light-color);
+  --el-menu-hover-bg-color: var(--primary-light8-color);
 
   --el-menu-text-color: var(--aside-text-color);
   --el-menu-active-color: var(--aside-text-color);
@@ -31,10 +34,24 @@
   --el-button-bg-color: var(--primary-color);
 
   --el-button-outline-color: var(--primary-light2-color);
-  --el-button-hover-bg-color: var(--primary-light-color);
-  --el-button-active-bg-color: var(--primary-light-color);
+  --el-button-hover-bg-color: var(--primary-light8-color);
+  --el-button-active-bg-color: var(--primary-light8-color);
 }
 
 .el-link.el-link--primary {
-  --el-link-hover-text-color: var(--primary-light-color);
+  --el-link-hover-text-color: var(--primary-light8-color);
+}
+
+.el-button {
+  --el-button-hover-bg-color: var(--primary-light4-color);
+  --el-button-hover-border-color: var(--primary-light4-color);
+}
+
+.el-button--primary {
+  --el-button-hover-bg-color: var(--primary-light8-color);
+}
+
+.el-tag {
+  --el-tag-bg-color: var(--primary-light1-color);
+  --el-tag-border-color: var(--primary-light4-color);
 }

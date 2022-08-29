@@ -1,5 +1,5 @@
 import axios from '../utils/request'
-import type { Category } from '@/interface/Category'
+import type { Category } from '@/interface/Blog'
 
 export const saveCategory = (category: any) => {
   return axios.post<Category>('/category/save', category)

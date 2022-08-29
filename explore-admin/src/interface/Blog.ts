@@ -12,3 +12,9 @@ export interface Category {
   hits: number
   sort: number
 }
+
+export interface Tag {
+  id: string | number
+  name: string
+  alias: string
+}

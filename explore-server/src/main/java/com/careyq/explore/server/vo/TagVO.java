@@ -1,19 +1,21 @@
 package com.careyq.explore.server.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 分类 VO
+ * 标签 VO
  * </p>
  *
  * @author CareyQ
- * @since 2022-08-27
+ * @since 2022-08-29
  */
 @Data
+@AllArgsConstructor
 @Accessors(chain = true)
-public class CategoryVO {
+public class TagVO {
 
     /**
      * 主键
@@ -21,23 +23,13 @@ public class CategoryVO {
     private Long id;
 
     /**
-     * 分类名称
+     * 标签名称
      */
     private String name;
 
     /**
-     * 分类别名
+     * 标签别名
      */
     private String alias;
-
-    /**
-     * 浏览量
-     */
-    private Long hits;
-
-    /**
-     * 排序
-     */
-    private Integer sort;
 
 }

@@ -3,6 +3,7 @@ package com.careyq.explore.server.controller;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.Category;
 import com.careyq.explore.server.service.CategoryService;
+import com.careyq.explore.server.service.CommonService;
 import com.careyq.explore.server.vo.CategoryVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +24,7 @@ import java.util.List;
 @RequestMapping("/api/category")
 public class CategoryController {
 
+    private final CommonService<Category> commonService;
     private final CategoryService categoryService;
 
     /**
@@ -33,7 +35,7 @@ public class CategoryController {
      */
     @PostMapping("/save")
     public Result<Boolean> saveCategory(@RequestBody @Validated Category category) {
-        return categoryService.saveCategory(category);
+        return commonService.saveEntity(category);
     }
 
     /**
@@ -42,7 +44,7 @@ public class CategoryController {
      * @return 结果
      */
     @GetMapping("/list")
-    public Result<List<CategoryVO>> saveCategory() {
+    public Result<List<CategoryVO>> getCategories() {
         return Result.success(categoryService.getCategories());
     }
 

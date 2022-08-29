@@ -8,7 +8,6 @@ import com.careyq.explore.server.mapper.CategoryMapper;
 import com.careyq.explore.server.service.CategoryService;
 import com.careyq.explore.server.vo.CategoryVO;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,21 +22,14 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Result<Boolean> saveCategory(Category category) {
-        Integer exists = baseMapper.selectIsExists(category.getName(), category.getAlias(), category.getId());
-        if (exists != null) {
-            return Result.fail("名称或别名已存在");
-        }
-        boolean result = category.getId() == null ? category.insert() : category.updateById();
-        return Result.success(result, "保存成功");
-    }
+    /**
+     * 分类顺序交换 id 容量
+     */
+    private static final int EXCHANGE_ID_SIZE = 2;
 
     @Override
     public List<CategoryVO> getCategories() {
         List<Category> categories = this.lambdaQuery().orderByAsc(Category::getSort).list();
-
         return categories.stream().map(c -> {
             CategoryVO vo = new CategoryVO();
             vo.setId(c.getId())
@@ -51,7 +43,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public Result<Boolean> exchange(List<Long> ids) {
-        if (CollUtil.isEmpty(ids) || ids.size() != 2) {
+        if (CollUtil.isEmpty(ids) || ids.size() != EXCHANGE_ID_SIZE) {
             return Result.fail("操作的数据有误");
         }
         List<Category> list = this.lambdaQuery().select(Category::getId, Category::getSort).in(Category::getId, ids).list();
