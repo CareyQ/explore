@@ -13,7 +13,7 @@ import Title from './components/main/Title.vue'
       <Title />
       <router-view v-slot="{ Component }">
         <transition mode="out-in" name="el-fade-in-linear">
-          <component :is="Component" />
+          <component :is="Component" style="height: calc(100% - 58px)" />
         </transition>
       </router-view>
     </el-main>

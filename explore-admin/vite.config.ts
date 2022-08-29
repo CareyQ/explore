@@ -6,6 +6,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
 
+import prismjs from 'vite-plugin-prismjs'
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -14,6 +16,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()]
+    }),
+    prismjs({
+      languages: ['json']
     })
   ],
   resolve: {
@@ -27,5 +32,8 @@ export default defineConfig({
         additionalData: '@use "@/assets/styl/color.scss" as *;'
       }
     }
+  },
+  optimizeDeps: {
+    include: ['@kangc/v-md-editor/lib/theme/vuepress.js']
   }
 })
