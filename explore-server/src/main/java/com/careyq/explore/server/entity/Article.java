@@ -61,6 +61,11 @@ public class Article extends BaseModel<Article> {
     private Boolean isOriginal;
 
     /**
+     * 非原创时作者
+     */
+    private String author;
+
+    /**
      * 非原创时来源
      */
     private String source;

@@ -1,18 +1,65 @@
 <script setup lang="ts">
 import { ElCard, ElInput, ElSelect, ElMessage } from 'element-plus'
+import { getCategories } from '@/api/category'
+import { getTags } from '@/api/tag'
 import Edit from '@/components/editor/markdownEditor.vue'
-import { ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import defaultImg from '@/assets/img/placeholder.jpg'
+import type { Category, Tag } from '@/interface/Blog'
 
 const drawer = ref(false)
+const isOriginal = ref(true)
+const isEncrypt = ref(false)
 const src = ref(defaultImg)
+const categories = ref<Category[]>([])
+const tags = ref<Tag[]>([])
+
+const form = reactive({
+  id: '',
+  alias: '',
+  title: '',
+  categoryId: '',
+  summary: '',
+  allowComment: true,
+  isTop: false,
+  isOriginal: true,
+  author: '',
+  source: '',
+  password: '',
+  thumbnail: '',
+  seoKeywords: '',
+  seoDesc: '',
+  wordCount: 0,
+  tags: [],
+  content: '',
+  original: ''
+})
+
+const getCategoryAndTag = () => {
+  getCategories().then((res) => {
+    if (res.code === 0 && res.data) {
+      categories.value = res.data
+    } else {
+      ElMessage.error(res.showMsg)
+    }
+  })
+  getTags().then((res) => {
+    if (res.code === 0 && res.data) {
+      tags.value = res.data
+    } else {
+      ElMessage.error(res.showMsg)
+    }
+  })
+}
+
+getCategoryAndTag()
 </script>
 
 <template>
   <div class="editor">
     <el-card shadow="never" class="editor-header">
       <div class="editor-header-content">
-        <el-input placeholder="文章标题" />
+        <el-input v-model="form.title" placeholder="文章标题" />
         <el-button>暂存</el-button>
         <el-button type="primary" @click="drawer = true">发布</el-button>
       </div>
@@ -24,31 +71,40 @@ const src = ref(defaultImg)
       <el-scrollbar height="100%">
         <el-form label-width="100px" label-position="left">
           <el-form-item label="文章别名">
-            <el-input autocomplete="off" />
+            <el-input autocomplete="off" v-model="form.alias" />
           </el-form-item>
           <el-form-item label="文章分类">
-            <el-select placeholder="Please select activity area">
-              <el-option label="Area1" value="shanghai" />
-              <el-option label="Area2" value="beijing" />
+            <el-select placeholder="选择分类" v-model="form.categoryId">
+              <el-option :label="item.name" :value="item.id" v-for="(item, index) in categories" :key="index" />
             </el-select>
           </el-form-item>
           <el-form-item label="文章标签">
-            <el-input autocomplete="off" />
+            <el-select
+              v-model="form.tags"
+              multiple
+              filterable
+              allow-create
+              default-first-option
+              placeholder="选择标签"
+              style="width: 100%"
+            >
+              <el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
           </el-form-item>
           <el-form-item label="阅读配置">
-            <el-checkbox label="是否原创" name="type" />
-            <el-checkbox label="开启评论" name="type" />
-            <el-checkbox label="是否置顶" name="type" />
-            <el-checkbox label="加密" name="type" />
+            <el-checkbox v-model="form.isOriginal" label="是否原创" />
+            <el-checkbox v-model="form.allowComment" label="开启评论" />
+            <el-checkbox v-model="form.isTop" label="是否置顶" />
+            <el-checkbox v-model="isEncrypt" label="加密" />
           </el-form-item>
-          <el-form-item label="作者">
-            <el-input autocomplete="off" />
+          <el-form-item v-if="!isOriginal" label="作者">
+            <el-input autocomplete="off" v-model="form.author" />
           </el-form-item>
-          <el-form-item label="文章出处">
-            <el-input autocomplete="off" />
+          <el-form-item v-if="!isOriginal" label="文章出处">
+            <el-input autocomplete="off" v-model="form.source" />
           </el-form-item>
-          <el-form-item label="访问密码">
-            <el-input type="password" autocomplete="new-password" show-password />
+          <el-form-item v-if="isEncrypt" label="访问密码">
+            <el-input type="password" autocomplete="new-password" v-model="form.password" show-password />
           </el-form-item>
           <el-form-item label="封面图">
             <el-image :src="src">
@@ -56,20 +112,25 @@ const src = ref(defaultImg)
                 <div class="image-slot">Loading<span class="dot">...</span></div>
               </template>
             </el-image>
-            <el-input class="img-src" autocomplete="off" placeholder="点击封面图选择图片，或直接输入图片地址" />
+            <el-input
+              class="img-src"
+              autocomplete="off"
+              v-model="form.thumbnail"
+              placeholder="点击封面图选择图片，或直接输入图片地址"
+            />
           </el-form-item>
           <el-form-item label="文章摘要">
-            <el-input type="textarea" placeholder="为空则自动截取文章内容" />
+            <el-input type="textarea" v-model="form.summary" placeholder="为空则自动截取文章内容" />
           </el-form-item>
           <el-form-item label="SEO 关键字">
-            <el-input type="textarea" placeholder="英文逗号分隔，为空则取文章标签" />
+            <el-input type="textarea" v-model="form.seoKeywords" placeholder="英文逗号分隔，为空则取文章标签" />
           </el-form-item>
           <el-form-item label="SEO 描述">
-            <el-input type="textarea" placeholder="为空则取文章摘要" />
+            <el-input type="textarea" v-model="form.seoDesc" placeholder="为空则取文章摘要" />
           </el-form-item>
           <el-form-item>
             <el-button>保存</el-button>
-            <el-button>发布</el-button>
+            <el-button type="primary">发布</el-button>
           </el-form-item>
         </el-form>
       </el-scrollbar>

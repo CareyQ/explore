@@ -88,7 +88,7 @@ const closeDialog = () => {
       articles
     </el-card>
 
-    <el-dialog v-model="dialogFormVisible" title="保存标签" width="15%">
+    <el-dialog v-model="dialogFormVisible" title="保存标签" width="20%">
       <el-form ref="tagRef" :model="form" :rules="rules" label-position="top">
         <el-form-item label="名称" prop="name">
           <el-input v-model.trim="form.name" autocomplete="off" />
