@@ -3,7 +3,7 @@ import { ElCard, ElInput, ElSelect, ElMessage } from 'element-plus'
 import { getCategories } from '@/api/category'
 import { getTags } from '@/api/tag'
 import Edit from '@/components/editor/markdownEditor.vue'
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref } from 'vue'
 import defaultImg from '@/assets/img/placeholder.jpg'
 import type { Category, Tag } from '@/interface/Blog'
 

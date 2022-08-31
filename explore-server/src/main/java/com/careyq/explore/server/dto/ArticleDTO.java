@@ -1,24 +1,17 @@
-package com.careyq.explore.server.entity;
+package com.careyq.explore.server.dto;
 
-import com.careyq.explore.common.entity.BaseModel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
- * 文章表
+ * 文章 DTO
  * </p>
  *
  * @author CareyQ
- * @since 2022-08-19
+ * @since 2022-08-31
  */
 @Data
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class Article extends BaseModel<Article> {
+public class ArticleDTO {
 
     /**
      * 文章别名，路径标识
@@ -99,11 +92,5 @@ public class Article extends BaseModel<Article> {
      * 文章点赞数
      */
     private Long likes;
-
-
-    @Override
-    public Serializable pkVal() {
-        return null;
-    }
 
 }
