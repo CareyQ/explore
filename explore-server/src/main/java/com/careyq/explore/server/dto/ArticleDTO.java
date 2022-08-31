@@ -3,6 +3,8 @@ package com.careyq.explore.server.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * <p>
@@ -23,21 +25,19 @@ public class ArticleDTO {
     /**
      * 文章别名，路径标识
      */
+    @NotNull(message = "文章别名不能为空")
     private String alias;
 
     /**
      * 文章标题
      */
+    @NotNull(message = "文章标题不能为空")
     private String title;
-
-    /**
-     * 文章状态 0：草稿 1：发布
-     */
-    private Integer status;
 
     /**
      * 分类 ID
      */
+    @NotNull(message = "文章分类不能为空")
     private Long categoryId;
 
     /**
@@ -48,16 +48,19 @@ public class ArticleDTO {
     /**
      * 允许评论 0：禁止 1：允许
      */
+    @NotNull(message = "是否评论不能为空")
     private Boolean allowComment;
 
     /**
      * 是否置顶 0：否 1：是
      */
+    @NotNull(message = "是否置顶不能为空")
     private Boolean isTop;
 
     /**
      * 是否是原创 0：否 1：是
      */
+    @NotNull(message = "是否原创不能为空")
     private Boolean isOriginal;
 
     /**
@@ -102,4 +105,8 @@ public class ArticleDTO {
     @NotBlank(message = "文章内容不能为空")
     private String content;
 
+    /**
+     * 标签
+     */
+    private List<Object> tags;
 }
