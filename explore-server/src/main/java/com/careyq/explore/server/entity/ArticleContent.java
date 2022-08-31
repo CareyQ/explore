@@ -26,6 +26,11 @@ public class ArticleContent extends BaseModel<ArticleContent> {
     private Long articleId;
 
     /**
+     * 原文件格式
+     */
+    private String original;
+
+    /**
      * 文章内容
      */
     private String content;

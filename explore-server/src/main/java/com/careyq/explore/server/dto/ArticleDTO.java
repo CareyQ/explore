@@ -2,6 +2,8 @@ package com.careyq.explore.server.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 文章 DTO
@@ -12,6 +14,11 @@ import lombok.Data;
  */
 @Data
 public class ArticleDTO {
+
+    /**
+     * 主键
+     */
+    private Long id;
 
     /**
      * 文章别名，路径标识
@@ -84,13 +91,15 @@ public class ArticleDTO {
     private String seoDesc;
 
     /**
-     * 文章浏览量
+     * 原文件格式
      */
-    private Long hits;
+    @NotBlank(message = "文章内容不能为空")
+    private String original;
 
     /**
-     * 文章点赞数
+     * 内容
      */
-    private Long likes;
+    @NotBlank(message = "文章内容不能为空")
+    private String content;
 
 }

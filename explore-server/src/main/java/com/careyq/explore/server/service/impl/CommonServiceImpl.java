@@ -48,7 +48,7 @@ public class CommonServiceImpl<T extends BaseModel<T>> extends ServiceImpl<Commo
         if (exists != null) {
             return Result.fail("名称或别名已存在");
         }
-        boolean result = id == null ? entity.insert() : entity.updateById();
+        boolean result = this.saveOrUpdate(entity);
         return Result.success(result, "保存成功");
     }
 }

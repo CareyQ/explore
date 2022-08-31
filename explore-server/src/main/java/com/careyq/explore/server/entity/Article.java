@@ -1,5 +1,7 @@
 package com.careyq.explore.server.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.careyq.explore.common.entity.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,6 +45,7 @@ public class Article extends BaseModel<Article> {
     /**
      * 文章摘要
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String summary;
 
     /**
@@ -63,31 +66,37 @@ public class Article extends BaseModel<Article> {
     /**
      * 非原创时作者
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String author;
 
     /**
      * 非原创时来源
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String source;
 
     /**
      * 私密文章密码
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String password;
 
     /**
      * 封面图
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String thumbnail;
 
     /**
      * SEO 关键字
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String seoKeywords;
 
     /**
      * SEO 描述
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String seoDesc;
 
     /**

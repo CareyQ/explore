@@ -1,9 +1,13 @@
 package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.careyq.explore.common.vo.Result;
+import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.entity.Article;
+import com.careyq.explore.server.entity.ArticleContent;
 import com.careyq.explore.server.mapper.ArticleMapper;
 import com.careyq.explore.server.service.ArticleService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +21,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
+    @Override
+    public Result<Boolean> saveArticle(ArticleDTO dto) {
+        Article article = new Article();
+        BeanUtils.copyProperties(dto, article);
+        this.saveOrUpdate(article);
+        ArticleContent articleContent = new ArticleContent();
+        articleContent.setArticleId(article.getId())
+        .setOriginal(dto.getOriginal())
+        .setContent(dto.getContent());
+
+        return null;
+    }
 }
