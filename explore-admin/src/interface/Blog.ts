@@ -18,3 +18,23 @@ export interface Tag {
   name: string
   alias: string
 }
+
+export interface Article {
+  id: string | number
+  alias: string
+  title: string
+  categoryId: string | number
+  summary: string
+  allowComment: boolean
+  isTop: boolean
+  isOriginal: boolean
+  author: string
+  source: string
+  password: string
+  thumbnail: string
+  seoKeywords: string
+  seoDesc: string
+  tags: []
+  content: string
+  original: string
+}

@@ -3,6 +3,7 @@ package com.careyq.explore.server.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.util.CollUtil;
+import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.entity.Article;
@@ -41,6 +42,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<Boolean> saveArticle(ArticleDTO dto) {
+        if (StrUtil.isNotBlank(dto.getAlias())) {
+            Integer exists = baseMapper.selectIsExists(dto.getTitle(), dto.getAlias(), dto.getId());
+            if (exists != null) {
+                return Result.fail("文章标题或别名已存在");
+            }
+        }
         Article article = new Article();
         BeanUtils.copyProperties(dto, article);
         this.saveOrUpdate(article);
@@ -60,7 +67,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<String> tagNames = new ArrayList<>();
         for (Object tag : tags) {
             if (tag instanceof Number tagId) {
-                tagIds.add((Long) tagId);
+                tagIds.add(Long.valueOf(String.valueOf(tagId)));
             }
             if (tag instanceof String tagName) {
                 tagNames.add(tagName);
