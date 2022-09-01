@@ -227,9 +227,7 @@ const onEditorChange = (content: any) => {
 .el-scrollbar {
   padding-right: 16px;
 }
-</style>
 
-<style scoped>
 .demo-image__placeholder .el-image {
   padding: 0 5px;
   max-width: 300px;

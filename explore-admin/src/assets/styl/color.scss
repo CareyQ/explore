@@ -36,6 +36,7 @@
   --el-button-outline-color: var(--primary-light-2);
   --el-button-hover-bg-color: var(--primary-light-8);
   --el-button-active-bg-color: var(--primary-light-8);
+  --el-button-active-border-color: var(--primary-light-8)
 }
 
 .el-link.el-link--primary {
@@ -47,8 +48,9 @@
   --el-button-hover-border-color: var(--primary-light-4);
 }
 
-.el-button--primary {
+.el-button.el-button--primary {
   --el-button-hover-bg-color: var(--primary-light-8);
+  --el-button-hover-border-color: var(--primary-light-8);
 }
 
 .el-tag {

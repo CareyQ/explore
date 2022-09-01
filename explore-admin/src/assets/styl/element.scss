@@ -18,7 +18,8 @@
 }
 
 .el-input__wrapper,
-.el-textarea__inner {
+.el-textarea__inner,
+.el-date-editor {
   box-shadow: none !important;
   border: 1px solid var(--el-input-border-color) !important;
 }
@@ -31,7 +32,8 @@
 .el-select .el-input__wrapper.is-focus,
 .el-select .el-input.is-focus .el-input__wrapper,
 .el-input__wrapper.is-focus,
-.el-textarea__inner:focus {
+.el-textarea__inner:focus,
+.el-date-editor.is-active {
   border-color: var(--primary-light-8) !important;
   box-shadow: 0 0 0 3px var(--primary-light-2) !important;
 }
@@ -41,6 +43,6 @@
   line-height: 1.4;
 }
 
-.el-form .el-form-item:last-child {
+.el-form:not(.el-form--inline) .el-form-item:last-child {
   margin-bottom: 0;
 }
