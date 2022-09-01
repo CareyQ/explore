@@ -1,14 +1,30 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
+import { ref } from 'vue'
 
 const content = ref('')
 const leftToolbar =
   'undo redo clear | bold italic strikethrough quote | ul ol table hr | link code image tip todo-list emoji'
+
+const emit = defineEmits(['editorChange'])
+
+const onChange = (text: string, html: string) => {
+  const content = {
+    text: text,
+    html: html
+  }
+  emit('editorChange', content)
+}
 </script>
 
 <template>
   <div class="edit-main">
-    <v-md-editor v-model="content" height="100%" :disabled-menus="[]" :left-toolbar="leftToolbar"></v-md-editor>
+    <v-md-editor
+      v-model="content"
+      height="100%"
+      :disabled-menus="[]"
+      :left-toolbar="leftToolbar"
+      @change="onChange"
+    ></v-md-editor>
   </div>
 </template>
 
