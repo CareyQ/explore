@@ -19,7 +19,10 @@ export default defineConfig({
         {
           'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar']
         }
-      ]
+      ],
+      eslintrc: {
+        enabled: true
+      }
     }),
     Components({
       resolvers: [NaiveUiResolver()]
