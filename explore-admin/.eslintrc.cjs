@@ -19,6 +19,8 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': ['off'],
-    'vue/comment-directive': 'off'
+    'vue/comment-directive': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'no-undef': 'off'
   }
 }

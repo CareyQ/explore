@@ -5,6 +5,10 @@ import App from './App.vue'
 import router from './router'
 import './router/permission'
 
+import 'vfonts/Lato.css'
+import 'vfonts/FiraCode.css'
+import '@/assets/scss/common.scss'
+
 const app = createApp(App)
 
 app.use(createPinia())

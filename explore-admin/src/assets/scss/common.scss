@@ -1,0 +1,58 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+html,
+body,
+#app {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  background-image: url(http://zhongguose.com/img/texture.png);
+  background-color: #f9f9fb;
+}
+
+.n-config-provider,
+.container,
+.sidebar,
+.main {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 235px;
+  background-image: url(http://zhongguose.com/img/texture.png);
+  background-color: #3a3f47;
+  color: #fff;
+}
+
+.main {
+  width: calc(100% - 235px);
+}
