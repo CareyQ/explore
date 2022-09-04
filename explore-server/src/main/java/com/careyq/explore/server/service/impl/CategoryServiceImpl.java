@@ -29,16 +29,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public List<CategoryVO> getCategories() {
-        List<Category> categories = this.lambdaQuery().orderByAsc(Category::getSort).list();
-        return categories.stream().map(c -> {
-            CategoryVO vo = new CategoryVO();
-            vo.setId(c.getId())
-                    .setName(c.getName())
-                    .setAlias(c.getAlias())
-                    .setHits(c.getHits())
-                    .setSort(c.getSort());
-            return vo;
-        }).toList();
+        return baseMapper.selectCategories();
     }
 
     @Override

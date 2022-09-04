@@ -5,6 +5,7 @@ import router from '@/router'
 
 type MenuTheme = NonNullable<MenuProps['themeOverrides']>
 
+const defaultRouter = ref(router.currentRoute.value.path)
 const menuTheme: MenuTheme = {
   itemTextColor: '#fff',
   itemIconColor: '#fff',
@@ -38,7 +39,12 @@ const handleUpdateMenu = (key: string, item: MenuOption) => {
         <p>没放弃，留在这一天...</p>
       </div>
     </div>
-    <n-menu :options="menus" @update:value="handleUpdateMenu" :theme-overrides="menuTheme" />
+    <n-menu
+      :options="menus"
+      :default-value="defaultRouter"
+      @update:value="handleUpdateMenu"
+      :theme-overrides="menuTheme"
+    />
   </aside>
 </template>
 

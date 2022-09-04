@@ -38,7 +38,7 @@ body {
 .n-config-provider,
 .container,
 .sidebar,
-.main {
+.content {
   height: 100%;
 }
 
@@ -53,6 +53,16 @@ body {
   color: #fff;
 }
 
-.main {
+.content {
   width: calc(100% - 235px);
+  color: #3a3f47;
+}
+
+.main {
+  padding: 0 30px 20px;
+  height: calc(100% - 98px);
+
+  >div {
+    height: 100%;
+  }
 }

@@ -1,6 +1,7 @@
 package com.careyq.explore.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.careyq.explore.common.entity.BaseModel;
 import com.careyq.explore.common.vo.Result;
 
 /**
@@ -11,7 +12,7 @@ import com.careyq.explore.common.vo.Result;
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface CommonService<T> extends IService<T> {
+public interface CommonService<T extends BaseModel<T>> extends IService<T> {
 
     /**
      * 保存实体

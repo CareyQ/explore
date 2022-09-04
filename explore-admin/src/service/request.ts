@@ -25,4 +25,14 @@ axios.interceptors.response.use(
   }
 )
 
-export default axios
+export const get = <T>(url: string, params?: object): Promise<Result<T>> => {
+  return axios.get(url, { params })
+}
+
+export const post = <T>(url: string, params?: object): Promise<Result<T>> => {
+  return axios.post(url, params)
+}
+
+export const put = <T>(url: string, params?: object): Promise<Result<T>> => {
+  return axios.put(url, params)
+}

@@ -7,3 +7,10 @@ type GlobalMenuOption = import('naive-ui').MenuOption & {
   icon?: () => import('vue').VNodeChild
   children?: GlobalMenuOption[]
 }
+
+type Result<T> = {
+  code: number
+  msg: string
+  showMsg: string
+  data?: T
+}

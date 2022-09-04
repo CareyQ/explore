@@ -4,6 +4,7 @@ import com.careyq.explore.common.entity.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
@@ -18,6 +19,7 @@ import java.io.Serializable;
  * @since 2022-08-19
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)

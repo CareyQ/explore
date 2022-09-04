@@ -36,6 +36,11 @@ public class CategoryVO {
     private Long hits;
 
     /**
+     * 文章数
+     */
+    private Long count;
+
+    /**
      * 排序
      */
     private Integer sort;

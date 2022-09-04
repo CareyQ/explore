@@ -1,6 +1,6 @@
 import router from '@/router'
 import Layout from '@/views/layout/index.vue'
-import { getMenus } from '@/apis/menu'
+import { getMenus } from '@/service/api/menu'
 import { convertToMenu } from '@/utils/menu'
 import type { Menu } from '@/model/menu'
 import type { RouteRecordRaw } from 'vue-router'
@@ -34,6 +34,8 @@ export const useRouteStore = defineStore('route-store', {
     },
     async initRoute() {
       const { data } = await getMenus()
+      console.log(data)
+
       if (data) {
         this.handleRoutes(data)
       }
