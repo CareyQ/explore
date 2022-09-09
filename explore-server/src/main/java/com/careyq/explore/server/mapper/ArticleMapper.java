@@ -3,6 +3,7 @@ package com.careyq.explore.server.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.entity.Article;
 import com.careyq.explore.server.vo.ArticlePageVO;
@@ -41,4 +42,12 @@ public interface ArticleMapper extends BaseMapper<Article> {
      */
     IPage<ArticlePageVO> selectArticlePage(Page<ArticlePageVO> page,
                                            @Param("dto") ArticlePageDTO dto);
+
+    /**
+     * 查询文章详情
+     *
+     * @param id 文章 ID
+     * @return 文章详情
+     */
+    ArticleDTO selectArticle(@Param("id") Long id);
 }

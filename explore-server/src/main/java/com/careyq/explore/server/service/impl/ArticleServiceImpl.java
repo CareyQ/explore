@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.careyq.explore.common.exception.UserException;
 import com.careyq.explore.common.util.CollUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
+import com.careyq.explore.server.enmus.ArticleStatusEnum;
 import com.careyq.explore.server.entity.Article;
 import com.careyq.explore.server.entity.ArticleContent;
 import com.careyq.explore.server.entity.ArticleTag;
@@ -45,11 +47,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result<Boolean> saveArticle(ArticleDTO dto) {
+    public Long saveArticle(ArticleDTO dto) {
         if (StrUtil.isNotBlank(dto.getAlias())) {
             Integer exists = baseMapper.selectIsExists(dto.getTitle(), dto.getAlias(), dto.getId());
             if (exists != null) {
-                return Result.fail("文章标题或别名已存在");
+                throw new UserException("文章标题或别名已存在");
             }
         }
         Article article = new Article();
@@ -64,7 +66,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         List<Object> tags = dto.getTags();
         if (CollUtil.isEmpty(tags)) {
-            return Result.success("保存成功");
+            throw new UserException("保存成功");
         }
 
         List<Long> tagIds = new ArrayList<>();
@@ -92,7 +94,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (CollUtil.isNotEmpty(articleTags)) {
             articleTagService.saveBatch(articleTags);
         }
-        return Result.success("保存成功");
+        return article.getId();
     }
 
     @Override
@@ -100,5 +102,29 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         IPage<ArticlePageVO> page = baseMapper.selectArticlePage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
         page.getRecords().forEach(e -> e.setTagsName(StrUtil.split(e.getTags(), StrUtil.COMMA)));
         return page;
+    }
+
+    @Override
+    public Result<ArticleDTO> getArticle(Long id) {
+        return Result.success(baseMapper.selectArticle(id));
+    }
+
+    @Override
+    public Result<Boolean> delArticle(Long id) {
+        boolean result = this.removeById(id);
+        if (result) {
+            return Result.success("删除成功");
+        }
+        return Result.fail("删除失败");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Boolean> publishArticle(ArticleDTO dto) {
+        Long articleId = this.saveArticle(dto);
+        Article article = new Article();
+        article.setStatus(ArticleStatusEnum.PUBLISHED.getCode()).setId(articleId);
+        article.updateById();
+        return Result.success("发布成功");
     }
 }

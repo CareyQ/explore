@@ -21,10 +21,10 @@ public interface ArticleService extends IService<Article> {
     /**
      * 保存文章
      *
-     * @param dto 文章
+     * @param dto 文章参数
      * @return 结果
      */
-    Result<Boolean> saveArticle(ArticleDTO dto);
+    Long saveArticle(ArticleDTO dto);
 
     /**
      * 获取文章分页
@@ -33,4 +33,28 @@ public interface ArticleService extends IService<Article> {
      * @return 分页
      */
     IPage<ArticlePageVO> getArticlePage(ArticlePageDTO dto);
+
+    /**
+     * 获取文章详情
+     *
+     * @param id 文章 ID
+     * @return 文章详情
+     */
+    Result<ArticleDTO> getArticle(Long id);
+
+    /**
+     * 删除文章
+     *
+     * @param id 文章 ID
+     * @return 操作结果
+     */
+    Result<Boolean> delArticle(Long id);
+
+    /**
+     * 发布文章
+     *
+     * @param dto 文章参数
+     * @return 操作结果
+     */
+    Result<Boolean> publishArticle(ArticleDTO dto);
 }

@@ -42,4 +42,25 @@
         </if>
         order by a.create_time desc
     </select>
+
+    <select id="selectArticle" resultType="com.careyq.explore.server.dto.ArticleDTO">
+        select a.id,
+               a.alias,
+               a.title,
+               a.category_id,
+               a.summary,
+               a.allow_comment,
+               a.is_top,
+               a.is_original,
+               a.author,
+               a.source,
+               a.password,
+               a.thumbnail,
+               a.seo_keywords,
+               a.seo_desc,
+               ac.original
+        from article a
+            left join article_content ac on a.id = ac.article_id
+        where a.id = #{id}
+    </select>
 </mapper>
