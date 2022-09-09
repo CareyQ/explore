@@ -1,9 +1,12 @@
 package com.careyq.explore.server.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
+import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.entity.Article;
+import com.careyq.explore.server.vo.ArticlePageVO;
 
 /**
  * <p>
@@ -22,4 +25,12 @@ public interface ArticleService extends IService<Article> {
      * @return 结果
      */
     Result<Boolean> saveArticle(ArticleDTO dto);
+
+    /**
+     * 获取文章分页
+     *
+     * @param dto ArticlePageDTO
+     * @return 分页
+     */
+    IPage<ArticlePageVO> getArticlePage(ArticlePageDTO dto);
 }

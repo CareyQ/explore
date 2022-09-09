@@ -1,11 +1,14 @@
 package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.util.CollUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
+import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.entity.Article;
 import com.careyq.explore.server.entity.ArticleContent;
 import com.careyq.explore.server.entity.ArticleTag;
@@ -15,6 +18,7 @@ import com.careyq.explore.server.service.ArticleContentService;
 import com.careyq.explore.server.service.ArticleService;
 import com.careyq.explore.server.service.ArticleTagService;
 import com.careyq.explore.server.service.TagService;
+import com.careyq.explore.server.vo.ArticlePageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -89,5 +93,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             articleTagService.saveBatch(articleTags);
         }
         return Result.success("保存成功");
+    }
+
+    @Override
+    public IPage<ArticlePageVO> getArticlePage(ArticlePageDTO dto) {
+        IPage<ArticlePageVO> page = baseMapper.selectArticlePage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
+        page.getRecords().forEach(e -> e.setTagsName(StrUtil.split(e.getTags(), StrUtil.COMMA)));
+        return page;
     }
 }

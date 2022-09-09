@@ -4,6 +4,9 @@ import lombok.experimental.UtilityClass;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 字符串工具类
@@ -16,8 +19,8 @@ public class StrUtil {
 
     public final String EMPTY = "";
     public final String COMMA = ",";
-    public final String SLASH  = "/";
-    public final String BACKSLASH   = "\\";
+    public final String SLASH = "/";
+    public final String BACKSLASH = "\\";
     public final String DOT = ".";
     public final String NULL = "null";
     public final String UNDEFINED = "undefined";
@@ -100,6 +103,26 @@ public class StrUtil {
             return EMPTY;
         }
         return DigestUtils.md5DigestAsHex(val.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * 将字符串按照指定分隔符，分割为集合
+     *
+     * @param val       待分割的字符串
+     * @param separator 分隔符
+     * @return 集合
+     */
+    public List<String> split(String val, String separator) {
+        if (val == null) {
+            return new ArrayList<>(0);
+        }
+        List<String> arrayList = new ArrayList<>();
+        if (isBlank(separator)) {
+            arrayList.add(val);
+            return arrayList;
+        }
+        arrayList.addAll(Arrays.asList(val.split(separator)));
+        return arrayList;
     }
 
     public static void main(String[] args) {

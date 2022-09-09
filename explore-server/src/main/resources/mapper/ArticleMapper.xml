@@ -9,4 +9,37 @@
         </if>
         limit 1
     </select>
+
+    <select id="selectArticlePage" resultType="com.careyq.explore.server.vo.ArticlePageVO">
+        select a.id,
+               a.alias,
+               a.title,
+               a.status,
+               c.name,
+               a.is_top,
+               a.is_original,
+               a.thumbnail,
+               a.hits,
+               a.likes,
+               a.create_time,
+               (select group_concat(t.name) from tag t
+                    left join article_tag at on t.id = at.tag_id
+                where at.article_id = a.id) tags
+        from article a
+            left join category c on a.category_id = c.id
+        where a.is_del = 0
+        <if test="dto.title != null">
+            a.title like concat('%', #{dto.title}, '%')
+        </if>
+        <if test="dto.categoryId != null">
+            a.categoryId = #{dto.categoryId}
+        </if>
+        <if test="dto.status != null">
+            a.status = #{dto.status}
+        </if>
+        <if test="dto.isOriginal != null">
+            a.isOriginal = #{dto.isOriginal}
+        </if>
+        order by a.create_time desc
+    </select>
 </mapper>
