@@ -1,6 +1,7 @@
 package com.careyq.explore.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.Menu;
 import com.careyq.explore.server.vo.MenuVO;
 
@@ -23,4 +24,12 @@ public interface MenuService extends IService<Menu> {
      * @return 菜单列表
      */
     List<MenuVO> getAdminMenus(Integer type);
+
+    /**
+     * 删除指定菜单
+     *
+     * @param id 菜单 ID
+     * @return 结果
+     */
+    Result<Boolean> delMenu(Long id);
 }

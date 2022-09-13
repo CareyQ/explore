@@ -111,4 +111,9 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
 
         return filename.substring(0, dotLastIndex);
     }
+
+    @Override
+    public boolean isExistByCategory(Long categoryId) {
+        return baseMapper.selectExistByCategory(categoryId) != null;
+    }
 }

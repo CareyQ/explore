@@ -102,9 +102,23 @@ create table if not exists article_tag
     key idx_tagId (tag_id) using btree
 ) comment '文章标签关联表';
 
+create table if not exists attachment_category
+(
+    id            bigint unsigned not null auto_increment comment '主键',
+    name          varchar(50)     not null comment '文件分类名称',
+    category_desc varchar(255)    not null comment '分类描述',
+    password      varchar(50)     null     default null comment '私密分类密码',
+    is_show       tinyint(1)      not null default 0 comment '是否展示',
+    is_del        tinyint(1)      not null default 0 comment '是否删除',
+    create_time   datetime        not null default current_timestamp comment '创建时间',
+    update_time   datetime        not null default current_timestamp on update current_timestamp comment '更新时间',
+    primary key (id)
+) comment '文件分类表';
+
 create table if not exists attachment
 (
     id          bigint unsigned not null auto_increment comment '主键',
+    category_id bigint          not null comment '文件分类 ID',
     name        varchar(50)     not null comment '文件名称',
     type        varchar(50)     not null comment '文件类型',
     path        varchar(255)    not null comment '文件路径',

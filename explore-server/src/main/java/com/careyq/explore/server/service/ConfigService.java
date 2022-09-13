@@ -13,4 +13,11 @@ import com.careyq.explore.server.entity.Config;
  */
 public interface ConfigService extends IService<Config> {
 
+    /**
+     * 根据 Code 获取值
+     *
+     * @param code code
+     * @return 值
+     */
+    String getConfigValue(Integer code);
 }

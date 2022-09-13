@@ -22,6 +22,11 @@ import java.io.Serializable;
 public class Attachment extends BaseModel<Attachment> {
 
     /**
+     * 文件分类 ID
+     */
+    private Long categoryId;
+
+    /**
      * 文件名称
      */
     private String name;

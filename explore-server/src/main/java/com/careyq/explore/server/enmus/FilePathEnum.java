@@ -18,7 +18,15 @@ public enum FilePathEnum {
     /**
      * 头像路径
      */
-    AVATAR(0, "avatar/", "头像路径");
+    AVATAR(0, "avatar/", "头像路径"),
+    /**
+     * 文章附件路径
+     */
+    ARTICLE(1, "article/", "文章附件路径"),
+    /**
+     * 画廊路径
+     */
+    GALLERY(2, "gallery/", "画廊路径");
 
     private final Integer code;
 

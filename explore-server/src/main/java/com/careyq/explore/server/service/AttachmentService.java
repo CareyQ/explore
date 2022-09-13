@@ -23,4 +23,14 @@ public interface AttachmentService extends IService<Attachment> {
      * @return 结果
      */
     boolean uploadFile(MultipartFile file, FilePathEnum pathEnum);
+
+    /**
+     * 指定分类下是否存在附件
+     *
+     * @param categoryId 分类 id
+     * @return 是否存在
+     */
+    boolean isExistByCategory(Long categoryId);
+
+
 }

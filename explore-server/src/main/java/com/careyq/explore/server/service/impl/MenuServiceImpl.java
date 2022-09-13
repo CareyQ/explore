@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.TypeReference;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.util.RedisUtil;
 import com.careyq.explore.common.util.StrUtil;
+import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.constant.CacheConst;
 import com.careyq.explore.server.entity.Menu;
 import com.careyq.explore.server.mapper.MenuMapper;
@@ -53,5 +54,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         }
         RedisUtil.set(CacheConst.MENU_KEY, result.values());
         return new ArrayList<>(result.values());
+    }
+
+    @Override
+    public Result<Boolean> delMenu(Long id) {
+        this.removeById(id);
+        return Result.success("删除成功");
     }
 }

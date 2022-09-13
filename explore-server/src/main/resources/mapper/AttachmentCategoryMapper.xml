@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.careyq.explore.server.mapper.AttachmentCategoryMapper">
+
+    <select id="selectCategoryList" resultType="com.careyq.explore.server.vo.AttachmentCategoryVO">
+        select id,
+               name,
+               if(password is null, true, false) isEncrypt,
+               is_show
+        from attachment_category
+        where is_del = 0
+    </select>
+</mapper>
