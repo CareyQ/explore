@@ -5,14 +5,14 @@ import lombok.Data;
 
 /**
  * <p>
- * 文件 VO
+ * 文件分页 VO
  * </p>
  *
  * @author CareyQ
  * @since 2022-09-13
  */
 @Data
-public class AttachmentVO {
+public class AttachmentPageVO {
 
     /**
      * 主键

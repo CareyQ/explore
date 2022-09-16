@@ -1,13 +1,22 @@
 package com.careyq.explore.server.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.careyq.explore.common.enums.IEnum;
 import com.careyq.explore.common.exception.UserException;
 import com.careyq.explore.common.util.FileUtil;
 import com.careyq.explore.common.util.StrUtil;
+import com.careyq.explore.common.vo.Result;
+import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
+import com.careyq.explore.server.dto.AttachmentPageDTO;
+import com.careyq.explore.server.enmus.BatchOperateTypeEnum;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.entity.Attachment;
 import com.careyq.explore.server.mapper.AttachmentMapper;
 import com.careyq.explore.server.service.AttachmentService;
+import com.careyq.explore.server.service.AttachmentVO;
+import com.careyq.explore.server.vo.AttachmentPageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -116,4 +125,33 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
     public boolean isExistByCategory(Long categoryId) {
         return baseMapper.selectExistByCategory(categoryId) != null;
     }
+
+    @Override
+    public IPage<AttachmentPageVO> getAttachmentPage(AttachmentPageDTO dto) {
+        return baseMapper.selectAttachmentPage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
+    }
+
+    @Override
+    public AttachmentVO getAttachment(Long id) {
+        return baseMapper.selectAttachment(id);
+    }
+
+    @Override
+    public Result<Boolean> batchOperate(AttachmentBatchOperateDTO dto) {
+        BatchOperateTypeEnum typeEnum = IEnum.codeOf(BatchOperateTypeEnum.class, dto.getOperationType());
+        switch (typeEnum) {
+            case DEL -> this.removeBatchByIds(dto.getIds());
+            case MOVE -> {
+                if (dto.getTargetCategoryId() == null) {
+                    throw new UserException("未指定附件分类");
+                }
+                this.lambdaUpdate()
+                        .set(Attachment::getCategoryId, dto.getTargetCategoryId())
+                        .in(Attachment::getId, dto.getIds());
+            }
+            default -> throw new IllegalStateException("未知的操作: " + dto.getOperationType());
+        }
+        return Result.success("操作成功");
+    }
+
 }
