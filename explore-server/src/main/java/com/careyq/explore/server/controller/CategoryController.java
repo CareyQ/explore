@@ -49,13 +49,13 @@ public class CategoryController {
     }
 
     /**
-     * 分类排序交换
+     * 删除分类
      *
      * @return 结果
      */
-    @PutMapping("/exchange")
-    public Result<Boolean> exchange(@RequestBody List<Long> ids) {
-        return categoryService.exchange(ids);
+    @DeleteMapping("/del")
+    public Result<Boolean> delCategory(@RequestParam Long id) {
+        return categoryService.delCategory(id);
     }
 }
 

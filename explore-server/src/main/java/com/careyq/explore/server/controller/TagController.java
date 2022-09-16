@@ -47,5 +47,6 @@ public class TagController {
     public Result<List<TagVO>> getTags() {
         return Result.success(tagService.getTags());
     }
+
 }
 

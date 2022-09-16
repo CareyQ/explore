@@ -25,10 +25,10 @@ public interface CategoryService extends IService<Category> {
     List<CategoryVO> getCategories();
 
     /**
-     * 更换两个分类位置
+     * 根据 id 删除分类
      *
-     * @param ids 分类 ID
+     * @param id 分类 ID
      * @return 结果
      */
-    Result<Boolean> exchange(List<Long> ids);
+    Result<Boolean> delCategory(Long id);
 }

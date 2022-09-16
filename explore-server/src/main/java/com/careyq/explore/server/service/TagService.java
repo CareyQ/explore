@@ -1,6 +1,7 @@
 package com.careyq.explore.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.Tag;
 import com.careyq.explore.server.vo.TagVO;
 
@@ -22,4 +23,12 @@ public interface TagService extends IService<Tag> {
      * @return 标签列表
      */
     List<TagVO> getTags();
+
+    /**
+     * 根据 id 删除标签
+     *
+     * @param id 标签 id
+     * @return 结果
+     */
+    Result<Boolean> delTag(Long id);
 }
