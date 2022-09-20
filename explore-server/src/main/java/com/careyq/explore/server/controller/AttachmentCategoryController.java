@@ -1,9 +1,14 @@
 package com.careyq.explore.server.controller;
 
+import com.careyq.explore.common.vo.Result;
+import com.careyq.explore.server.entity.AttachmentCategory;
 import com.careyq.explore.server.service.AttachmentCategoryService;
+import com.careyq.explore.server.vo.AttachmentCategoryVO;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,10 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/attachmentCategory")
+@RequestMapping("/api/attachment/category")
 public class AttachmentCategoryController {
 
     private final AttachmentCategoryService attachmentCategoryService;
 
+    /**
+     * 保存文件分类
+     *
+     * @param category 文件分类
+     * @return 结果
+     */
+    @PostMapping("/save")
+    public Result<Boolean> saveAttachmentCategory(@RequestBody @Validated AttachmentCategory category) {
+        return attachmentCategoryService.saveAttachmentCategory(category);
+    }
+
+    /**
+     * 获取文件分类
+     *
+     * @return 结果
+     */
+    @GetMapping("/list")
+    public Result<List<AttachmentCategoryVO>> getAttachmentCategoryList() {
+        return Result.success(attachmentCategoryService.getAttachmentCategoryList());
+    }
 }
 

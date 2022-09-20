@@ -20,7 +20,7 @@ type Article = {
   id: string | number
   alias: string
   title: string
-  categoryId: string | number
+  categoryId: number
   summary: string
   allowComment: boolean
   isTop: boolean
@@ -34,4 +34,25 @@ type Article = {
   tags: []
   content: string
   original: string
+}
+
+type ArticlePage = {
+  id: number
+  alias: string
+  title: string
+  status: number
+  categoryName: string
+  isTop: boolean
+  thumbnail: string
+  tagsName: []
+  createTime: string
+  hits: number
+  likes: number
+}
+
+type AttachmentCategory = {
+  id: number
+  name: string
+  isEncrypt: boolean
+  isShow: boolean
 }

@@ -30,18 +30,29 @@ public interface IEnum {
     /**
      * 通过 code 获取枚举
      *
-     * @param enumType 枚举类
-     * @param code     code 值
-     * @param <T>      IEnum 子类
+     * @param enumClass 枚举类
+     * @param code      code 值
+     * @param <T>       IEnum 子类
      * @return 枚举
      */
-    static <T extends IEnum> T codeOf(Class<T> enumType, Integer code) {
-        if (!enumType.isEnum()) {
-            throw new IllegalArgumentException(enumType.getName() + "不是枚举类");
+    static <T extends IEnum> T codeOf(Class<T> enumClass, Integer code) {
+        if (!enumClass.isEnum()) {
+            throw new IllegalArgumentException(enumClass.getName() + "不是枚举类");
         }
-        return Stream.of(enumType.getEnumConstants())
+        return Stream.of(enumClass.getEnumConstants())
                 .filter(v -> Objects.equals(v.getCode(), code))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("未找到该枚举类型"));
+    }
+
+    /**
+     * 检查枚举是否无此 code
+     *
+     * @param enumClass 枚举类
+     * @param code      code 值
+     * @return 是否存在
+     */
+    static boolean noCode(Class<? extends IEnum> enumClass, Integer code) {
+        return Stream.of(enumClass.getEnumConstants()).noneMatch(e -> Objects.equals(e.getCode(), code));
     }
 }

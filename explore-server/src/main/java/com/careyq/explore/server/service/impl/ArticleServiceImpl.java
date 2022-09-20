@@ -65,10 +65,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         contentService.saveOrUpdate(articleContent);
 
         List<Object> tags = dto.getTags();
-        if (CollUtil.isEmpty(tags)) {
-            throw new UserException("保存成功");
-        }
-
         List<Long> tagIds = new ArrayList<>();
         List<String> tagNames = new ArrayList<>();
         for (Object tag : tags) {

@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 /**
@@ -64,5 +66,11 @@ public class CommonServiceImpl<T extends BaseModel<T>> extends ServiceImpl<Commo
         }
         boolean result = service.saveOrUpdate(entity);
         return Result.success(result, "保存成功");
+    }
+
+    public static void main(String[] args) {
+        LocalDateTime applyingSTime = LocalDateTime.of(2022, 9, 6, 0, 0, 0);
+        LocalDateTime applyingETime = LocalDateTime.now();
+        System.out.println(applyingSTime.until(applyingETime, ChronoUnit.DAYS));
     }
 }

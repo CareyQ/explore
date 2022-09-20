@@ -1,4 +1,4 @@
-package com.careyq.explore.server.service;
+package com.careyq.explore.server.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.entity.Attachment;
-import com.careyq.explore.server.service.AttachmentVO;
+import com.careyq.explore.server.vo.AttachmentVO;
 import com.careyq.explore.server.vo.AttachmentPageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

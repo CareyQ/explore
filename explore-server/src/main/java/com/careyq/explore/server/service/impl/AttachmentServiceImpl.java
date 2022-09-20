@@ -15,7 +15,7 @@ import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.entity.Attachment;
 import com.careyq.explore.server.mapper.AttachmentMapper;
 import com.careyq.explore.server.service.AttachmentService;
-import com.careyq.explore.server.service.AttachmentVO;
+import com.careyq.explore.server.vo.AttachmentVO;
 import com.careyq.explore.server.vo.AttachmentPageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

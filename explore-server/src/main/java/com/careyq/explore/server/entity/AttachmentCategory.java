@@ -40,7 +40,7 @@ public class AttachmentCategory extends BaseModel<AttachmentCategory> {
     /**
      * 是否展示
      */
-    private String isShow;
+    private Boolean isShow;
 
 
     @Override

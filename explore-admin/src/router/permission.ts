@@ -3,7 +3,7 @@ import router from '@/router'
 
 router.beforeEach(async (to, from, next) => {
   const routerStore = useRouteStore()
-  if (routerStore.menus.length <= 0) {
+  if (routerStore.routes.length <= 0) {
     await routerStore.initRoute()
     next({ path: to.path })
   } else {

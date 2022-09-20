@@ -1,5 +1,7 @@
 package com.careyq.explore.server.vo;
 
+import com.careyq.explore.common.annotation.EnumName;
+import com.careyq.explore.server.enmus.ArticleStatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -34,6 +36,7 @@ public class ArticlePageVO {
     /**
      * 状态
      */
+    @EnumName(ArticleStatusEnum.class)
     private Integer status;
 
     /**

@@ -3,6 +3,7 @@ package com.careyq.explore.server.mapper;
 import com.careyq.explore.server.entity.AttachmentCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.careyq.explore.server.vo.AttachmentCategoryVO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author CareyQ
  * @since 2022-09-13
  */
+@Mapper
 public interface AttachmentCategoryMapper extends BaseMapper<AttachmentCategory> {
 
     /**

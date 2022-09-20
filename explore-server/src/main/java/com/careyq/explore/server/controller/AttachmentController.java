@@ -6,7 +6,7 @@ import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.service.AttachmentService;
-import com.careyq.explore.server.service.AttachmentVO;
+import com.careyq.explore.server.vo.AttachmentVO;
 import com.careyq.explore.server.vo.AttachmentPageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/file")
+@RequestMapping("/api/attachment")
 public class AttachmentController {
 
     private final AttachmentService attachmentService;

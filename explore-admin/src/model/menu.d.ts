@@ -1,4 +1,4 @@
-export interface Menu {
+type Menu = {
   id: number
   title: string
   name: string

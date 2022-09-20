@@ -1,22 +1,21 @@
 import router from '@/router'
 import Layout from '@/views/layout/index.vue'
 import { getMenus } from '@/service/api/menu'
-import { convertToMenu } from '@/utils/menu'
-import type { Menu } from '@/model/menu'
 import type { RouteRecordRaw } from 'vue-router'
+import { Icon } from '@iconify/vue'
+import { ElIcon } from 'element-plus'
 
 interface RouteState {
-  menus: GlobalMenuOption[]
+  routes: RouteRecordRaw[]
 }
 
 export const useRouteStore = defineStore('route-store', {
   state: (): RouteState => ({
-    menus: []
+    routes: []
   }),
-  actions: {
-    handleRoutes(routes: Menu[]) {
-      ;(this.menus as GlobalMenuOption[]) = convertToMenu(routes)
 
+  actions: {
+    handleRoutes(menus: Menu[]) {
       const root: RouteRecordRaw = {
         path: '/',
         name: 'Layout',
@@ -28,35 +27,38 @@ export const useRouteStore = defineStore('route-store', {
         children: [] as RouteRecordRaw[]
       }
 
-      const vueRoutes = convertToRouter(routes)
-      root.children = vueRoutes
+      this.routes = convertToRouter(menus)
+      root.children = this.routes
       router.addRoute(root)
     },
+
     async initRoute() {
       const { data } = await getMenus()
-      console.log(data)
 
       if (data) {
-        this.handleRoutes(data)
+        this.handleRoutes(data as Menu[])
       }
     }
   }
 })
 
 /** 后端路由转换为 vue 路由 */
-function convertToRouter(routes: Menu[]) {
-  const modules = import.meta.glob('../../views/**/*.vue')
-  return routes.map((menu) => {
+const modules = import.meta.glob('../../views/**/**.vue')
+function convertToRouter(menus: Menu[]) {
+  return menus.map((menu) => {
     const router: RouteRecordRaw = {
       path: menu.router,
       name: menu.name,
       meta: {
-        icon: menu.icon,
         title: menu.title
       },
       redirect: '',
       component: modules[`../../views/${menu.component}.vue`],
       children: []
+    }
+
+    if (menu.icon && router.meta) {
+      router.meta.icon = iconRender(menu.icon)
     }
 
     if (menu.children && menu.children.length > 0) {
@@ -68,4 +70,8 @@ function convertToRouter(routes: Menu[]) {
 
     return router
   })
+}
+
+export function iconRender(icon: string) {
+  return () => h(ElIcon, null, { default: () => h(Icon, { icon }) })
 }

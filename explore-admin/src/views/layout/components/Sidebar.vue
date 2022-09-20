@@ -1,28 +1,12 @@
 <script setup lang="ts">
 import { useRouteStore } from '@/stores/modules/route'
-import type { MenuProps, MenuOption } from 'naive-ui'
-import router from '@/router'
+import MenuItem from './MenuItem.vue'
 
-type MenuTheme = NonNullable<MenuProps['themeOverrides']>
+const routeStore = useRouteStore()
+const router = useRouter()
 
 const defaultRouter = ref(router.currentRoute.value.path)
-const menuTheme: MenuTheme = {
-  itemTextColor: '#fff',
-  itemIconColor: '#fff',
-  arrowColor: '#fff',
-  itemTextColorActive: '#fff',
-  itemIconColorActive: '#fff',
-  itemIconColorActiveHover: '#01adb5',
-  itemColorActive: '#01adb5'
-}
-const routeStore = useRouteStore()
-
-const menus = computed(() => routeStore.menus as GlobalMenuOption[])
-
-const handleUpdateMenu = (key: string, item: MenuOption) => {
-  const menuItem = item as GlobalMenuOption
-  router.push(menuItem.routePath)
-}
+const menus = computed(() => routeStore.routes)
 </script>
 
 <template>
@@ -39,27 +23,40 @@ const handleUpdateMenu = (key: string, item: MenuOption) => {
         <p>没放弃，留在这一天...</p>
       </div>
     </div>
-    <n-menu
-      :options="menus"
-      :default-value="defaultRouter"
-      @update:value="handleUpdateMenu"
-      :theme-overrides="menuTheme"
-    />
+    <hr />
+    <el-menu router :default-active="defaultRouter">
+      <MenuItem :item="item" v-for="item in menus" :key="item.path" />
+    </el-menu>
   </aside>
 </template>
 
 <style lang="scss" scoped>
+.sidebar {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 20px;
+  height: calc(100vh - 40px);
+  width: 250px;
+  padding: 0 10px;
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  color: var(--text-dark-color);
+}
+
 .userinfo {
   display: flex;
-  padding: 30px 20px;
   align-items: center;
+  justify-content: center;
+  padding: 32px 0 26px;
 }
 
 .avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px dashed var(--text-dark-color);
 }
 
 .info {

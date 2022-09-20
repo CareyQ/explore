@@ -1,12 +1,14 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["**/*.d.ts", "src/**/*.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["naive-ui/volar"]
+    "types": [
+      "unplugin-icons/types/vue",
+    ]
   },
 
   "references": [
