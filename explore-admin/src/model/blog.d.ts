@@ -56,3 +56,11 @@ type AttachmentCategory = {
   isEncrypt: boolean
   isShow: boolean
 }
+
+type AttachmentCategoryDetail = {
+  id: number
+  name: string
+  categoryDesc: string
+  password: string
+  isShow: boolean
+}
