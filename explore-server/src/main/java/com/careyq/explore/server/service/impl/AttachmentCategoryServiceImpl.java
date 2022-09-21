@@ -6,6 +6,7 @@ import com.careyq.explore.server.entity.AttachmentCategory;
 import com.careyq.explore.server.mapper.AttachmentCategoryMapper;
 import com.careyq.explore.server.service.AttachmentCategoryService;
 import com.careyq.explore.server.service.AttachmentService;
+import com.careyq.explore.server.vo.AttachmentCategoryPageVO;
 import com.careyq.explore.server.vo.AttachmentCategoryVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,19 @@ public class AttachmentCategoryServiceImpl extends ServiceImpl<AttachmentCategor
     }
 
     @Override
-    public List<AttachmentCategoryVO> getAttachmentCategoryList() {
+    public List<AttachmentCategoryPageVO> getAttachmentCategoryList() {
         return baseMapper.selectCategoryList();
+    }
+
+    @Override
+    public AttachmentCategoryVO getAttachmentDetail(Long id) {
+        AttachmentCategory category = this.getById(id);
+        AttachmentCategoryVO vo = new AttachmentCategoryVO();
+        vo.setId(category.getId())
+                .setName(category.getName())
+                .setCategoryDesc(category.getCategoryDesc())
+                .setPassword(category.getPassword())
+                .setIsShow(category.getIsShow());
+        return vo;
     }
 }

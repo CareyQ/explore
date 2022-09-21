@@ -51,13 +51,14 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean uploadFile(MultipartFile file, FilePathEnum pathEnum) {
+    public boolean uploadFile(MultipartFile file, Long categoryId,  FilePathEnum pathEnum) {
         String filename = file.getOriginalFilename();
         if (StrUtil.isBlank(filename)) {
             throw new UserException("文件名称不能为空");
         }
         Attachment attachment = new Attachment();
         attachment.setName(filename)
+                .setCategoryId(categoryId)
                 .setType(MediaType.valueOf(Objects.requireNonNull(file.getContentType())).getType())
                 .setSize(file.getSize());
         attachment.builderPath(pathEnum.getPath(), filename, FileUtil.extName(filename));

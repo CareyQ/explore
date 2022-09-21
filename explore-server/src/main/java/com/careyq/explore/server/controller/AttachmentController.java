@@ -29,6 +29,17 @@ public class AttachmentController {
     private final AttachmentService attachmentService;
 
     /**
+     * 上传文件
+     *
+     * @param file 文件
+     * @return 结果
+     */
+    @PostMapping("/upload")
+    public Result<Boolean> upload(@RequestPart MultipartFile file, Long categoryId) {
+        return Result.success(attachmentService.uploadFile(file, categoryId, FilePathEnum.OTHER));
+    }
+
+    /**
      * 上传头像
      *
      * @param file 头像文件
@@ -36,7 +47,7 @@ public class AttachmentController {
      */
     @PostMapping("/upload/avatar")
     public Result<Boolean> uploadAvatar(@RequestPart MultipartFile file) {
-        return Result.success(attachmentService.uploadFile(file, FilePathEnum.AVATAR));
+        return Result.success(attachmentService.uploadFile(file, 1L, FilePathEnum.AVATAR));
     }
 
     /**

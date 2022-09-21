@@ -24,9 +24,9 @@ public enum FilePathEnum {
      */
     ARTICLE(1, "article/", "文章附件路径"),
     /**
-     * 画廊路径
+     * 其他附件路径
      */
-    GALLERY(2, "gallery/", "画廊路径");
+    OTHER(2, "other/", "其他附件路径");
 
     private final Integer code;
 

@@ -1,18 +1,17 @@
 package com.careyq.explore.server.vo;
 
-import com.careyq.explore.common.annotation.FileUrl;
 import lombok.Data;
 
 /**
  * <p>
- * 文件分页 VO
+ * 文件分类 VO
  * </p>
  *
  * @author CareyQ
  * @since 2022-09-13
  */
 @Data
-public class AttachmentPageVO {
+public class AttachmentCategoryPageVO {
 
     /**
      * 主键
@@ -20,19 +19,17 @@ public class AttachmentPageVO {
     private Long id;
 
     /**
-     * 文件名称
+     * 分类名称
      */
     private String name;
 
     /**
-     * 文件路径
+     * 是否加密
      */
-    @FileUrl
-    private String path;
+    private Boolean isEncrypt;
 
     /**
-     * 文件类型
+     * 是否展示
      */
-    private String type;
-
+    private Boolean isShow;
 }

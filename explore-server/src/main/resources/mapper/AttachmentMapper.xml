@@ -3,12 +3,13 @@
 <mapper namespace="com.careyq.explore.server.mapper.AttachmentMapper">
 
     <select id="selectAttachmentPage" resultType="com.careyq.explore.server.vo.AttachmentPageVO">
-        select id, name, path from attachment where is_del = 0
+        select id, name, path, type from attachment where is_del = 0
         <if test="dto.categoryId != null">
             and category_id = #{dto.categoryId}
         </if>
-        <if test="dto.type != null">
+        <if test="dto.type != null and dto.type.length > 0">
             and type = #{dto.type}
         </if>
+        order by create_time desc
     </select>
 </mapper>

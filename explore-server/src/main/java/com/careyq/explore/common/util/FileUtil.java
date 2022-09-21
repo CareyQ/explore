@@ -29,6 +29,7 @@ public class FileUtil {
      */
     public File buildFile(String path) {
         File file = new File(path);
+        System.out.println(path);
         if (!file.getParentFile().exists()) {
             boolean res = file.getParentFile().mkdirs();
             if (!res) {

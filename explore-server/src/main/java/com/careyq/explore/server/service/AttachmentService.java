@@ -24,11 +24,12 @@ public interface AttachmentService extends IService<Attachment> {
     /**
      * 上传文件
      *
-     * @param file     文件
-     * @param pathEnum FilePathEnum
+     * @param file       文件
+     * @param categoryId 文件分类
+     * @param pathEnum   FilePathEnum
      * @return 结果
      */
-    boolean uploadFile(MultipartFile file, FilePathEnum pathEnum);
+    boolean uploadFile(MultipartFile file, Long categoryId, FilePathEnum pathEnum);
 
     /**
      * 指定分类下是否存在附件

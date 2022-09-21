@@ -2,7 +2,7 @@ package com.careyq.explore.server.mapper;
 
 import com.careyq.explore.server.entity.AttachmentCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.careyq.explore.server.vo.AttachmentCategoryVO;
+import com.careyq.explore.server.vo.AttachmentCategoryPageVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -23,5 +23,5 @@ public interface AttachmentCategoryMapper extends BaseMapper<AttachmentCategory>
      *
      * @return 结果
      */
-    List<AttachmentCategoryVO> selectCategoryList();
+    List<AttachmentCategoryPageVO> selectCategoryList();
 }

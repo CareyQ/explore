@@ -3,6 +3,7 @@ package com.careyq.explore.server.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.AttachmentCategory;
+import com.careyq.explore.server.vo.AttachmentCategoryPageVO;
 import com.careyq.explore.server.vo.AttachmentCategoryVO;
 
 import java.util.List;
@@ -38,5 +39,13 @@ public interface AttachmentCategoryService extends IService<AttachmentCategory> 
      *
      * @return 分类列表
      */
-    List<AttachmentCategoryVO> getAttachmentCategoryList();
+    List<AttachmentCategoryPageVO> getAttachmentCategoryList();
+
+    /**
+     * 获取文件分类详情
+     *
+     * @param id 分类 ID
+     * @return 详情
+     */
+    AttachmentCategoryVO getAttachmentDetail(Long id);
 }

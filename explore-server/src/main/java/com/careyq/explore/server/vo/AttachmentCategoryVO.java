@@ -1,6 +1,7 @@
 package com.careyq.explore.server.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import lombok.Data;
  * @since 2022-09-13
  */
 @Data
+@Accessors(chain = true)
 public class AttachmentCategoryVO {
 
     /**
@@ -19,14 +21,19 @@ public class AttachmentCategoryVO {
     private Long id;
 
     /**
-     * 分类名称
+     * 文件分类名称
      */
     private String name;
 
     /**
-     * 是否加密
+     * 分类描述
      */
-    private Boolean isEncrypt;
+    private String categoryDesc;
+
+    /**
+     * 私密分类密码
+     */
+    private String password;
 
     /**
      * 是否展示
