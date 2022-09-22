@@ -64,3 +64,14 @@ type AttachmentCategoryDetail = {
   password: string
   isShow: boolean
 }
+
+type Attachment = {
+  id: string | number
+  name: string
+  type: string
+  path: string
+  size: string | number
+  height: string | number
+  weight: string | number
+  createTime: string
+}

@@ -15,3 +15,7 @@ export const getAttachmentPage = (params: any) => {
 export const getAttachmentCategory = (params: any) => {
   return get<AttachmentCategoryDetail>('/attachment/category/detail?id=' + params)
 }
+
+export const getAttachment = (params: any) => {
+  return get<Attachment>('/attachment/detail?id=' + params)
+}

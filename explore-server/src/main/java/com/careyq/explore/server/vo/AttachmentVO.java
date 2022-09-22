@@ -1,5 +1,6 @@
 package com.careyq.explore.server.vo;
 
+import com.careyq.explore.common.annotation.FileUrl;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -35,6 +36,7 @@ public class AttachmentVO {
     /**
      * 文件路径
      */
+    @FileUrl
     private String path;
 
     /**

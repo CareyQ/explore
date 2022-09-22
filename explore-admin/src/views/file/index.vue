@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { getAttachmentCategoryList, saveAttachmentCategory, getAttachmentPage, getAttachmentCategory } from '@/service'
+import {
+  getAttachmentCategoryList,
+  saveAttachmentCategory,
+  getAttachmentPage,
+  getAttachmentCategory,
+  getAttachment
+} from '@/service'
 import { ElMessage } from 'element-plus'
 import type { UploadProps, UploadFile, UploadUserFile, TabsPaneContext } from 'element-plus'
+import { fileSize } from '@/utils'
 
 const categories = ref<AttachmentCategory[]>([])
 const files = ref<Page>()
@@ -16,6 +23,7 @@ const categoryForm = reactive({
 
 const categoryDialogVisible = ref(false)
 const uploadDialogVisible = ref(false)
+const fileDialogVisible = ref(false)
 const categoryLoading = ref(false)
 const rules = {
   name: [{ required: true, message: '请输入分类名称', trigger: 'change' }],
@@ -138,6 +146,55 @@ const handleEditCategory = (id: number) => {
     }
   })
 }
+
+const checkTitle = ref('全 选')
+const checkFlag = ref(false)
+const checkAll = () => {
+  if (checkFlag.value === false) {
+    // 全选
+    files.value?.records.forEach((e) => {
+      checkIds.value.push(e?.id)
+    })
+    checkTitle.value = '取消全选'
+    checkFlag.value = true
+  } else {
+    checkIds.value = []
+    checkTitle.value = '全 选'
+    checkFlag.value = false
+  }
+}
+
+const file = reactive<Attachment>({
+  id: '',
+  name: '',
+  type: '',
+  path: '',
+  size: '',
+  height: '',
+  weight: '',
+  createTime: ''
+})
+
+const getFile = (id: number) => {
+  getAttachment(id).then((res) => {
+    if (res.code === 0) {
+      const data = res.data
+      if (data) {
+        file.id = data.id
+        file.name = data.name
+        file.type = data.type
+        file.path = data.path
+        file.size = data.size
+        file.height = data.height
+        file.weight = data.weight
+        file.createTime = data.createTime
+        fileDialogVisible.value = true
+      }
+    } else {
+      ElMessage.error(res.showMsg)
+    }
+  })
+}
 </script>
 
 <template>
@@ -146,18 +203,18 @@ const handleEditCategory = (id: number) => {
       <template #header>
         <div class="filter">
           <div class="handle">
-            <el-button type="primary" @click="categoryDialogVisible = true">编辑当前分类</el-button>
+            <el-button type="primary" @click="handleEditCategory(uploadData.categoryId)">编辑当前分类</el-button>
             <el-button type="primary" @click="uploadDialogVisible = true">
               <el-icon class="icon-btn" :size="18">
                 <UisUploadAlt />
               </el-icon>
               上 传
             </el-button>
-            <el-button type="primary" v-if="checkIds.length > 0">
+            <el-button type="primary" v-if="checkIds.length > 0" @click="checkAll">
               <el-icon class="icon-btn" :size="18">
                 <IcBaselineChecklistRtl />
               </el-icon>
-              全 选
+              {{ checkTitle }}
             </el-button>
             <el-button v-if="checkIds.length > 0" type="danger" plain>
               <el-icon class="icon-btn" :size="18">
@@ -193,12 +250,18 @@ const handleEditCategory = (id: number) => {
           <el-row :gutter="14" v-if="files?.records && files?.records.length > 0">
             <el-col v-for="(item, index) in files?.records" :key="index" :span="4">
               <div class="file-item">
-                <el-checkbox @change="handleCheck(item?.id)" />
-                <div class="cover" :style="`background-image: url(item?.path);`">
+                <input
+                  type="checkbox"
+                  :id="item?.id"
+                  :checked="checkIds.indexOf(item?.id) >= 0"
+                  @click="handleCheck(item?.id)"
+                  class="checkBox"
+                />
+                <div class="cover" :style="`background-image: url(item?.path);`" @click="getFile(item?.id)">
                   <img :src="item?.path" :alt="item?.name" v-if="item?.type === 'image'" />
                   <span v-else class="cover-text">{{ item?.name.substring(item?.name.lastIndexOf('.') + 1) }}</span>
                 </div>
-                <div class="name">
+                <div class="name" @click="getFile(item?.id)">
                   <span>{{ item?.name }}</span>
                 </div>
               </div>
@@ -254,6 +317,38 @@ const handleEditCategory = (id: number) => {
         <div class="el-upload__text">点击选择文件或拖拽文件到此</div>
       </el-upload>
     </el-dialog>
+
+    <el-dialog v-model="fileDialogVisible" title="文件详情" :width="file.type === 'image' ? '50%' : '30%'">
+      <div class="file-detail">
+        <div class="preview" v-if="file.type === 'image'">
+          <img :src="file.path" :alt="file.name" />
+        </div>
+
+        <el-descriptions direction="vertical" column="1">
+          <el-descriptions-item>
+            <template #label>
+              <div class="desc-name">
+                文件名：
+                <el-icon class="icon-btn" :size="18" color="#8392ab">
+                  <ant-design:edit-outlined />
+                </el-icon>
+              </div>
+            </template>
+            {{ file.name }}
+          </el-descriptions-item>
+
+          <el-descriptions-item label="文件大小：">
+            {{ fileSize(file.size) }}
+          </el-descriptions-item>
+          <el-descriptions-item label="Remarks">
+            <el-tag size="small">School</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="Address"
+            >No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item
+          >
+        </el-descriptions>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -307,14 +402,14 @@ const handleEditCategory = (id: number) => {
       font-size: 14px;
     }
   }
-  .el-checkbox {
+  .checkBox {
     right: 10px;
     top: 6px;
     position: absolute;
     display: none;
   }
   &:hover {
-    .el-checkbox {
+    .checkBox {
       display: block;
     }
   }
@@ -329,9 +424,9 @@ const handleEditCategory = (id: number) => {
   }
 }
 
-.file-item:has(> .is-checked) {
+.file-item:has(> .checkBox:checked) {
   border-color: var(--text-dark-color);
-  .el-checkbox {
+  .checkBox {
     display: block;
   }
 }
@@ -347,6 +442,15 @@ const handleEditCategory = (id: number) => {
     top: 12px;
     right: -30px;
   }
+}
+
+.desc-name {
+  display: flex;
+  align-items: center;
+}
+
+.file-detail {
+  display: flex;
 }
 </style>
 
@@ -374,7 +478,31 @@ const handleEditCategory = (id: number) => {
   padding-right: 20px;
 }
 
+.file .el-tabs__item.is-active {
+  font-weight: bold;
+}
+
 .filter .el-form--inline .el-form-item {
   margin-bottom: 0 !important;
+}
+
+.file-detail .el-dialog__body {
+  padding-top: 10px;
+}
+
+.file-detail {
+  .el-descriptions__cell {
+    padding-bottom: 8px !important;
+  }
+  .el-descriptions__cell.el-descriptions__label {
+    padding-top: 16px;
+  }
+  .el-descriptions__cell.el-descriptions__content {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--el-border-color);
+  }
+  .el-descriptions__table tr:first-child .el-descriptions__cell.el-descriptions__label {
+    padding-top: 0;
+  }
 }
 </style>
