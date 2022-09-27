@@ -66,7 +66,7 @@ type AttachmentCategoryDetail = {
 }
 
 type Attachment = {
-  id: string | number
+  id: number
   name: string
   type: string
   path: string

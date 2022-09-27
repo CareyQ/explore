@@ -12,9 +12,9 @@ type cellClassName = {
   columnIndex: number
 }
 
-type Page = {
+type Page<T = any> = {
   pages: number
-  records: []
+  records: T[]
   current: number
   size: number
   total: 0

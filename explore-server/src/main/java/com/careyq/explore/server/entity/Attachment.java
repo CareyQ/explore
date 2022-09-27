@@ -54,7 +54,7 @@ public class Attachment extends BaseModel<Attachment> {
     /**
      * 图片宽度
      */
-    private Integer weight;
+    private Integer width;
 
     /**
      * 构建路径

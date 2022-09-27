@@ -11,7 +11,7 @@ import type { UploadProps, UploadFile, UploadUserFile, TabsPaneContext } from 'e
 import { fileSize } from '@/utils'
 
 const categories = ref<AttachmentCategory[]>([])
-const files = ref<Page>()
+const files = ref<Page<Attachment>>()
 const categoryRef = ref()
 const categoryForm = reactive({
   id: '' || 0,
@@ -46,8 +46,10 @@ const getData = () => {
   getAttachmentCategoryList().then((res) => {
     if (res.code === 0 && res.data) {
       categories.value = res.data
-      uploadData.categoryId = res.data[0].id
-      getFilePage()
+      if (res.data.length > 0) {
+        uploadData.categoryId = res.data[0].id
+        getFilePage()
+      }
     } else {
       ElMessage.error(res.showMsg)
     }
@@ -90,7 +92,7 @@ const getFilePage = () => {
 }
 
 const handleTabClick = (pane: TabsPaneContext) => {
-  const name = pane.props.name
+  const name = pane.props.name as number
   uploadData.categoryId = name
   getFilePage()
 }
@@ -164,32 +166,13 @@ const checkAll = () => {
   }
 }
 
-const file = reactive<Attachment>({
-  id: '',
-  name: '',
-  type: '',
-  path: '',
-  size: '',
-  height: '',
-  weight: '',
-  createTime: ''
-})
+const file = ref({} as any)
 
 const getFile = (id: number) => {
   getAttachment(id).then((res) => {
     if (res.code === 0) {
-      const data = res.data
-      if (data) {
-        file.id = data.id
-        file.name = data.name
-        file.type = data.type
-        file.path = data.path
-        file.size = data.size
-        file.height = data.height
-        file.weight = data.weight
-        file.createTime = data.createTime
-        fileDialogVisible.value = true
-      }
+      file.value = res.data
+      fileDialogVisible.value = true
     } else {
       ElMessage.error(res.showMsg)
     }
@@ -246,30 +229,34 @@ const getFile = (id: number) => {
         @tab-add="categoryDialogVisible = true"
         @tab-click="handleTabClick"
       >
-        <el-tab-pane :name="item.id" v-for="(item, index) in categories" :key="index" :label="item.name">
-          <el-row :gutter="14" v-if="files?.records && files?.records.length > 0">
-            <el-col v-for="(item, index) in files?.records" :key="index" :span="4">
-              <div class="file-item">
-                <input
-                  type="checkbox"
-                  :id="item?.id"
-                  :checked="checkIds.indexOf(item?.id) >= 0"
-                  @click="handleCheck(item?.id)"
-                  class="checkBox"
-                />
-                <div class="cover" :style="`background-image: url(item?.path);`" @click="getFile(item?.id)">
-                  <img :src="item?.path" :alt="item?.name" v-if="item?.type === 'image'" />
-                  <span v-else class="cover-text">{{ item?.name.substring(item?.name.lastIndexOf('.') + 1) }}</span>
+        <div v-if="categories.length > 0">
+          <el-tab-pane :name="item.id" v-for="(item, index) in categories" :key="index" :label="item.name">
+            <el-row :gutter="14" v-if="files?.records && files?.records.length > 0">
+              <el-col v-for="(item, index) in files.records" :key="index" :span="4">
+                <div class="file-item">
+                  <input
+                    type="checkbox"
+                    :id="item.id.toString"
+                    :checked="checkIds.indexOf(item.id) >= 0"
+                    @click="handleCheck(item.id)"
+                    class="checkBox"
+                  />
+                  <div class="cover" :style="`background-image: url(item?.path);`" @click="getFile(item.id)">
+                    <img :src="item.path" :alt="item.name" v-if="item?.type === 'image'" />
+                    <span v-else class="cover-text">{{ item.name.substring(item?.name.lastIndexOf('.') + 1) }}</span>
+                  </div>
+                  <div class="name" @click="getFile(item.id)">
+                    <span>{{ item.name }}</span>
+                  </div>
                 </div>
-                <div class="name" @click="getFile(item?.id)">
-                  <span>{{ item?.name }}</span>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
+              </el-col>
+            </el-row>
 
-          <el-empty v-else description="description" />
-        </el-tab-pane>
+            <el-empty v-else description="description" />
+          </el-tab-pane>
+        </div>
+
+        <el-empty v-else description="description" />
       </el-tabs>
     </el-card>
 
@@ -319,7 +306,7 @@ const getFile = (id: number) => {
     </el-dialog>
 
     <el-dialog v-model="fileDialogVisible" title="文件详情" :width="file.type === 'image' ? '50%' : '30%'">
-      <div class="file-detail">
+      <div :class="['file-detail', file.type === 'image' ? 'double' : 'single']">
         <div class="preview" v-if="file.type === 'image'">
           <img :src="file.path" :alt="file.name" />
         </div>
@@ -337,17 +324,53 @@ const getFile = (id: number) => {
             {{ file.name }}
           </el-descriptions-item>
 
+          <el-descriptions-item label="文件类型：">
+            {{ file.type }}
+          </el-descriptions-item>
+
           <el-descriptions-item label="文件大小：">
             {{ fileSize(file.size) }}
           </el-descriptions-item>
-          <el-descriptions-item label="Remarks">
-            <el-tag size="small">School</el-tag>
+
+          <el-descriptions-item v-if="file.type === 'image'" label="图片尺寸：">
+            {{ file.width }} x {{ file.height }}
           </el-descriptions-item>
-          <el-descriptions-item label="Address"
-            >No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province</el-descriptions-item
-          >
+
+          <el-descriptions-item label="上传时间：">
+            {{ file.createTime }}
+          </el-descriptions-item>
+
+          <el-descriptions-item>
+            <template #label>
+              <div class="desc-name">
+                文件地址：
+                <el-icon class="icon-btn" :size="18" color="#8392ab">
+                  <material-symbols:content-copy-outline-rounded />
+                </el-icon>
+              </div>
+            </template>
+            <a :href="file.path" target="_blank">{{ file.path }}</a>
+          </el-descriptions-item>
+
+          <el-descriptions-item v-if="file.type === 'image'">
+            <template #label>
+              <div class="desc-name">
+                Markdown 格式：
+                <el-icon class="icon-btn" :size="18" color="#8392ab">
+                  <material-symbols:content-copy-outline-rounded />
+                </el-icon>
+              </div>
+            </template>
+            {{ `![${file.name.substring(0, file.name.lastIndexOf('.'))}](${file.path})` }}
+          </el-descriptions-item>
         </el-descriptions>
       </div>
+
+      <template #footer>
+        <el-button>上一个</el-button>
+        <el-button>下一个</el-button>
+        <el-button>删除</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -449,8 +472,22 @@ const getFile = (id: number) => {
   align-items: center;
 }
 
-.file-detail {
+.file-detail.double {
   display: flex;
+
+  .preview {
+    width: 45%;
+    margin-right: 20px;
+  }
+  .el-descriptions {
+    width: 55%;
+  }
+}
+
+.file-detail.double {
+  .el-descriptions {
+    width: 100%;
+  }
 }
 </style>
 
@@ -500,6 +537,7 @@ const getFile = (id: number) => {
   .el-descriptions__cell.el-descriptions__content {
     margin-bottom: 20px;
     border-bottom: 1px solid var(--el-border-color);
+    opacity: 0.7;
   }
   .el-descriptions__table tr:first-child .el-descriptions__cell.el-descriptions__label {
     padding-top: 0;

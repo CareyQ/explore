@@ -52,7 +52,7 @@ public class AttachmentVO {
     /**
      * 图片宽度
      */
-    private Integer weight;
+    private Integer width;
 
     /**
      * 上传时间

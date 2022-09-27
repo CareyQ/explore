@@ -67,7 +67,7 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
             BufferedImage image = ImageIO.read(file.getInputStream());
             if (Objects.nonNull(image)) {
                 attachment.setHeight(image.getWidth())
-                        .setWeight(image.getHeight());
+                        .setWidth(image.getHeight());
             }
         } catch (IOException e) {
             log.error("文件转换 image 异常，文件名：{}", file.getOriginalFilename(), e);
