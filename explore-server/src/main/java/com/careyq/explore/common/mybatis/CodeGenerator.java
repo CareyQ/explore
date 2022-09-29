@@ -27,7 +27,7 @@ public class CodeGenerator {
         String moduleName = input("模块名");
         String tableNames = input("表名，多个英文逗号分隔；所有输入 all");
 
-        FastAutoGenerator.create("jdbc:mysql://xxxxxx:3306/explore", "xxxx", "xxxxx")
+        FastAutoGenerator.create("jdbc:mysql://139.155.174.195:3306/explore", "root", "qk20150303")
                 .globalConfig(builder -> builder
                         .author(author)
                         .commentDate("yyyy-MM-dd")

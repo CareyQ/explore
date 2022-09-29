@@ -1,114 +1,103 @@
-const menus = [
+export const menusRes: Menu[] = [
   {
     id: 1,
     title: '首页',
-    name: 'Dashboard',
-    component: 'dashboard/index',
+    name: 'Home',
+    component: 'home/index',
     isBlank: false,
-    router: '/dashboard',
+    router: '/',
     icon: 'fluent:home-24-regular',
-    children: null
+    group: 1,
+    children: []
   },
   {
     id: 2,
-    title: '博客管理',
-    name: 'Blog',
-    component: 'blog/index',
+    title: '片刻',
+    name: 'Moment',
+    component: 'moment/index',
     isBlank: false,
-    router: '/blog',
-    icon: 'akar-icons:book-close',
-    children: [
-      {
-        id: 3,
-        title: '文章列表',
-        name: 'Article',
-        component: 'blog/article/index',
-        isBlank: false,
-        router: '/blog/article',
-        icon: null,
-        children: null
-      },
-      {
-        id: 4,
-        title: '发布文章',
-        name: 'PublishArticle',
-        component: 'blog/edit/index',
-        isBlank: false,
-        router: '/blog/edit',
-        icon: null,
-        children: null
-      },
-      {
-        id: 5,
-        title: '分类/标签',
-        name: 'CategoryTag',
-        component: 'blog/category-tag/index',
-        isBlank: false,
-        router: '/blog/category-tag',
-        icon: null,
-        children: null
-      }
-    ]
+    router: '/moment',
+    icon: 'ri:wechat-line',
+    group: 1,
+    children: []
   },
   {
     id: 7,
-    title: '文件管理',
-    name: 'File',
-    component: 'file/index',
+    title: '文章',
+    name: 'Article',
+    component: 'article/index',
     isBlank: false,
-    router: '/file',
-    icon: 'akar-icons:folder',
-    children: null
+    router: '/article',
+    icon: 'ri:book-3-line',
+    group: 1,
+    children: []
+  },
+
+  {
+    id: 8,
+    title: '留言',
+    name: 'Comment',
+    component: 'comment/index',
+    isBlank: false,
+    router: '/comment',
+    icon: 'majesticons:comment-2-text-line',
+    group: 2,
+    children: []
   },
   {
     id: 8,
-    title: '评论留言',
-    name: 'Message',
-    component: 'message/index',
+    title: '画廊',
+    name: 'Gallery',
+    component: 'gallery/index',
     isBlank: false,
-    router: '/message',
-    icon: 'akar-icons:chat-dots',
-    children: null
+    router: '/gallery',
+    icon: 'ph:google-photos-logo',
+    group: 2,
+    children: []
+  },
+
+  {
+    id: 9,
+    title: '博客归档',
+    name: 'Archive',
+    component: 'archive/index',
+    isBlank: false,
+    router: '/archive',
+    icon: '',
+    group: 3,
+    children: []
   },
   {
     id: 9,
-    title: '作者信息',
-    name: 'Author',
-    component: 'author/index',
+    title: '友情链接',
+    name: 'Link',
+    component: 'link/index',
     isBlank: false,
-    router: '/author',
-    icon: 'akar-icons:person',
-    children: null
+    router: '/link',
+    icon: '',
+    group: 3,
+    children: []
   },
   {
     id: 10,
-    title: '系统设置',
-    name: 'System',
-    component: 'system/index',
+    title: '关于博主',
+    name: 'About',
+    component: 'about/index',
     isBlank: false,
-    router: '/system',
-    icon: 'akar-icons:settings-horizontal',
-    children: [
-      {
-        id: 11,
-        title: '前台设置',
-        name: 'SystemWeb',
-        component: 'system/web/index',
-        isBlank: false,
-        router: '/system/web',
-        icon: null,
-        children: null
-      },
-      {
-        id: 12,
-        title: '后台设置',
-        name: 'SystemAdmin',
-        component: 'system/admin/index',
-        isBlank: false,
-        router: '/system/admin',
-        icon: null,
-        children: null
-      }
-    ]
+    router: '/about',
+    icon: '',
+    group: 3,
+    children: []
+  },
+  {
+    id: 10,
+    title: '隐私政策',
+    name: 'Privacy',
+    component: 'privacy/index',
+    isBlank: false,
+    router: '/privacy',
+    icon: '',
+    group: 3,
+    children: []
   }
 ]
