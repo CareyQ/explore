@@ -26,14 +26,24 @@ const menus = computed(() => routeStore.menus)
 }
 
 .link {
-  padding: 10px;
+  margin-bottom: 4px;
   a {
     display: flex;
     align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    &:hover {
+      background-color: #fdf7f7;
+    }
   }
   .icon {
-    margin-right: 6px;
+    margin-right: 8px;
     font-size: 1.125rem;
   }
+}
+
+a.router-link-active.router-link-exact-active {
+  background-color: var(--primary);
+  color: var(--white);
 }
 </style>

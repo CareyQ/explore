@@ -7,6 +7,10 @@
 :root {
   --white: #fff;
   --text-color: #66758c;
+  --primary: #ec5454;
+
+  --border-radius: .75rem;
+  --shadow: 0 0 0 1px rgb(188 195 206 / 10%), 0 2px 10px rgb(48 55 66 / 6%);
 }
 
 h1,
@@ -45,10 +49,14 @@ a {
 .card {
   margin-bottom: 1.25rem;
   padding: 1.25rem;
-  border-radius: .75rem;
-  box-shadow: 0 0 0 1px rgb(188 195 206 / 10%), 0 2px 10px rgb(48 55 66 / 6%);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   background-color: var(--white);
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.icon-btn {
+  cursor: pointer;
 }

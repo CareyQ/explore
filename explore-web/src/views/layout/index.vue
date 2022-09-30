@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Sidebar from './components/sidebar.vue'
+import Hero from './components/hero.vue'
 </script>
 
 <template>
@@ -7,11 +8,14 @@ import Sidebar from './components/sidebar.vue'
     <Sidebar />
 
     <main class="main">
-      <router-view v-slot="{ Component }">
-        <transition mode="out-in" name="el-fade-in-linear">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <Hero />
+      <div class="page">
+        <router-view v-slot="{ Component }">
+          <transition mode="out-in" name="el-fade-in-linear">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
     </main>
   </div>
 </template>
@@ -24,5 +28,13 @@ import Sidebar from './components/sidebar.vue'
 
 .main {
   flex: 1;
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.page {
+  padding: 2.5rem;
 }
 </style>
