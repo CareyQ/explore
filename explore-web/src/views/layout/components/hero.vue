@@ -32,7 +32,7 @@
   height: 14.25rem;
   background-size: cover;
   background-position: center center;
-  background-image: url(https://cdn.pixabay.com/photo/2021/02/13/13/02/red-lighthouse-6011477_960_720.jpg);
+  background-image: url(https://www.rawchen.com/wp-content/themes/pix/img/banner.jpg);
   &::after {
     content: '';
     position: absolute;

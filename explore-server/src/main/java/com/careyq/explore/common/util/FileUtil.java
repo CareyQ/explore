@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 文件工具类
@@ -79,4 +80,9 @@ public class FileUtil {
         }
     }
 
+    public static void main(String[] args) {
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add("1");
+        objects.remove("1");
+    }
 }

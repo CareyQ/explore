@@ -22,6 +22,7 @@ import Hero from './components/hero.vue'
 
 <style lang="scss" scoped>
 .sidebar {
+  position: relative;
   width: 15rem;
   margin-right: 1.25rem;
 }
@@ -35,6 +36,6 @@ import Hero from './components/hero.vue'
 }
 
 .page {
-  padding: 2.5rem;
+  padding: 1.5rem 2.5rem 2.5rem;
 }
 </style>

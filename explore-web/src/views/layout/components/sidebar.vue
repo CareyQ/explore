@@ -7,7 +7,7 @@ const menus = computed(() => routeStore.menus)
 
 <template>
   <aside class="sidebar">
-    <div class="menu">
+    <div class="sidebar-content">
       <div class="card" v-for="(items, index) in menus" :key="index">
         <div class="link" v-for="item in items" :key="item.path">
           <router-link v-if="item && item.meta" :to="item.path">
@@ -25,6 +25,11 @@ const menus = computed(() => routeStore.menus)
   font-size: 1rem;
 }
 
+.sidebar-content {
+  position: sticky;
+  top: 1rem;
+}
+
 .link {
   margin-bottom: 4px;
   a {
@@ -33,7 +38,7 @@ const menus = computed(() => routeStore.menus)
     padding: 8px 10px;
     border-radius: 8px;
     &:hover {
-      background-color: #fdf7f7;
+      background-color: #eaedf1;
     }
   }
   .icon {

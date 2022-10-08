@@ -1,9 +1,20 @@
+<script setup lang="ts">
+import ArticleItem from '@/components/ArticleItem.vue'
+import PageSide from '@/components/PageSide.vue'
+import { articleList } from '@/mock/system'
+</script>
+
 <template>
-  <div class="home">home</div>
+  <div class="home aside">
+    <div class="article-list">
+      <ArticleItem v-for="(item, index) in articleList" :key="index" :data="item" />
+    </div>
+    <PageSide />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.hero {
-  background-image: url(https://cdn.pixabay.com/photo/2021/02/13/13/02/red-lighthouse-6011477_960_720.jpg);
+.aside {
+  display: flex;
 }
 </style>

@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ArticleItem: typeof import('./src/components/ArticleItem.vue')['default']
+    CommitMap: typeof import('./src/components/CommitMap.vue')['default']
     ElConfigProvider: typeof import('~icons/el/config-provider')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
@@ -14,10 +16,12 @@ declare module '@vue/runtime-core' {
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    PageSide: typeof import('./src/components/PageSide.vue')['default']
     'Ri:contrast2Line': typeof import('~icons/ri/contrast2-line')['default']
     'Ri:searchLine': typeof import('~icons/ri/search-line')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TagList: typeof import('./src/components/TagList.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
     'Uil:commentExclamation': typeof import('~icons/uil/comment-exclamation')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
