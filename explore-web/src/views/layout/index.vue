@@ -32,7 +32,6 @@ import Hero from './components/hero.vue'
   border-radius: var(--border-radius);
   background-color: var(--white);
   box-shadow: var(--shadow);
-  overflow: hidden;
 }
 
 .page {

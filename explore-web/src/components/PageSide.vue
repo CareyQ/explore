@@ -29,6 +29,9 @@ import CommitMap from './CommitMap.vue'
   max-width: 15rem;
   width: 100%;
   padding-left: 1.25rem;
+  > * {
+    margin-bottom: 0.75rem;
+  }
 }
 
 .count {

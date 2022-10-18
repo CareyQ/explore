@@ -26,6 +26,8 @@
 
 <style lang="scss" scoped>
 .hero {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden;
   position: relative;
   padding: 1.25rem 2.5rem;
   color: var(--white);
