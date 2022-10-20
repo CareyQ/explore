@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { commitMap } from '@/mock/system'
+import { sidebar } from '@/mock/system'
 import CommitMap from './CommitMap.vue'
 </script>
 
@@ -20,7 +20,19 @@ import CommitMap from './CommitMap.vue'
       </div>
     </div>
 
-    <CommitMap :commitMap="commitMap" />
+    <CommitMap :commitMap="sidebar.commitMap" />
+
+    <div class="hot-articles module">
+      <h3 class="module-title">
+        <material-symbols:article-outline class="icon" />
+        热门文章
+      </h3>
+      <div class="module-content">
+        <div class="hot-item" v-for="(item, index) in sidebar.hotArticles" :key="index">
+          <a href=""># {{ item.title }}</a>
+        </div>
+      </div>
+    </div>
   </aside>
 </template>
 
@@ -58,7 +70,42 @@ import CommitMap from './CommitMap.vue'
   font-size: 1.25rem;
   font-weight: bold;
 }
+
 .desc {
   opacity: 0.5;
+}
+
+.module {
+  margin-top: 20px;
+  background-color: var(--gray-light);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.module-title {
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--gray);
+  font-size: 1rem;
+  font-weight: normal;
+  .icon {
+    margin-right: 4px;
+  }
+}
+
+.hot-item {
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  a {
+    white-space: nowrap;
+    &:hover {
+      color: var(--primary);
+    }
+  }
 }
 </style>

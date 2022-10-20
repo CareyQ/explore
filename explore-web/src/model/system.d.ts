@@ -23,6 +23,8 @@ type ArticleItem = {
   date: string
   location: string
   like: number
+  comment: number
+  category: string
   files: string[]
 }
 

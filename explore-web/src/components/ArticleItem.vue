@@ -24,38 +24,16 @@ const isArticle = ref(props.data.type === 1)
           </div>
         </div>
       </div>
-      <p class="desc">{{ data.desc }}</p>
+
+      <div class="detail">
+        <p class="desc">{{ data.desc }}</p>
+        <div class="meta">as</div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.item {
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--gray);
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  color: var(--text-gray);
-  font-size: 0.875rem;
-  span {
-    margin-right: 1rem;
-  }
-}
-
-.type {
-  padding: 2px 6px;
-  border: 1px solid var(--text-gray);
-  background-color: #fafafa;
-  font-size: 0.75rem;
-  border-radius: 4px;
-}
-
 .title {
   margin-top: 1rem;
   color: var(--dark);

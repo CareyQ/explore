@@ -7,23 +7,21 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Article: typeof import('./src/components/item/Article.vue')['default']
     ArticleItem: typeof import('./src/components/ArticleItem.vue')['default']
     CommitMap: typeof import('./src/components/CommitMap.vue')['default']
-    ElConfigProvider: typeof import('~icons/el/config-provider')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
-    IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
-    IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
-    IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
-    IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    Item: typeof import('./src/components/item/index.vue')['default']
+    'Majesticons:heartLine': typeof import('~icons/majesticons/heart-line')['default']
+    'MaterialSymbols:articleOutline': typeof import('~icons/material-symbols/article-outline')['default']
+    'MaterialSymbols:locationOnOutlineRounded': typeof import('~icons/material-symbols/location-on-outline-rounded')['default']
+    Meta: typeof import('./src/components/item/Meta.vue')['default']
+    Moment: typeof import('./src/components/item/Moment.vue')['default']
     PageSide: typeof import('./src/components/PageSide.vue')['default']
     'Ri:contrast2Line': typeof import('~icons/ri/contrast2-line')['default']
     'Ri:searchLine': typeof import('~icons/ri/search-line')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TagList: typeof import('./src/components/TagList.vue')['default']
-    TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
-    'Uil:commentExclamation': typeof import('~icons/uil/comment-exclamation')['default']
-    WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    'Uil:commentAltDots': typeof import('~icons/uil/comment-alt-dots')['default']
   }
 }
