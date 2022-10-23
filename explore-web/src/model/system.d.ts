@@ -8,6 +8,7 @@ type Menu = {
   group: number
   children: Menu[]
   isBlank: boolean
+  show: boolean
 }
 
 type TagList = {

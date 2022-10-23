@@ -12,21 +12,34 @@ const props = defineProps<{
 
     <div class="content">
       <img v-if="data.files.length > 0" :src="data.files[0]" :alt="data.title" />
-      <div class="right">
-        <p class="desc">{{ data.desc }}</p>
-        <Meta
-          :like="data.like"
-          :location="data.location"
-          :is-article="true"
-          :comment="data.comment"
-          :category="data.category"
-        />
-      </div>
+      <p class="desc">{{ data.desc }}</p>
     </div>
+
+    <Meta
+      :like="data.like"
+      :location="data.location"
+      :is-article="true"
+      :comment="data.comment"
+      :category="data.category"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.article {
+  margin-bottom: 1rem;
+}
+
+.list .article {
+  border-bottom: 1px solid var(--gray);
+  &:last-child {
+    border-bottom: none;
+  }
+  img {
+    width: 20%;
+  }
+}
+
 .title {
   margin-top: 1rem;
   color: var(--dark);
@@ -40,19 +53,15 @@ const props = defineProps<{
 
 .desc {
   color: var(--dark);
-  margin: 1rem 0;
   white-space: pre-wrap;
   line-height: 1.5;
+  font-size: 1.125rem;
+  text-align: justify;
 }
 
 img {
   margin-right: 1rem;
-  width: 150px;
+  width: 30%;
   border-radius: 6px;
-}
-
-.right {
-  flex: 1;
-  position: relative;
 }
 </style>

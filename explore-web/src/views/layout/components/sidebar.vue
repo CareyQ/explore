@@ -10,7 +10,7 @@ const menus = computed(() => routeStore.menus)
     <div class="sidebar-content">
       <div class="card" v-for="(items, index) in menus" :key="index">
         <div class="link" v-for="item in items" :key="item.path">
-          <router-link v-if="item && item.meta" :to="item.path">
+          <router-link v-if="item && item.meta && item.meta.show" :to="item.path">
             <component :is="item.meta.icon" class="icon" />
             <span>{{ item.meta.title }}</span>
           </router-link>

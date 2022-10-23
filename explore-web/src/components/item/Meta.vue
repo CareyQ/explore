@@ -15,24 +15,22 @@ const props = defineProps<{
       <span><majesticons:heart-line class="icon" /> {{ like }}</span>
     </div>
 
-    <span v-if="isArticle"># {{ category }}</span>
-    <span v-else><uil:comment-alt-dots /> {{ comment }}</span>
+    <span v-if="isArticle" class="category"># {{ category }}</span>
+    <span class="comment" v-else><uil:comment-alt-dots class="comment-icon" /> {{ comment }}</span>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .meta {
-  position: absolute;
-  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   font-size: 0.8125rem;
-  background-color: rgba($color: #668cff, $alpha: 0.0987);
+  background-color: #f5f5f7;
   border-radius: 8px;
-  padding: 12px 10px;
-
+  padding: 10px;
+  margin: 8px 0 1rem;
   span {
     display: flex;
     align-items: flex-end;
@@ -48,5 +46,22 @@ const props = defineProps<{
 .icon {
   margin-right: 4px;
   color: var(--text-gray);
+}
+
+span.comment {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.comment-icon {
+  margin-right: 4px;
+}
+
+.category {
+  cursor: pointer;
+  padding: 4px 8px;
 }
 </style>

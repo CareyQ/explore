@@ -49,7 +49,8 @@ function convertToRouter(menus: Menu[]) {
       name: menu.name,
       meta: {
         title: menu.title,
-        group: menu.group
+        group: menu.group,
+        show: menu.show
       },
       redirect: '',
       component: modules[`../../views/${menu.component}.vue`],
@@ -60,13 +61,9 @@ function convertToRouter(menus: Menu[]) {
       router.meta.icon = iconRender(menu.icon)
     }
 
-    if (menu.children && menu.children.length > 0) {
-      router.redirect = menu.children[0].router
-    }
     if (router && menu.children) {
       router.children = convertToRouter(menu.children)
     }
-
     return router
   })
 }

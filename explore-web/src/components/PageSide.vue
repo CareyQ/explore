@@ -33,6 +33,18 @@ import CommitMap from './CommitMap.vue'
         </div>
       </div>
     </div>
+
+    <div class="hot-moment module">
+      <h3 class="module-title">
+        <mingcute:moment-line class="icon" />
+        热门动态
+      </h3>
+      <div class="module-content">
+        <div class="hot-item" v-for="(item, index) in sidebar.hotMoment" :key="index">
+          <a href="">{{ item.title }}</a>
+        </div>
+      </div>
+    </div>
   </aside>
 </template>
 
@@ -98,11 +110,16 @@ import CommitMap from './CommitMap.vue'
 .hot-item {
   margin-bottom: 8px;
   font-size: 0.875rem;
+
   &:last-child {
     margin-bottom: 0;
   }
   a {
+    display: block;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.7;
     &:hover {
       color: var(--primary);
     }

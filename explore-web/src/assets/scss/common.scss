@@ -10,7 +10,7 @@
   --primary: #0969da;
   --gray: #d8dee4;
   --gray-light: #f8f9fa;
-  --dark: #24292f;
+  --dark: #3b4351;
   --text-gray: #bcc3ce;
 
   --border-radius: .75rem;
@@ -41,9 +41,6 @@ p {
   margin: 0;
 }
 
-
-
-
 html,
 body {
   margin: 0;
@@ -51,10 +48,15 @@ body {
 
 body {
   font-weight: 400;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, "HarmonyOS_Regular", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
   background-image: url(http://zhongguose.com/img/texture.png);
   background-color: #f9f9fb;
   color: var(--text-color);
+}
+
+input,
+textarea {
+  font-family: -apple-system, "HarmonyOS_Regular", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
 }
 
 a {
@@ -87,4 +89,8 @@ img {
 
 .icon-btn {
   cursor: pointer;
+}
+
+.detail {
+  color: var(--dark);
 }

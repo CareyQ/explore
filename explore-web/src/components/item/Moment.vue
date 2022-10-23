@@ -28,7 +28,14 @@ const props = defineProps<{
 .moment {
   position: relative;
   margin-bottom: 1rem;
-  padding-bottom: 3.5rem;
+}
+
+.list .moment {
+  border-bottom: 1px solid var(--gray);
+  width: 90%;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .desc {
@@ -36,6 +43,8 @@ const props = defineProps<{
   margin: 1rem 0;
   white-space: pre-wrap;
   line-height: 1.5;
+  font-size: 1.125rem;
+  text-align: justify;
 }
 
 .files {
@@ -55,7 +64,7 @@ const props = defineProps<{
   position: relative;
   padding: 4px;
   width: 25%;
-  margin: 0 4px;
+  margin: 0 4px 8px;
   img {
     position: absolute;
     top: 0;
