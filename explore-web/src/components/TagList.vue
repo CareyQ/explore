@@ -9,9 +9,9 @@ const index = ref(props.data[0].id)
 
 <template>
   <div class="list">
-    <div v-if="data.length === 0" class="tag">全部</div>
+    <div v-if="data.length === 0" class="tab">全部</div>
     <div v-else class="tag-list">
-      <div v-for="item in data" :key="item.id" :class="['tag', index === item.id ? 'active' : '']">
+      <div v-for="item in data" :key="item.id" :class="['tab', index === item.id ? 'active' : '']">
         {{ item.name }}
       </div>
     </div>
@@ -39,7 +39,7 @@ const index = ref(props.data[0].id)
   align-items: center;
 }
 
-.tag {
+.tab {
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -62,7 +62,7 @@ const index = ref(props.data[0].id)
     background-color: transparent;
   }
 }
-.tag.active {
+.tab.active {
   color: var(--primary);
   &::after {
     background-color: var(--primary);

@@ -94,3 +94,16 @@ img {
 .detail {
   color: var(--dark);
 }
+
+.tag {
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.tag-gray {
+  border-color: var(--text-gray);
+  background-color: #fafafa;
+  color: var(--text-gray);
+}

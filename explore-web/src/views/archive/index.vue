@@ -13,10 +13,10 @@ import { archive } from '@/mock/system'
       </div>
     </div>
 
-    <div class="module tag">
+    <div class="module blog-tag">
       <h3 class="title">博客标签</h3>
       <div class="wrap">
-        <div v-for="(item, index) in archive.tags" :key="index" class="item">
+        <div v-for="(item, index) in archive.tags" :key="index" class="tag">
           <a href="">{{ item.name }}</a>
         </div>
       </div>
@@ -63,7 +63,7 @@ import { archive } from '@/mock/system'
   }
 }
 
-.tag {
+.blog-tag {
   a {
     padding: 2px 8px;
     border: 1px solid var(--text-gray);

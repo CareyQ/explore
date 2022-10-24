@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { comment } from '@/mock/system'
+
+const show = ref(false)
 </script>
 
 <template>
@@ -40,12 +42,13 @@ import { comment } from '@/mock/system'
           </div>
           <div class="comment-content">
             <div class="user">
-              <span class="username">{{ item.username }} <span>云南省</span></span>
+              <span class="username">{{ item.username }} </span>
             </div>
             <div class="reply">
               {{ item.comment }}
             </div>
             <div class="reply-info">
+              <span>来自云南省</span>
               <span>{{ item.date }}</span>
               <span>回复</span>
             </div>
@@ -62,7 +65,36 @@ import { comment } from '@/mock/system'
             <div class="reply-info">
               <span>来自云南省</span>
               <span>{{ item.date }}</span>
-              <span>回复</span>
+              <span @click="show = !show">回复</span>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="show">
+          <div class="form">
+            <div class="info">
+              <input type="text" placeholder="邮箱（必填）" />
+              <input type="text" placeholder="昵称（必填）" />
+              <input type="text" placeholder="个人网站" />
+            </div>
+          </div>
+
+          <div class="content">
+            <textarea placeholder="发表评论..." rows="4" />
+            <div class="handle">
+              <div class="left">
+                <span>Emoji</span>
+                <div class="private">
+                  <input type="checkbox" />
+                  私密评论
+                </div>
+                <div class="notice">
+                  <input type="checkbox" />
+                  邮件回复
+                </div>
+              </div>
+
+              <div class="send">发送</div>
             </div>
           </div>
         </div>

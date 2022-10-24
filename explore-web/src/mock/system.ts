@@ -626,3 +626,74 @@ export const comment = [
     ]
   }
 ]
+
+export const link = {
+  collect: [],
+  friend: [
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    },
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: 'https://myblog-1312740657.cos.ap-shanghai.myqcloud.com/config/6ed918c888cc40cd904d456cfcd06e7e.jpg',
+      desc: 'Mr-吴の个人博客'
+    }
+  ],
+  invalid: [
+    {
+      id: 1,
+      url: '',
+      username: 'Mr-吴の客栈',
+      avatar: '',
+      desc: 'Mr-吴の个人博客'
+    }
+  ]
+}

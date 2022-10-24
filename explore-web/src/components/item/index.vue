@@ -12,7 +12,7 @@ const isArticle = ref(props.data.type === 1)
 <template>
   <div :class="['item', isArticle ? 'article' : 'moment']">
     <div class="header">
-      <span class="type">{{ isArticle ? '文章' : '片刻' }}</span>
+      <span class="tag tag-gray">{{ isArticle ? '文章' : '片刻' }}</span>
       <span class="date">{{ data.date }}</span>
     </div>
 
@@ -38,13 +38,5 @@ const isArticle = ref(props.data.type === 1)
   span {
     margin-right: 1rem;
   }
-}
-
-.type {
-  padding: 2px 6px;
-  border: 1px solid var(--text-gray);
-  background-color: #fafafa;
-  font-size: 0.75rem;
-  border-radius: 4px;
 }
 </style>
