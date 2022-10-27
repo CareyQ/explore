@@ -107,3 +107,19 @@ img {
   background-color: #fafafa;
   color: var(--text-gray);
 }
+
+.text-box {
+  padding: 6px 10px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid var(--gray);
+  color: var(--dark);
+  transition: border .2s;
+
+  &:hover,
+  &:focus {
+    border-color: var(--primary);
+  }
+}
