@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { link } from '@/mock/system'
-const something = ref('')
-console.log(something.value)
 </script>
 
 <template>
-  <div class="link">
+  <div class="link page-content">
+    <PageHeader :title="'友情链接'" :date="'2022-10-30'" :view="123" />
+
     <div class="content">
       <div class="link-item" v-for="(item, index) in link.friend" :key="index">
         <a href="" class="link-item-inner">
           <img :src="item.avatar" :alt="item.username" />
-          <div class="info">
-            <span class="name">{{ item.username }}</span>
-            <span class="desc" v-if="item.desc">{{ item.desc }}</span>
-          </div>
+          <span class="name">{{ item.username }}</span>
         </a>
       </div>
     </div>
@@ -28,13 +25,16 @@ console.log(something.value)
     </div>
 
     <div class="submit-link">
+      <h2 class="title">友链交换<span class="count">123</span></h2>
       <div class="form">
         <MyInput placeholder="网站名称（必填）" />
         <MyInput placeholder="网站地址（必填）" />
         <MyInput placeholder="网站图片（必填）" />
-        <MyInput placeholder="网站描述" />
+        <MyButton>提交</MyButton>
       </div>
     </div>
+
+    <div class="link-record"></div>
   </div>
 </template>
 
@@ -53,13 +53,14 @@ console.log(something.value)
 .link-item-inner {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 12px 20px;
   box-shadow: 0 0 0 0.5px rgb(188 195 206 / 10%), 0 1px 10px rgb(48 55 66 / 6%);
-  border-radius: 6px;
+  border-radius: 12px;
   transition: all 0.2s ease-in-out;
   img {
-    width: 48px;
-    height: 48px;
+    margin-right: 1rem;
+    width: 34px;
+    height: 34px;
     border-radius: 4px;
   }
   &:hover {
@@ -75,16 +76,28 @@ console.log(something.value)
   line-height: 1.5;
 }
 
-.name {
-  color: var(--primary);
-}
-
-.desc {
-  font-size: 0.875rem;
-  color: var(--text-gray);
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
 }
 
 .my-input {
-  display: block;
+  margin-bottom: 1rem;
+}
+
+.my-button {
+  width: fit-content;
+}
+
+.title {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.count {
+  margin-left: 4px;
+  font-size: 0.875rem;
+  opacity: 0.8;
 }
 </style>

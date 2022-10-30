@@ -1,22 +1,76 @@
 <script setup lang="ts">
 import { articleDetail } from '@/mock/system'
-import Comment from '../../components/Comment.vue'
+import { useTocStore } from '@/stores/modules/toc'
 
-const route = useRoute()
+const contentRef = ref()
+const toc = ref()
+
+const tocStore = useTocStore()
+
+const buildToc = () => {
+  nextTick(() => {
+    const titleTag = ['H1', 'H2', 'H3']
+    let titles = [] as any[]
+    contentRef.value.childNodes.forEach((e: any, index: number) => {
+      if (titleTag.includes(e.nodeName)) {
+        const id = 'title-' + index
+        const level = Number(e.nodeName.substring(1, 2))
+        e.setAttribute('id', id)
+
+        let node = {
+          id,
+          level,
+          parent: null,
+          children: [],
+          title: e.innerHTML
+        }
+
+        if (titles.length > 0) {
+          let lastNode = titles.at(-1)
+          // 遇到子标题
+          if (lastNode.level < node.level) {
+            node.parent = lastNode
+            lastNode.children.push(node)
+          }
+          // 遇到上一级标题
+          else if (lastNode.level > node.level) {
+            let parent = lastNode.parent
+            while (parent) {
+              if (parent.level < node.level) {
+                parent.children.push(node)
+                node.parent = parent
+                break
+              }
+              parent = parent.parent
+            }
+          }
+          // 遇到平级
+          else if (lastNode.parent) {
+            node.parent = lastNode.parent
+            lastNode.parent.children.push(node)
+          }
+        }
+
+        titles.push(node)
+      }
+    })
+    toc.value = titles.filter((e) => e.parent === null)
+    tocStore.handleToc(toc.value)
+  })
+}
+buildToc()
 </script>
 
 <template>
-  <div class="detail">
-    <div class="header">
-      <h2 class="title">{{ articleDetail.title }}</h2>
-      <p class="meta">
-        <span><mdi:calendar-week-begin />{{ articleDetail.date }}</span>
-        <span><akar-icons:statistic-up />{{ articleDetail.view }}</span>
-        <span># {{ articleDetail.categoryName }}</span>
-      </p>
-    </div>
+  <div class="detail page-content">
+    <PageHeader
+      :title="articleDetail.title"
+      :date="articleDetail.date"
+      :view="articleDetail.view"
+      :category="articleDetail.categoryName"
+    />
 
-    <div class="content article-content" v-html="articleDetail.content"></div>
+    <div ref="contentRef" class="content article-content" v-html="articleDetail.content"></div>
 
     <div class="footer">
       <div class="tags">
@@ -33,43 +87,20 @@ const route = useRoute()
 </template>
 
 <style lang="scss" scoped>
-.title {
-  font-size: 1.875rem;
+.detail {
+  position: relative;
 }
 
-.meta {
-  margin-top: 6px;
-  opacity: 0.8;
-}
-
-.meta,
 .nav,
-.nav > div,
-.meta span {
+.nav > div {
   display: flex;
   align-items: center;
-}
-
-.meta span {
-  margin-right: 1.5rem;
-  svg {
-    margin-right: 6px;
-  }
-}
-
-.header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--gray);
 }
 
 .content {
   font-size: 1.125rem;
   line-height: 1.6;
   text-align: justify;
-}
-
-.footer {
 }
 
 .tags {

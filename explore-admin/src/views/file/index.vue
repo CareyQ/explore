@@ -519,8 +519,8 @@ const getFile = (id: number) => {
   font-weight: bold;
 }
 
-.filter .el-form--inline .el-form-item {
-  margin-bottom: 0 !important;
+.filter .el-form--inline .el-form-item.asterisk-left {
+  margin-bottom: 1rem !important;
 }
 
 .file-detail .el-dialog__body {

@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.exception.UserException;
 import com.careyq.explore.common.util.CollUtil;
+import com.careyq.explore.common.util.IpUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
+import com.careyq.explore.config.MyRequestContextHolder;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.enmus.ArticleStatusEnum;
@@ -56,6 +58,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         }
         Article article = new Article();
         BeanUtils.copyProperties(dto, article);
+        article.setLocation(IpUtil.getRequestRegion(MyRequestContextHolder.getRequest()));
         this.saveOrUpdate(article);
 
         ArticleContent articleContent = new ArticleContent();

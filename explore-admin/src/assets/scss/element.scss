@@ -76,10 +76,19 @@
 .el-input .el-input__wrapper {
   padding: .25rem .75rem;
   border-radius: .5rem;
+
+  .el-input__suffix {
+    position: absolute;
+    right: 10px;
+  }
 }
 
 .el-form-item {
   margin-bottom: 24px !important;
+}
+
+.el-form--inline .el-form-item {
+  margin-bottom: 1rem !important;
 }
 
 .el-input-number.is-controls-right .el-input-number__increase,
@@ -137,6 +146,7 @@
   --el-button-border-color: var(--el-color-danger) !important;
   --el-button-text-color: var(--el-color-danger) !important;
   background-color: transparent;
+
   &:hover {
     color: var(--el-color-danger) !important;
     border-color: var(--el-color-danger) !important;

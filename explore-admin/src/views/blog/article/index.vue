@@ -34,6 +34,12 @@ const getData = () => {
   })
 }
 
+const actionCell = (row: cellClassName) => {
+  if (row.columnIndex === 9) {
+    return 'table-action'
+  }
+}
+
 onMounted(() => {
   getData()
 })
@@ -88,7 +94,7 @@ const queryPage = () => {
     </div>
 
     <div class="data">
-      <el-table :data="articlePage?.records" style="width: 100%">
+      <el-table :data="articlePage?.records" style="width: 100%" :cell-class-name="actionCell">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="title" label="标题" />
         <el-table-column label="状态" width="100">
@@ -116,7 +122,23 @@ const queryPage = () => {
             <el-switch v-model="scope.row.isTop" style="--el-switch-on-color: var(--green)" />
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" width="180" />
+        <el-table-column prop="createTime" label="创建时间" width="160" />
+
+        <el-table-column label="操作" class="table-action" width="100">
+          <template #default="scope">
+            <el-tooltip effect="dark" content="编辑文章" placement="top">
+              <el-icon class="icon-btn" :size="18" color="#8392ab" @click="">
+                <FluentDocumentEdit24Filled class="icon" />
+              </el-icon>
+            </el-tooltip>
+
+            <el-tooltip effect="dark" content="删除文章" placement="top">
+              <el-icon class="icon-btn" :size="20" color="#8392ab">
+                <MdiDelete class="icon" />
+              </el-icon>
+            </el-tooltip>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </el-card>

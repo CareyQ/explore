@@ -11,7 +11,7 @@ package com.careyq.explore.common.util.date;
 public class DatePattern {
 
     /**
-     * 标准日期时间格式，精确到秒：yyyy-MM-dd HH:mm:ss
+     * 标准日期时间格式，精确到分：yyyy-MM-dd HH:mm
      */
-    public static final String NORM_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String NORM_DATETIME_PATTERN = "yyyy-MM-dd HH:mm";
 }

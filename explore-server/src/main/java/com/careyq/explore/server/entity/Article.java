@@ -100,6 +100,11 @@ public class Article extends BaseModel<Article> {
     private String seoDesc;
 
     /**
+     * 发表位置
+     */
+    private String location;
+
+    /**
      * 文章浏览量
      */
     private Long hits;

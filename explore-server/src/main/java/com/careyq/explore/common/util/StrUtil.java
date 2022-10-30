@@ -24,6 +24,18 @@ public class StrUtil {
     public final String DOT = ".";
     public final String NULL = "null";
     public final String UNDEFINED = "undefined";
+    public final String UNKNOWN = "unknown";
+    public final String LOCALHOST = "127.0.0.1";
+
+    /**
+     * 是否为空字符，且为 unknown
+     *
+     * @param val 需要验证的字符串
+     * @return 若为空，返回 true
+     */
+    public boolean isBlankOrUnknown(CharSequence val) {
+        return !StrUtil.isNotBlank(val) || UNKNOWN.equalsIgnoreCase((String) val);
+    }
 
     /**
      * 是否为空字符串
