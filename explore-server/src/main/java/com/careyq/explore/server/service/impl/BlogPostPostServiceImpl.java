@@ -12,14 +12,12 @@ import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.enmus.ArticleStatusEnum;
 import com.careyq.explore.server.entity.ArticleContent;
-import com.careyq.explore.server.entity.ArticleTag;
+import com.careyq.explore.server.entity.PostTagMerge;
 import com.careyq.explore.server.entity.BlogPost;
-import com.careyq.explore.server.entity.Tag;
 import com.careyq.explore.server.mapper.BlogMapper;
 import com.careyq.explore.server.service.ArticleContentService;
 import com.careyq.explore.server.service.ArticleTagService;
-import com.careyq.explore.server.service.BlogService;
-import com.careyq.explore.server.service.TagService;
+import com.careyq.explore.server.service.BlogPostService;
 import com.careyq.explore.server.vo.ArticlePageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -39,7 +37,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, BlogPost> implements BlogService {
+public class BlogPostPostServiceImpl extends ServiceImpl<BlogMapper, BlogPost> implements BlogPostService {
 
     private final ArticleContentService contentService;
     private final TagService tagService;
@@ -88,14 +86,14 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, BlogPost> implement
             tagService.saveBatch(newTags);
         }
         tagIds.addAll(newTags.stream().map(Tag::getId).toList());
-        List<ArticleTag> articleTags = tagIds.stream().distinct().map(tagId -> new ArticleTag(article.getId(), tagId)).toList();
+        List<PostTagMerge> postTagMerges = tagIds.stream().distinct().map(tagId -> new PostTagMerge(article.getId(), tagId)).toList();
         if (CollUtil.isNotEmpty(tagIds)) {
-            articleTagService.remove(new LambdaQueryWrapper<ArticleTag>()
-                    .eq(ArticleTag::getArticleId, article.getId())
-                    .notIn(ArticleTag::getTagId, tagIds));
+            articleTagService.remove(new LambdaQueryWrapper<PostTagMerge>()
+                    .eq(PostTagMerge::getArticleId, article.getId())
+                    .notIn(PostTagMerge::getTagId, tagIds));
         }
-        if (CollUtil.isNotEmpty(articleTags)) {
-            articleTagService.saveBatch(articleTags);
+        if (CollUtil.isNotEmpty(postTagMerges)) {
+            articleTagService.saveBatch(postTagMerges);
         }
         return article.getId();
     }

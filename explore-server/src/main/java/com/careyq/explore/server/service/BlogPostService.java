@@ -16,7 +16,7 @@ import com.careyq.explore.server.vo.ArticlePageVO;
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface BlogService extends IService<BlogPost> {
+public interface BlogPostService extends IService<BlogPost> {
 
     /**
      * 保存文章

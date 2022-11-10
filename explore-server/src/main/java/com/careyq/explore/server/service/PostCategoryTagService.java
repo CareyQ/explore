@@ -2,7 +2,7 @@ package com.careyq.explore.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.server.entity.Category;
+import com.careyq.explore.server.entity.PostCategoryTag;
 import com.careyq.explore.server.vo.CategoryVO;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface CategoryService extends IService<Category> {
+public interface PostCategoryTagService extends IService<PostCategoryTag> {
 
     /**
      * 获取分类列表

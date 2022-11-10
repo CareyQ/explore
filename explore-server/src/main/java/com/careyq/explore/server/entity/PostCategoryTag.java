@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 分类表
+ * 博客分类/标签表
  * </p>
  *
  * @author CareyQ
@@ -19,29 +19,29 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Category extends BaseModel<Category> {
+public class PostCategoryTag extends BaseModel<PostCategoryTag> {
 
     /**
-     * 分类名称
+     * 类型 0：分类 1：文章标签 2：片刻标签
      */
-    @NotBlank(message = "分类名称不能为空")
+    private Integer type;
+
+    /**
+     * 名称
+     */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     /**
-     * 分类别名，路径标识
+     * 别名，路径标识
      */
-    @NotBlank(message = "分类别名不能为空")
-    private String alias;
+    @NotBlank(message = "别名不能为空")
+    private String slug;
 
     /**
-     * 浏览量
+     * 文章数量
      */
-    private Long hits;
-
-    /**
-     * 排序
-     */
-    private Integer sort;
+    private Long quantity;
 
 
     @Override

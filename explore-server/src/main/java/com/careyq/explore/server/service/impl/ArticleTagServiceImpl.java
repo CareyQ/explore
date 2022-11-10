@@ -1,7 +1,7 @@
 package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.careyq.explore.server.entity.ArticleTag;
+import com.careyq.explore.server.entity.PostTagMerge;
 import com.careyq.explore.server.mapper.ArticleTagMapper;
 import com.careyq.explore.server.service.ArticleTagService;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-08-19
  */
 @Service
-public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, ArticleTag> implements ArticleTagService {
+public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, PostTagMerge> implements ArticleTagService {
 
 }

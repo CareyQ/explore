@@ -1,7 +1,7 @@
 package com.careyq.explore.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.careyq.explore.server.entity.Category;
+import com.careyq.explore.server.entity.PostCategoryTag;
 import com.careyq.explore.server.vo.CategoryVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2022-08-19
  */
 @Mapper
-public interface CategoryMapper extends BaseMapper<Category> {
+public interface CategoryMapper extends BaseMapper<PostCategoryTag> {
 
     /**
      * 查询分类

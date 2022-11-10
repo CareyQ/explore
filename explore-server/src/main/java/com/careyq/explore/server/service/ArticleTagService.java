@@ -1,7 +1,7 @@
 package com.careyq.explore.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.careyq.explore.server.entity.ArticleTag;
+import com.careyq.explore.server.entity.PostTagMerge;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.careyq.explore.server.entity.ArticleTag;
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface ArticleTagService extends IService<ArticleTag> {
+public interface ArticleTagService extends IService<PostTagMerge> {
 
 }

@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.entity.BaseModel;
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.server.entity.Category;
-import com.careyq.explore.server.entity.Tag;
+import com.careyq.explore.server.entity.PostCategoryTag;
 import com.careyq.explore.server.mapper.CommonMapper;
 import com.careyq.explore.server.service.CommonService;
 import lombok.AllArgsConstructor;
@@ -39,10 +38,10 @@ public class CommonServiceImpl<T extends BaseModel<T>> extends ServiceImpl<Commo
         String tableName = null;
         IService<T> service = null;
         
-        if (entity instanceof Category category) {
-            id = category.getId();
-            name = category.getName();
-            alias = category.getAlias();
+        if (entity instanceof PostCategoryTag postCategoryTag) {
+            id = postCategoryTag.getId();
+            name = postCategoryTag.getName();
+            alias = postCategoryTag.getAlias();
             tableName = "category";
             service = serviceMap.get("categoryServiceImpl");
         }

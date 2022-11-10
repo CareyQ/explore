@@ -1,8 +1,8 @@
 package com.careyq.explore.server.controller;
 
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.server.entity.Category;
-import com.careyq.explore.server.service.CategoryService;
+import com.careyq.explore.server.entity.PostCategoryTag;
+import com.careyq.explore.server.service.PostCategoryTagService;
 import com.careyq.explore.server.service.CommonService;
 import com.careyq.explore.server.vo.CategoryVO;
 import lombok.AllArgsConstructor;
@@ -24,18 +24,18 @@ import java.util.List;
 @RequestMapping("/api/category")
 public class CategoryController {
 
-    private final CommonService<Category> commonService;
-    private final CategoryService categoryService;
+    private final CommonService<PostCategoryTag> commonService;
+    private final PostCategoryTagService postCategoryTagService;
 
     /**
      * 保存分类
      *
-     * @param category 分类
+     * @param postCategoryTag 分类
      * @return 结果
      */
     @PostMapping("/save")
-    public Result<Boolean> saveCategory(@RequestBody @Validated Category category) {
-        return commonService.saveEntity(category);
+    public Result<Boolean> saveCategory(@RequestBody @Validated PostCategoryTag postCategoryTag) {
+        return commonService.saveEntity(postCategoryTag);
     }
 
     /**
@@ -45,7 +45,7 @@ public class CategoryController {
      */
     @GetMapping("/list")
     public Result<List<CategoryVO>> getCategories() {
-        return Result.success(categoryService.getCategories());
+        return Result.success(postCategoryTagService.getCategories());
     }
 
     /**
@@ -55,7 +55,7 @@ public class CategoryController {
      */
     @DeleteMapping("/del")
     public Result<Boolean> delCategory(@RequestParam Long id) {
-        return categoryService.delCategory(id);
+        return postCategoryTagService.delCategory(id);
     }
 }
 

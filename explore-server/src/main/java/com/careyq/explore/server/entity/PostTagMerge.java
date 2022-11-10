@@ -20,12 +20,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class ArticleTag extends BaseModel<ArticleTag> {
+public class PostTagMerge extends BaseModel<PostTagMerge> {
 
     /**
-     * 文章 ID
+     * 博客 ID
      */
-    private Long articleId;
+    private Long postId;
 
     /**
      * 标签 ID

@@ -2,9 +2,9 @@ package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.server.entity.Category;
+import com.careyq.explore.server.entity.PostCategoryTag;
 import com.careyq.explore.server.mapper.CategoryMapper;
-import com.careyq.explore.server.service.CategoryService;
+import com.careyq.explore.server.service.PostCategoryTagService;
 import com.careyq.explore.server.vo.CategoryVO;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2022-08-19
  */
 @Service
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+public class PostCategoryTagServiceImpl extends ServiceImpl<CategoryMapper, PostCategoryTag> implements PostCategoryTagService {
 
     @Override
     public List<CategoryVO> getCategories() {

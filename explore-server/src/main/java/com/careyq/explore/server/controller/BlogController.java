@@ -5,7 +5,7 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.annotation.ArticlePublishValid;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
-import com.careyq.explore.server.service.BlogService;
+import com.careyq.explore.server.service.BlogPostService;
 import com.careyq.explore.server.vo.ArticlePageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/blog")
 public class BlogController {
 
-    private final BlogService blogService;
+    private final BlogPostService blogPostService;
 
     /**
      * 保存文章
@@ -34,7 +34,7 @@ public class BlogController {
      */
     @PostMapping("/article/save")
     public Result<Long> saveArticle(@RequestBody @Validated ArticleDTO dto) {
-        return Result.success(blogService.saveArticle(dto), "保存成功");
+        return Result.success(blogPostService.saveArticle(dto), "保存成功");
     }
 
     /**
@@ -45,7 +45,7 @@ public class BlogController {
      */
     @PostMapping("/page")
     public Result<IPage<ArticlePageVO>> getArticlePage(@RequestBody ArticlePageDTO dto) {
-        return Result.success(blogService.getArticlePage(dto));
+        return Result.success(blogPostService.getArticlePage(dto));
     }
 
     /**
@@ -56,7 +56,7 @@ public class BlogController {
      */
     @GetMapping("/detail")
     public Result<ArticleDTO> getArticle(@RequestParam Long id) {
-        return blogService.getArticle(id);
+        return blogPostService.getArticle(id);
     }
 
     /**
@@ -67,7 +67,7 @@ public class BlogController {
      */
     @DeleteMapping("/del")
     public Result<Boolean> delArticle(@RequestParam Long id) {
-        return blogService.delArticle(id);
+        return blogPostService.delArticle(id);
     }
 
     /**
@@ -78,7 +78,7 @@ public class BlogController {
      */
     @PostMapping("/publish")
     public Result<Boolean> publishArticle(@RequestBody @Validated(ArticlePublishValid.class) ArticleDTO dto) {
-        return blogService.publishArticle(dto);
+        return blogPostService.publishArticle(dto);
     }
 }
 
