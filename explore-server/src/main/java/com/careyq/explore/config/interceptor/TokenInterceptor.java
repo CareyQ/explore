@@ -2,6 +2,7 @@ package com.careyq.explore.config.interceptor;
 
 import com.alibaba.fastjson2.JSON;
 import com.careyq.explore.common.annotation.IgnoreLogin;
+import com.careyq.explore.common.util.DigestUtil;
 import com.careyq.explore.common.util.RedisUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
@@ -54,7 +55,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
 
         String ua = request.getHeader("User-Agent");
-        String encryptUa = StrUtil.encrypt(ua);
+        String encryptUa = DigestUtil.encrypt(ua);
         String key = token + "." + encryptUa;
         String cache = RedisUtil.get(key);
         if (StrUtil.isBlank(cache)) {

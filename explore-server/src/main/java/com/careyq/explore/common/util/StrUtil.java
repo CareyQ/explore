@@ -1,9 +1,7 @@
 package com.careyq.explore.common.util;
 
 import lombok.experimental.UtilityClass;
-import org.springframework.util.DigestUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,37 +85,6 @@ public class StrUtil {
     }
 
     /**
-     * 加密
-     *
-     * @param val 待加密字符串
-     * @return 加密后的字符串
-     */
-    public String encrypt(String val) {
-        if (isBlank(val)) {
-            return EMPTY;
-        }
-        StringBuilder builder = new StringBuilder();
-        byte[] bytes = val.getBytes(StandardCharsets.UTF_8);
-        for (int i = 0; i < bytes.length; i++) {
-            builder.append(bytes[i]).append(i);
-        }
-        return md5Hex(builder.toString());
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param val 待加密字符串
-     * @return 加密后的字符串
-     */
-    public String md5Hex(String val) {
-        if (isBlank(val)) {
-            return EMPTY;
-        }
-        return DigestUtils.md5DigestAsHex(val.getBytes(StandardCharsets.UTF_8));
-    }
-
-    /**
      * 将字符串按照指定分隔符，分割为集合
      *
      * @param val       待分割的字符串
@@ -137,18 +104,4 @@ public class StrUtil {
         return arrayList;
     }
 
-    public static void main(String[] args) {
-
-        /*String a = "\t\n";
-        String b = " 1 ";
-        String c = null;
-        String d = "  ";
-
-        System.out.println(isNotBlank(a));
-        System.out.println(isNotBlank(b));
-        System.out.println(isNotBlank(c));
-        System.out.println(isBlank(d));*/
-
-        System.out.println(encrypt("123456"));
-    }
 }

@@ -1,6 +1,7 @@
 package com.careyq.explore.server.entity;
 
 import com.careyq.explore.common.entity.BaseModel;
+import com.careyq.explore.common.util.DigestUtil;
 import com.careyq.explore.common.util.StrUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,7 +66,7 @@ public class Attachment extends BaseModel<Attachment> {
      */
     public void builderPath(String prefix, String fileName, String extension) {
         this.path = prefix
-                + StrUtil.md5Hex(fileName + System.currentTimeMillis())
+                + DigestUtil.md5Hex(fileName + System.currentTimeMillis())
                 + StrUtil.DOT
                 + extension;
     }
