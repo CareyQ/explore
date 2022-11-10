@@ -80,9 +80,9 @@ public class ArticleDTO {
     private String password;
 
     /**
-     * 封面图
+     * 附件 ID
      */
-    private String thumbnail;
+    private String attachmentIds;
 
     /**
      * SEO 关键字

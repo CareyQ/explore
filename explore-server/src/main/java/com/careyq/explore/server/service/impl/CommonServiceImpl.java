@@ -33,27 +33,26 @@ public class CommonServiceImpl<T extends BaseModel<T>> extends ServiceImpl<Commo
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<Boolean> saveEntity(T entity) {
-        Long id;
-        String name;
-        String alias;
-        String tableName;
-        IService<T> service;
-        switch (entity) {
-            case Category category -> {
-                id = category.getId();
-                name = category.getName();
-                alias = category.getAlias();
-                tableName = "category";
-                service = serviceMap.get("categoryServiceImpl");
-            }
-            case Tag tag -> {
-                id = tag.getId();
-                name = tag.getName();
-                alias = tag.getAlias();
-                tableName = "tag";
-                service = serviceMap.get("tagServiceImpl");
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + entity);
+        Long id = null;
+        String name = null;
+        String alias = null;
+        String tableName = null;
+        IService<T> service = null;
+        
+        if (entity instanceof Category category) {
+            id = category.getId();
+            name = category.getName();
+            alias = category.getAlias();
+            tableName = "category";
+            service = serviceMap.get("categoryServiceImpl");
+        }
+
+        if (entity instanceof Tag tag) {
+            id = tag.getId();
+            name = tag.getName();
+            alias = tag.getAlias();
+            tableName = "tag";
+            service = serviceMap.get("tagServiceImpl");
         }
 
         if (service == null) {

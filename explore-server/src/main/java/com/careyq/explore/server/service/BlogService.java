@@ -5,18 +5,18 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
-import com.careyq.explore.server.entity.Article;
+import com.careyq.explore.server.entity.Blog;
 import com.careyq.explore.server.vo.ArticlePageVO;
 
 /**
  * <p>
- * 文章表 服务类
+ * 博客表 服务类
  * </p>
  *
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface ArticleService extends IService<Article> {
+public interface BlogService extends IService<Blog> {
 
     /**
      * 保存文章
@@ -25,6 +25,8 @@ public interface ArticleService extends IService<Article> {
      * @return 结果
      */
     Long saveArticle(ArticleDTO dto);
+
+    Long saveMoment();
 
     /**
      * 获取文章分页

@@ -5,21 +5,21 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
-import com.careyq.explore.server.entity.Article;
+import com.careyq.explore.server.entity.Blog;
 import com.careyq.explore.server.vo.ArticlePageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
- * 文章表 Mapper
+ * 博客表 Mapper
  * </p>
  *
  * @author CareyQ
  * @since 2022-08-19
  */
 @Mapper
-public interface ArticleMapper extends BaseMapper<Article> {
+public interface BlogMapper extends BaseMapper<Blog> {
 
     /**
      * 查询名称或别名是否已存在

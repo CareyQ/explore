@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.careyq.explore.server.mapper.ArticleMapper">
+<mapper namespace="com.careyq.explore.server.mapper.BlogMapper">
 
     <select id="selectIsExists" resultType="java.lang.Integer">
-        select 1 from article where is_del = 0 and (title = #{title} or alias = #{alias})
+        select 1 from blog where is_del = 0 and (title = #{title} or alias = #{alias})
         <if test="id != null">
             and id != #{id}
         </if>
@@ -25,7 +25,7 @@
                (select group_concat(t.name) from tag t
                     left join article_tag at on t.id = at.tag_id
                 where at.article_id = a.id) tags
-        from article a
+        from blog a
             left join category c on a.category_id = c.id
         where a.is_del = 0
         <if test="dto.title != null and dto.title.length > 0">
@@ -59,7 +59,7 @@
                a.seo_keywords,
                a.seo_desc,
                ac.original
-        from article a
+        from blog a
             left join article_content ac on a.id = ac.article_id
         where a.id = #{id}
     </select>

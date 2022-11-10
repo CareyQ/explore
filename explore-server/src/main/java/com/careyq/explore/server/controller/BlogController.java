@@ -5,7 +5,7 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.annotation.ArticlePublishValid;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
-import com.careyq.explore.server.service.ArticleService;
+import com.careyq.explore.server.service.BlogService;
 import com.careyq.explore.server.vo.ArticlePageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/article")
-public class ArticleController {
+@RequestMapping("/api/blog")
+public class BlogController {
 
-    private final ArticleService articleService;
+    private final BlogService blogService;
 
     /**
      * 保存文章
@@ -32,9 +32,9 @@ public class ArticleController {
      * @param dto 提交参数
      * @return 文章 ID
      */
-    @PostMapping("/save")
+    @PostMapping("/article/save")
     public Result<Long> saveArticle(@RequestBody @Validated ArticleDTO dto) {
-        return Result.success(articleService.saveArticle(dto), "保存成功");
+        return Result.success(blogService.saveArticle(dto), "保存成功");
     }
 
     /**
@@ -45,7 +45,7 @@ public class ArticleController {
      */
     @PostMapping("/page")
     public Result<IPage<ArticlePageVO>> getArticlePage(@RequestBody ArticlePageDTO dto) {
-        return Result.success(articleService.getArticlePage(dto));
+        return Result.success(blogService.getArticlePage(dto));
     }
 
     /**
@@ -56,7 +56,7 @@ public class ArticleController {
      */
     @GetMapping("/detail")
     public Result<ArticleDTO> getArticle(@RequestParam Long id) {
-        return articleService.getArticle(id);
+        return blogService.getArticle(id);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ArticleController {
      */
     @DeleteMapping("/del")
     public Result<Boolean> delArticle(@RequestParam Long id) {
-        return articleService.delArticle(id);
+        return blogService.delArticle(id);
     }
 
     /**
@@ -78,7 +78,7 @@ public class ArticleController {
      */
     @PostMapping("/publish")
     public Result<Boolean> publishArticle(@RequestBody @Validated(ArticlePublishValid.class) ArticleDTO dto) {
-        return articleService.publishArticle(dto);
+        return blogService.publishArticle(dto);
     }
 }
 

@@ -6,21 +6,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.exception.UserException;
 import com.careyq.explore.common.util.CollUtil;
-import com.careyq.explore.common.util.IpUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.config.MyRequestContextHolder;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.enmus.ArticleStatusEnum;
-import com.careyq.explore.server.entity.Article;
 import com.careyq.explore.server.entity.ArticleContent;
 import com.careyq.explore.server.entity.ArticleTag;
+import com.careyq.explore.server.entity.Blog;
 import com.careyq.explore.server.entity.Tag;
-import com.careyq.explore.server.mapper.ArticleMapper;
+import com.careyq.explore.server.mapper.BlogMapper;
 import com.careyq.explore.server.service.ArticleContentService;
-import com.careyq.explore.server.service.ArticleService;
 import com.careyq.explore.server.service.ArticleTagService;
+import com.careyq.explore.server.service.BlogService;
 import com.careyq.explore.server.service.TagService;
 import com.careyq.explore.server.vo.ArticlePageVO;
 import lombok.AllArgsConstructor;
@@ -33,7 +31,7 @@ import java.util.List;
 
 /**
  * <p>
- * 文章表 服务实现类
+ * 博客表 服务实现类
  * </p>
  *
  * @author CareyQ
@@ -41,7 +39,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
     private final ArticleContentService contentService;
     private final TagService tagService;
@@ -56,16 +54,22 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 throw new UserException("文章标题或别名已存在");
             }
         }
-        Article article = new Article();
+        Blog article = new Blog();
         BeanUtils.copyProperties(dto, article);
-        article.setLocation(IpUtil.getRequestRegion(MyRequestContextHolder.getRequest()));
         this.saveOrUpdate(article);
 
-        ArticleContent articleContent = new ArticleContent();
-        articleContent.setArticleId(article.getId())
-                .setOriginal(dto.getOriginal())
-                .setContent(dto.getContent());
-        contentService.saveOrUpdate(articleContent);
+        if (dto.getId() == null) {
+            new ArticleContent().setArticleId(article.getId())
+                    .setOriginal(dto.getOriginal())
+                    .setContent(dto.getContent())
+                    .insert();
+        } else {
+            contentService.lambdaUpdate()
+                    .set(ArticleContent::getOriginal, dto.getOriginal())
+                    .set(ArticleContent::getContent, dto.getContent())
+                    .eq(ArticleContent::getArticleId, article.getId())
+                    .update();
+        }
 
         List<Object> tags = dto.getTags();
         List<Long> tagIds = new ArrayList<>();
@@ -97,6 +101,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
+    public Long saveMoment() {
+        return null;
+    }
+
+    @Override
     public IPage<ArticlePageVO> getArticlePage(ArticlePageDTO dto) {
         IPage<ArticlePageVO> page = baseMapper.selectArticlePage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
         page.getRecords().forEach(e -> e.setTagsName(StrUtil.split(e.getTags(), StrUtil.COMMA)));
@@ -121,9 +130,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Transactional(rollbackFor = Exception.class)
     public Result<Boolean> publishArticle(ArticleDTO dto) {
         Long articleId = this.saveArticle(dto);
-        Article article = new Article();
-        article.setStatus(ArticleStatusEnum.PUBLISHED.getCode()).setId(articleId);
-        article.updateById();
+        Blog blog = new Blog();
+        blog.setStatus(ArticleStatusEnum.PUBLISHED.getCode()).setId(articleId);
+        blog.updateById();
         return Result.success("发布成功");
     }
 }

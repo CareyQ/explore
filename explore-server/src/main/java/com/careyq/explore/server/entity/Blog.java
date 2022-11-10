@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 文章表
+ * 博客表
  * </p>
  *
  * @author CareyQ
@@ -20,12 +20,17 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Article extends BaseModel<Article> {
+public class Blog extends BaseModel<Blog> {
 
     /**
      * 文章别名，路径标识
      */
     private String alias;
+
+    /**
+     * 类型：0：文章 1：片刻
+     */
+    private Integer type;
 
     /**
      * 文章标题
@@ -43,7 +48,7 @@ public class Article extends BaseModel<Article> {
     private Long categoryId;
 
     /**
-     * 文章摘要
+     * 文章摘要/片刻
      */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String summary;
@@ -82,10 +87,10 @@ public class Article extends BaseModel<Article> {
     private String password;
 
     /**
-     * 封面图
+     * 附件 ID
      */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
-    private String thumbnail;
+    private String attachmentIds;
 
     /**
      * SEO 关键字

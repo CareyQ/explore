@@ -1,5 +1,6 @@
 package com.careyq.explore.common.util;
 
+import com.careyq.explore.config.MyRequestContextHolder;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.xdb.Searcher;
@@ -95,11 +96,10 @@ public class IpUtil {
     /**
      * 获取请求的归属地
      *
-     * @param request HttpServletRequest
      * @return 归属地
      */
-    public String getRequestRegion(HttpServletRequest request) {
-        return getIpRegion(getIpAddr(request));
+    public String getRequestRegion() {
+        return getIpRegion(getIpAddr(MyRequestContextHolder.getRequest()));
     }
 
     /**
