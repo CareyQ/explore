@@ -26,7 +26,7 @@
                     left join article_tag at on t.id = at.tag_id
                 where at.article_id = a.id) tags
         from blog_post a
-            left join postCategoryTag c on a.category_id = c.id
+            left join postMeta c on a.category_id = c.id
         where a.is_del = 0
         <if test="dto.title != null and dto.title.length > 0">
             and a.title like concat('%', #{dto.title}, '%')

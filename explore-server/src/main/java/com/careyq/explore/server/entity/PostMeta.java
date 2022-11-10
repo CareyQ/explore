@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class PostCategoryTag extends BaseModel<PostCategoryTag> {
+public class PostMeta extends BaseModel<PostMeta> {
 
     /**
      * 类型 0：分类 1：文章标签 2：片刻标签

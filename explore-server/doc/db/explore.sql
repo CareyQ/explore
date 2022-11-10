@@ -85,7 +85,7 @@ create table if not exists article_content
     key idx_articleId (article_id) using btree
 ) comment '文章内容表';
 
-create table if not exists post_category_tag
+create table if not exists post_meta
 (
     id          bigint unsigned not null auto_increment comment '主键',
     type        int             not null default 0 comment '类型 0：分类 1：文章标签 2：片刻标签',

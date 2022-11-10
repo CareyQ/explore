@@ -2,9 +2,9 @@ package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.vo.Result;
-import com.careyq.explore.server.entity.PostCategoryTag;
-import com.careyq.explore.server.mapper.CategoryMapper;
-import com.careyq.explore.server.service.PostCategoryTagService;
+import com.careyq.explore.server.entity.PostMeta;
+import com.careyq.explore.server.mapper.PostMetaMapper;
+import com.careyq.explore.server.service.PostMetaService;
 import com.careyq.explore.server.vo.CategoryVO;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,17 @@ import java.util.List;
  * @since 2022-08-19
  */
 @Service
-public class PostCategoryTagServiceImpl extends ServiceImpl<CategoryMapper, PostCategoryTag> implements PostCategoryTagService {
+public class PostMetaServiceImpl extends ServiceImpl<PostMetaMapper, PostMeta> implements PostMetaService {
+
+    @Override
+    public Result<Boolean> saveEntity(PostMeta entity) {
+        Integer exists = baseMapper.selectIsExists(entity.getName(), entity.getSlug(), entity.getId());
+        if (exists != null) {
+            return Result.fail("名称或别名已存在");
+        }
+        boolean result = this.saveOrUpdate(entity);
+        return Result.success(result, "保存成功");
+    }
 
     @Override
     public List<CategoryVO> getCategories() {

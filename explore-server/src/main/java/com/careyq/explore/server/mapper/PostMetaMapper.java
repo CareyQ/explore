@@ -1,7 +1,7 @@
 package com.careyq.explore.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.careyq.explore.server.entity.PostCategoryTag;
+import com.careyq.explore.server.entity.PostMeta;
 import com.careyq.explore.server.vo.CategoryVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +18,19 @@ import java.util.List;
  * @since 2022-08-19
  */
 @Mapper
-public interface CategoryMapper extends BaseMapper<PostCategoryTag> {
+public interface PostMetaMapper extends BaseMapper<PostMeta> {
+
+    /**
+     * 查询名称或别名是否已存在
+     *
+     * @param name      名称
+     * @param slug     别名
+     * @param id        主键
+     * @return 结果
+     */
+    Integer selectIsExists(@Param("name") String name,
+                           @Param("slug") String slug,
+                           @Param("id") Long id);
 
     /**
      * 查询分类
