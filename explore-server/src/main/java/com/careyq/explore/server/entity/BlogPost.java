@@ -20,17 +20,17 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Blog extends BaseModel<Blog> {
-
-    /**
-     * 文章别名，路径标识
-     */
-    private String alias;
+public class BlogPost extends BaseModel<BlogPost> {
 
     /**
      * 类型：0：文章 1：片刻
      */
     private Integer type;
+
+    /**
+     * 文章别名，路径标识
+     */
+    private String slug;
 
     /**
      * 文章标题
@@ -48,10 +48,10 @@ public class Blog extends BaseModel<Blog> {
     private Long categoryId;
 
     /**
-     * 文章摘要/片刻
+     * 文章摘要/片刻内容
      */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
-    private String summary;
+    private String desc;
 
     /**
      * 允许评论 0：禁止 1：允许
@@ -67,6 +67,11 @@ public class Blog extends BaseModel<Blog> {
      * 是否是原创 0：否 1：是
      */
     private Boolean isOriginal;
+
+    /**
+     * 归属地
+     */
+    private String location;
 
     /**
      * 非原创时作者
@@ -87,10 +92,10 @@ public class Blog extends BaseModel<Blog> {
     private String password;
 
     /**
-     * 附件 ID
+     * 关联附件 文章：封面图 片刻：附件
      */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
-    private String attachmentIds;
+    private String file_id;
 
     /**
      * SEO 关键字
@@ -105,11 +110,6 @@ public class Blog extends BaseModel<Blog> {
     private String seoDesc;
 
     /**
-     * 发表位置
-     */
-    private String location;
-
-    /**
      * 文章浏览量
      */
     private Long hits;
@@ -118,6 +118,11 @@ public class Blog extends BaseModel<Blog> {
      * 文章点赞数
      */
     private Long likes;
+
+    /**
+     * 文章内容字数统计
+     */
+    private Long word_count;
 
 
     @Override

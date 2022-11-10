@@ -13,7 +13,7 @@ import com.careyq.explore.server.dto.ArticlePageDTO;
 import com.careyq.explore.server.enmus.ArticleStatusEnum;
 import com.careyq.explore.server.entity.ArticleContent;
 import com.careyq.explore.server.entity.ArticleTag;
-import com.careyq.explore.server.entity.Blog;
+import com.careyq.explore.server.entity.BlogPost;
 import com.careyq.explore.server.entity.Tag;
 import com.careyq.explore.server.mapper.BlogMapper;
 import com.careyq.explore.server.service.ArticleContentService;
@@ -39,7 +39,7 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, BlogPost> implements BlogService {
 
     private final ArticleContentService contentService;
     private final TagService tagService;
@@ -54,7 +54,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
                 throw new UserException("文章标题或别名已存在");
             }
         }
-        Blog article = new Blog();
+        BlogPost article = new BlogPost();
         BeanUtils.copyProperties(dto, article);
         this.saveOrUpdate(article);
 
@@ -130,9 +130,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Transactional(rollbackFor = Exception.class)
     public Result<Boolean> publishArticle(ArticleDTO dto) {
         Long articleId = this.saveArticle(dto);
-        Blog blog = new Blog();
-        blog.setStatus(ArticleStatusEnum.PUBLISHED.getCode()).setId(articleId);
-        blog.updateById();
+        BlogPost blogPost = new BlogPost();
+        blogPost.setStatus(ArticleStatusEnum.PUBLISHED.getCode()).setId(articleId);
+        blogPost.updateById();
         return Result.success("发布成功");
     }
 }
