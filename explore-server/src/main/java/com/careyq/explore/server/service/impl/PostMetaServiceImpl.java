@@ -22,12 +22,12 @@ import java.util.List;
 public class PostMetaServiceImpl extends ServiceImpl<PostMetaMapper, PostMeta> implements PostMetaService {
 
     @Override
-    public Result<Boolean> saveEntity(PostMeta entity) {
-        Integer exists = baseMapper.selectIsExists(entity.getName(), entity.getSlug(), entity.getId());
+    public Result<Boolean> saveMeta(PostMeta meta) {
+        Integer exists = baseMapper.selectIsExists(meta.getName(), meta.getSlug(), meta.getId());
         if (exists != null) {
             return Result.fail("名称或别名已存在");
         }
-        boolean result = this.saveOrUpdate(entity);
+        boolean result = this.saveOrUpdate(meta);
         return Result.success(result, "保存成功");
     }
 

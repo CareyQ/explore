@@ -20,10 +20,10 @@ public interface PostMetaService extends IService<PostMeta> {
     /**
      * 保存
      *
-     * @param entity 实体
+     * @param meta 实体
      * @return 结果
      */
-    Result<Boolean> saveEntity(PostMeta entity);
+    Result<Boolean> saveMeta(PostMeta meta);
 
     /**
      * 获取分类列表

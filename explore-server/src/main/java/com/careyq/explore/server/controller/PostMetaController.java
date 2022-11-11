@@ -23,18 +23,17 @@ import java.util.List;
 @RequestMapping("/api/post/meta")
 public class PostMetaController {
 
-    private final CommonService<PostMeta> commonService;
     private final PostMetaService postMetaService;
 
     /**
-     * 保存分类
+     * 保存
      *
-     * @param postMeta 分类
+     * @param postMeta 实体
      * @return 结果
      */
     @PostMapping("/save")
-    public Result<Boolean> saveCategory(@RequestBody @Validated PostMeta postMeta) {
-        return commonService.saveEntity(postMeta);
+    public Result<Boolean> saveMeta(@RequestBody @Validated PostMeta postMeta) {
+        return postMetaService.saveMeta(postMeta);
     }
 
     /**
