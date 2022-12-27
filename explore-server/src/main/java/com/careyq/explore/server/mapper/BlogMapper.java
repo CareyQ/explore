@@ -18,7 +18,6 @@ import org.apache.ibatis.annotations.Param;
  * @author CareyQ
  * @since 2022-08-19
  */
-@Mapper
 public interface BlogMapper extends BaseMapper<BlogPost> {
 
     /**

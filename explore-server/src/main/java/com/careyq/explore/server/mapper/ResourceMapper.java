@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.entity.Resource;
-import com.careyq.explore.server.vo.ResourceVO;
 import com.careyq.explore.server.vo.ResourcePageVO;
-import org.apache.ibatis.annotations.Mapper;
+import com.careyq.explore.server.vo.ResourceVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,7 +18,6 @@ import org.apache.ibatis.annotations.Select;
  * @author CareyQ
  * @since 2022-08-19
  */
-@Mapper
 public interface ResourceMapper extends BaseMapper<Resource> {
 
     /**

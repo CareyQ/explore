@@ -3,7 +3,6 @@ package com.careyq.explore.server.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.careyq.explore.server.entity.PostMeta;
 import com.careyq.explore.server.vo.CategoryVO;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,7 +16,6 @@ import java.util.List;
  * @author CareyQ
  * @since 2022-08-19
  */
-@Mapper
 public interface PostMetaMapper extends BaseMapper<PostMeta> {
 
     /**
