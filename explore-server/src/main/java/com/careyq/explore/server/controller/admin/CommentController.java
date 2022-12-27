@@ -1,4 +1,4 @@
-package com.careyq.explore.server.controller;
+package com.careyq.explore.server.controller.admin;
 
 import com.careyq.explore.server.service.CommentService;
 import lombok.AllArgsConstructor;

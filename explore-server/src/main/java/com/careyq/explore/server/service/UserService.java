@@ -5,8 +5,7 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.entity.User;
 import com.careyq.explore.server.vo.LoginUserVO;
-
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -25,6 +24,6 @@ public interface UserService extends IService<User> {
      * @param dto LoginDTO
      * @return LoginUserVO
      */
-    Result<LoginUserVO> login(HttpServletRequest request,  LoginDTO dto);
+    Result<LoginUserVO> login(HttpServletRequest request, LoginDTO dto);
 
 }

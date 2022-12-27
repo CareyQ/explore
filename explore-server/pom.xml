@@ -25,15 +25,15 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>2.7.3</spring.boot.version>
+        <spring.boot.version>3.0.1</spring.boot.version>
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
         <mybatis.generator.version>3.5.3</mybatis.generator.version>
-        <mysql.version>8.0.30</mysql.version>
-        <druid.version>1.2.14</druid.version>
+        <mysql.version>8.0.31</mysql.version>
+        <druid.version>1.2.15</druid.version>
         <velocity.version>2.3</velocity.version>
         <lombok.version>1.18.24</lombok.version>
-        <fastjson.version>2.0.16</fastjson.version>
-        <ip.region.version>2.6.5</ip.region.version>
+        <fastjson.version>2.0.21</fastjson.version>
+        <ip.region.version>2.6.6</ip.region.version>
         <transmittable.thread.version>2.14.2</transmittable.thread.version>
     </properties>
 

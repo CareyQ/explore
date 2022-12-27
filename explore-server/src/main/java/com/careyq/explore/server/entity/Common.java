@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 文件表
+ * 资源表
  * </p>
  *
  * @author CareyQ

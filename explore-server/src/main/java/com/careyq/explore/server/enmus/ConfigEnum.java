@@ -14,9 +14,13 @@ import lombok.Getter;
 public enum ConfigEnum {
 
     /**
-     * 操作成功
+     * 域名配置
      */
-    DOMAIN(0, "域名配置");
+    DOMAIN(0, "域名配置"),
+    /**
+     * 默认资源文件夹
+     */
+    DEFAULT_RESOURCE_CATEGORY(1, "默认资源文件夹 ID");
 
     private final Integer code;
     private final String desc;

@@ -1,11 +1,9 @@
 package com.careyq.explore.common.util;
 
 import com.careyq.explore.server.enmus.ConfigEnum;
-import com.careyq.explore.server.service.ConfigService;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 系统工具类
@@ -17,7 +15,6 @@ import javax.annotation.PostConstruct;
 @AllArgsConstructor
 public class SysUtil {
 
-    private final ConfigService configService;
     private static SysUtil instance;
 
     private static final String HTTP_STR = "http";
@@ -34,6 +31,6 @@ public class SysUtil {
         if (StrUtil.isBlank(path) || path.contains(HTTP_STR)) {
             return path;
         }
-        return instance.configService.getConfigValue(ConfigEnum.DOMAIN.getCode()) + StrUtil.SLASH + path;
+        return ConfigUtil.getConfig(ConfigEnum.DOMAIN.getCode()) + StrUtil.SLASH + path;
     }
 }

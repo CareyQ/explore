@@ -16,7 +16,7 @@ const props = defineProps(['title', 'date', 'view', 'category'])
 <style lang="scss" scoped>
 .page-header {
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--gray);
 }
 .meta,

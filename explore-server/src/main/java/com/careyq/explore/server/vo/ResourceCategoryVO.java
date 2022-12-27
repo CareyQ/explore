@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 文件分类 VO
+ * 资源分类 VO
  * </p>
  *
  * @author CareyQ
@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class AttachmentCategoryVO {
+public class ResourceCategoryVO {
 
     /**
      * 主键
@@ -21,7 +21,7 @@ public class AttachmentCategoryVO {
     private Long id;
 
     /**
-     * 文件分类名称
+     * 资源分类名称
      */
     private String name;
 

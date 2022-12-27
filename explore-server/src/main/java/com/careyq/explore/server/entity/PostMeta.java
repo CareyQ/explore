@@ -1,11 +1,13 @@
 package com.careyq.explore.server.entity;
 
 import com.careyq.explore.common.entity.BaseModel;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -18,6 +20,8 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PostMeta extends BaseModel<PostMeta> {
 
@@ -37,11 +41,6 @@ public class PostMeta extends BaseModel<PostMeta> {
      */
     @NotBlank(message = "别名不能为空")
     private String slug;
-
-    /**
-     * 文章数量
-     */
-    private Long quantity;
 
 
     @Override

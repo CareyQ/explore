@@ -1,4 +1,4 @@
-package com.careyq.explore.server.controller;
+package com.careyq.explore.server.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.careyq.explore.common.vo.Result;

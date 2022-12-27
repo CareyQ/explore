@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.enums.IEnum;
 import com.careyq.explore.common.exception.UserException;
+import com.careyq.explore.common.util.ConfigUtil;
 import com.careyq.explore.common.util.FileUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
@@ -12,32 +13,30 @@ import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.enmus.BatchOperateTypeEnum;
 import com.careyq.explore.server.enmus.FilePathEnum;
-import com.careyq.explore.server.entity.Attachment;
-import com.careyq.explore.server.mapper.AttachmentMapper;
-import com.careyq.explore.server.service.AttachmentService;
-import com.careyq.explore.server.vo.AttachmentVO;
-import com.careyq.explore.server.vo.AttachmentPageVO;
+import com.careyq.explore.server.entity.Resource;
+import com.careyq.explore.server.mapper.ResourceMapper;
+import com.careyq.explore.server.service.ResourceService;
+import com.careyq.explore.server.vo.ResourcePageVO;
+import com.careyq.explore.server.vo.ResourceVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * <p>
- * 文件表 服务实现类
+ * 资源表 服务实现类
  * </p>
  *
  * @author CareyQ
@@ -45,36 +44,39 @@ import java.util.Objects;
  */
 @Slf4j
 @Service
-public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachment> implements AttachmentService {
+public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
     private static final String LOCATION = "D:\\Files\\";
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean uploadFile(MultipartFile file, Long categoryId,  FilePathEnum pathEnum) {
+        if (categoryId == null) {
+            categoryId = ConfigUtil.getResourceCategory();
+        }
         String filename = file.getOriginalFilename();
         if (StrUtil.isBlank(filename)) {
             throw new UserException("文件名称不能为空");
         }
-        Attachment attachment = new Attachment();
-        attachment.setName(filename)
+        Resource resource = new Resource();
+        resource.setName(filename)
                 .setCategoryId(categoryId)
                 .setType(MediaType.valueOf(Objects.requireNonNull(file.getContentType())).getType())
                 .setSize(file.getSize());
-        attachment.builderPath(pathEnum.getPath(), filename, FileUtil.extName(filename));
+        resource.builderPath(pathEnum.getPath(), filename, FileUtil.extName(filename));
 
         try {
             BufferedImage image = ImageIO.read(file.getInputStream());
             if (Objects.nonNull(image)) {
-                attachment.setHeight(image.getWidth())
+                resource.setHeight(image.getWidth())
                         .setWidth(image.getHeight());
             }
         } catch (IOException e) {
             log.error("文件转换 image 异常，文件名：{}", file.getOriginalFilename(), e);
             throw new UserException("文件转换图片失败");
         }
-        attachment.insert();
-        File localFile = FileUtil.buildFile(LOCATION + attachment.getPath());
+        resource.insert();
+        File localFile = FileUtil.buildFile(LOCATION + resource.getPath());
         try {
             file.transferTo(localFile);
         } catch (IOException e) {
@@ -82,12 +84,6 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
             throw new UserException("文件写入本地失败");
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(DigestUtils.md5DigestAsHex(String.valueOf(System.currentTimeMillis()).getBytes(StandardCharsets.UTF_8)));
-
-
     }
 
     public static String getBasename(String filename) {
@@ -128,12 +124,12 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
     }
 
     @Override
-    public IPage<AttachmentPageVO> getAttachmentPage(AttachmentPageDTO dto) {
+    public IPage<ResourcePageVO> getPage(AttachmentPageDTO dto) {
         return baseMapper.selectAttachmentPage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
     }
 
     @Override
-    public AttachmentVO getAttachment(Long id) {
+    public ResourceVO getDetail(Long id) {
         return baseMapper.selectAttachment(id);
     }
 
@@ -147,8 +143,8 @@ public class AttachmentServiceImpl extends ServiceImpl<AttachmentMapper, Attachm
                     throw new UserException("未指定附件分类");
                 }
                 this.lambdaUpdate()
-                        .set(Attachment::getCategoryId, dto.getTargetCategoryId())
-                        .in(Attachment::getId, dto.getIds());
+                        .set(Resource::getCategoryId, dto.getTargetCategoryId())
+                        .in(Resource::getId, dto.getIds());
             }
             default -> throw new IllegalStateException("未知的操作: " + dto.getOperationType());
         }

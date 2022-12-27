@@ -15,7 +15,7 @@ const props = defineProps(['replies'])
       <div class="info">
         <span>来自云南省</span>
         <span>{{ item.date }}</span>
-        <span @click="$emit('reply', item)">回复</span>
+        <span @click="$emit('reply', item)" class="reply-btn">回复</span>
       </div>
     </div>
   </div>

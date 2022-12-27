@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(['commentText'])
+</script>
 
 <template>
   <div class="form">
@@ -9,7 +11,7 @@
     </div>
 
     <div class="content">
-      <textarea class="text-box" placeholder="发表评论..." rows="3" />
+      <textarea class="text-box" placeholder="发表评论..." rows="3" v-model="commentText" />
     </div>
 
     <div class="handle">

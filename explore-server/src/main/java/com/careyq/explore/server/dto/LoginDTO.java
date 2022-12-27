@@ -2,7 +2,7 @@ package com.careyq.explore.server.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * <p>

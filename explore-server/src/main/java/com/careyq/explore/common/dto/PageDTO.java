@@ -1,9 +1,8 @@
 package com.careyq.explore.common.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * <p>

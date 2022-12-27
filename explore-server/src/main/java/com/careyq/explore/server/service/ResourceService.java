@@ -6,20 +6,20 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.enmus.FilePathEnum;
-import com.careyq.explore.server.entity.Attachment;
-import com.careyq.explore.server.vo.AttachmentPageVO;
-import com.careyq.explore.server.vo.AttachmentVO;
+import com.careyq.explore.server.entity.Resource;
+import com.careyq.explore.server.vo.ResourcePageVO;
+import com.careyq.explore.server.vo.ResourceVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
- * 文件表 服务类
+ * 资源表 服务类
  * </p>
  *
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface AttachmentService extends IService<Attachment> {
+public interface ResourceService extends IService<Resource> {
 
     /**
      * 上传文件
@@ -45,7 +45,7 @@ public interface AttachmentService extends IService<Attachment> {
      * @param dto 分页筛选参数
      * @return 分页结果
      */
-    IPage<AttachmentPageVO> getAttachmentPage(AttachmentPageDTO dto);
+    IPage<ResourcePageVO> getPage(AttachmentPageDTO dto);
 
     /**
      * 获取附件详情
@@ -53,7 +53,7 @@ public interface AttachmentService extends IService<Attachment> {
      * @param id 附件 ID
      * @return 详情
      */
-    AttachmentVO getAttachment(Long id);
+    ResourceVO getDetail(Long id);
 
     /**
      * 批量操作附件

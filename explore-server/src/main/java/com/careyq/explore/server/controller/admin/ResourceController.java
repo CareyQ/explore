@@ -1,13 +1,13 @@
-package com.careyq.explore.server.controller;
+package com.careyq.explore.server.controller.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
 import com.careyq.explore.server.enmus.FilePathEnum;
-import com.careyq.explore.server.service.AttachmentService;
-import com.careyq.explore.server.vo.AttachmentVO;
-import com.careyq.explore.server.vo.AttachmentPageVO;
+import com.careyq.explore.server.service.ResourceService;
+import com.careyq.explore.server.vo.ResourceVO;
+import com.careyq.explore.server.vo.ResourcePageVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
- * 文件表 控制层
+ * 资源表 控制层
  * </p>
  *
  * @author CareyQ
@@ -23,10 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/attachment")
-public class AttachmentController {
+@RequestMapping("/api/resource")
+public class ResourceController {
 
-    private final AttachmentService attachmentService;
+    private final ResourceService resourceService;
 
     /**
      * 上传文件
@@ -36,7 +36,7 @@ public class AttachmentController {
      */
     @PostMapping("/upload")
     public Result<Boolean> upload(@RequestPart MultipartFile file, Long categoryId) {
-        return Result.success(attachmentService.uploadFile(file, categoryId, FilePathEnum.OTHER));
+        return Result.success(resourceService.uploadFile(file, categoryId, FilePathEnum.OTHER));
     }
 
     /**
@@ -47,7 +47,7 @@ public class AttachmentController {
      */
     @PostMapping("/upload/avatar")
     public Result<Boolean> uploadAvatar(@RequestPart MultipartFile file) {
-        return Result.success(attachmentService.uploadFile(file, 1L, FilePathEnum.AVATAR));
+        return Result.success(resourceService.uploadFile(file, 1L, FilePathEnum.AVATAR));
     }
 
     /**
@@ -57,8 +57,8 @@ public class AttachmentController {
      * @return 分页结果
      */
     @PostMapping("/page")
-    public Result<IPage<AttachmentPageVO>> getAttachmentPage(@RequestBody @Validated AttachmentPageDTO dto) {
-        return Result.success(attachmentService.getAttachmentPage(dto));
+    public Result<IPage<ResourcePageVO>> getAttachmentPage(@RequestBody @Validated AttachmentPageDTO dto) {
+        return Result.success(resourceService.getPage(dto));
     }
 
     /**
@@ -68,12 +68,12 @@ public class AttachmentController {
      * @return 附件详情
      */
     @GetMapping("/detail")
-    public Result<AttachmentVO> getAttachment(@RequestParam Long id) {
-        return Result.success(attachmentService.getAttachment(id));
+    public Result<ResourceVO> getAttachment(@RequestParam Long id) {
+        return Result.success(resourceService.getDetail(id));
     }
 
     public Result<Boolean> batchOperate(@RequestBody @Validated AttachmentBatchOperateDTO dto) {
-        return attachmentService.batchOperate(dto);
+        return resourceService.batchOperate(dto);
     }
 }
 

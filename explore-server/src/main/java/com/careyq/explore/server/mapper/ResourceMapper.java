@@ -4,23 +4,23 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.careyq.explore.server.dto.AttachmentPageDTO;
-import com.careyq.explore.server.entity.Attachment;
-import com.careyq.explore.server.vo.AttachmentVO;
-import com.careyq.explore.server.vo.AttachmentPageVO;
+import com.careyq.explore.server.entity.Resource;
+import com.careyq.explore.server.vo.ResourceVO;
+import com.careyq.explore.server.vo.ResourcePageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>
- * 文件表 Mapper
+ * 资源表 Mapper
  * </p>
  *
  * @author CareyQ
  * @since 2022-08-19
  */
 @Mapper
-public interface AttachmentMapper extends BaseMapper<Attachment> {
+public interface ResourceMapper extends BaseMapper<Resource> {
 
     /**
      * 查询指定分类下的文件是否存在
@@ -38,7 +38,7 @@ public interface AttachmentMapper extends BaseMapper<Attachment> {
      * @param dto  参数
      * @return 分页结果
      */
-    IPage<AttachmentPageVO> selectAttachmentPage(Page<AttachmentPageVO> page, @Param("dto") AttachmentPageDTO dto);
+    IPage<ResourcePageVO> selectAttachmentPage(Page<ResourcePageVO> page, @Param("dto") AttachmentPageDTO dto);
 
     /**
      * 根据 ID 查询
@@ -47,5 +47,5 @@ public interface AttachmentMapper extends BaseMapper<Attachment> {
      * @return 结果
      */
     @Select("select id, name, type, path, size, height, width, create_time from attachment where id = #{id}")
-    AttachmentVO selectAttachment(@Param("id") Long id);
+    ResourceVO selectAttachment(@Param("id") Long id);
 }

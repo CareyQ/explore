@@ -1,11 +1,11 @@
 package com.careyq.explore.common.util;
 
 import com.alibaba.fastjson2.JSON;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**

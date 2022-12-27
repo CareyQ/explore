@@ -14,7 +14,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PostMetaTypeEnum implements IEnum {
+public enum MetaTypeEnum implements IEnum {
 
     /**
      * 文章

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 附件 VO
+ * 资源 VO
  * </p>
  *
  * @author CareyQ
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-public class AttachmentVO {
+public class ResourceVO {
 
     /**
      * 主键

@@ -1,11 +1,11 @@
 package com.careyq.explore.server.entity;
 
 import com.careyq.explore.common.entity.BaseModel;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -19,12 +19,12 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class AttachmentCategory extends BaseModel<AttachmentCategory> {
+public class ResourceCategory extends BaseModel<ResourceCategory> {
 
     /**
      * 文件分类名称
      */
-    @NotBlank(message = "文件分类名称不能为空")
+    @NotBlank(message = "资源分类名称不能为空")
     private String name;
 
     /**
@@ -41,6 +41,11 @@ public class AttachmentCategory extends BaseModel<AttachmentCategory> {
      * 是否展示
      */
     private Boolean isShow;
+
+    /**
+     * 封面资源 ID
+     */
+    private Long cover;
 
 
     @Override

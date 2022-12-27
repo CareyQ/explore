@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author CareyQ
  * @since 2022-08-21
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.careyq.explore"})
 public class ExploreApplication {
 
     public static void main(String[] args) {

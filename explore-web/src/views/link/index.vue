@@ -45,6 +45,10 @@ import { link } from '@/mock/system'
   margin: 0 -8px;
 }
 
+.link > div {
+  margin-bottom: 1rem;
+}
+
 .link-item {
   padding: 8px;
   width: 33.33333333%;

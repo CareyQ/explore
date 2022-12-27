@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 文件表
+ * 资源表
  * </p>
  *
  * @author CareyQ
@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Attachment extends BaseModel<Attachment> {
+public class Resource extends BaseModel<Resource> {
 
     /**
      * 文件分类 ID

@@ -1,18 +1,17 @@
-package com.careyq.explore.server.controller;
+package com.careyq.explore.server.controller.admin;
 
 import com.careyq.explore.common.annotation.IgnoreLogin;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.LoginDTO;
 import com.careyq.explore.server.service.UserService;
 import com.careyq.explore.server.vo.LoginUserVO;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -37,7 +36,7 @@ public class UserController {
      */
     @IgnoreLogin
     @PostMapping("/login")
-    public Result<LoginUserVO> login(HttpServletRequest request,  @RequestBody @Validated LoginDTO dto) {
+    public Result<LoginUserVO> login(HttpServletRequest request, @RequestBody @Validated LoginDTO dto) {
         return userService.login(request, dto);
     }
 

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const props = defineProps(['comments'])
 const showForm = ref()
+const commentText = ref()
 
-const replyHandle = (index: number, item) => {
+const replyHandle = (index: number, item: any) => {
   showForm.value = index
+  commentText.value = '@' + item.username
 }
 </script>
 
@@ -20,7 +22,7 @@ const replyHandle = (index: number, item) => {
           <div class="info">
             <span>来自云南省</span>
             <span>{{ item.date }}</span>
-            <span @click="showForm = index">回复</span>
+            <span @click="showForm = index" class="reply-btn">回复</span>
           </div>
         </div>
       </div>
@@ -30,7 +32,7 @@ const replyHandle = (index: number, item) => {
         :replies="item.replies"
         @reply="replyHandle(index, $event)"
       />
-      <CommentForm v-if="showForm === index" />
+      <CommentForm v-if="showForm === index" :commentText="commentText" />
     </div>
   </div>
 </template>
@@ -88,6 +90,14 @@ const replyHandle = (index: number, item) => {
     > * {
       margin-right: 20px;
     }
+  }
+}
+
+.reply-btn {
+  cursor: pointer;
+  &:hover {
+    color: var(--primary);
+    text-decoration: underline;
   }
 }
 </style>

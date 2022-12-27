@@ -123,7 +123,7 @@ create table if not exists attachment_category
     primary key (id)
 ) comment '文件分类表';
 
-create table if not exists attachment
+create table if not exists resource
 (
     id          bigint unsigned not null auto_increment comment '主键',
     category_id bigint          not null comment '文件分类 ID',
@@ -137,7 +137,7 @@ create table if not exists attachment
     create_time datetime        not null default current_timestamp comment '创建时间',
     update_time datetime        not null default current_timestamp on update current_timestamp comment '更新时间',
     primary key (id)
-) comment '文件表';
+) comment '资源表';
 
 create table if not exists blog_comment
 (
