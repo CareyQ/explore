@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import {
-  getAttachmentCategoryList,
-  saveAttachmentCategory,
-  getAttachmentPage,
-  getAttachmentCategory,
-  getAttachment
+  getResourceCategeoryList,
+  saveResourceCategory,
+  getResourcePage,
+  getResourceCategoryDetail,
+  getResourceDetail
 } from '@/service'
 import { ElMessage } from 'element-plus'
 import type { UploadProps, UploadFile, UploadUserFile, TabsPaneContext } from 'element-plus'
 import { fileSize } from '@/utils'
 
-const categories = ref<AttachmentCategory[]>([])
-const files = ref<Page<Attachment>>()
+const categories = ref<ResourceCategory[]>([])
+const files = ref<Page<Resource>>()
 const categoryRef = ref()
 const categoryForm = reactive({
   id: '' || 0,
@@ -43,7 +43,7 @@ const filePage = reactive({
 const uploadFiles = ref<UploadUserFile[]>([])
 
 const getData = () => {
-  getAttachmentCategoryList().then((res) => {
+  getResourceCategeoryList().then((res) => {
     if (res.code === 0 && res.data) {
       categories.value = res.data
       if (res.data.length > 0) {
@@ -66,7 +66,7 @@ const saveCategory = () => {
       return
     }
     categoryLoading.value = true
-    saveAttachmentCategory(categoryForm).then((res) => {
+    saveResourceCategory(categoryForm).then((res) => {
       if (res.code === 0) {
         ElMessage.success(res.showMsg)
         categoryRef.value.resetFields()
@@ -82,7 +82,7 @@ const saveCategory = () => {
 
 const getFilePage = () => {
   filePage.categoryId = uploadData.categoryId
-  getAttachmentPage(filePage).then((res) => {
+  getResourcePage(filePage).then((res) => {
     if (res.code === 0) {
       files.value = res.data
     } else {
@@ -112,7 +112,7 @@ const handleCloseUpload = () => {
 
 const handleCloseCategory = () => {
   categoryRef.value.resetFields()
-  getAttachmentCategoryList().then((res) => {
+  getResourceCategeoryList().then((res) => {
     if (res.code === 0 && res.data) {
       categories.value = res.data
     } else {
@@ -132,7 +132,7 @@ const handleCheck = (id: number) => {
 }
 
 const handleEditCategory = (id: number) => {
-  getAttachmentCategory(id).then((res) => {
+  getResourceCategoryDetail(id).then((res) => {
     if (res.code === 0) {
       const data = res.data
       if (data) {
@@ -169,7 +169,7 @@ const checkAll = () => {
 const file = ref({} as any)
 
 const getFile = (id: number) => {
-  getAttachment(id).then((res) => {
+  getResourceDetail(id).then((res) => {
     if (res.code === 0) {
       file.value = res.data
       fileDialogVisible.value = true

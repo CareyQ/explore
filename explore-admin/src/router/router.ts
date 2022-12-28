@@ -1,5 +1,7 @@
 import Layout from '@/views/layout/index.vue'
 import type { RouteRecordRaw } from 'vue-router'
+import { Icon } from '@iconify/vue'
+import { ElIcon } from 'element-plus'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,7 +15,7 @@ const routes: RouteRecordRaw[] = [
         path: '/dashboard',
         meta: {
           title: '仪表盘',
-          icon: 'akar-icons:dashboard'
+          icon: iconRender('akar-icons:dashboard')
         },
         component: () => import('@/views/dashboard/index.vue')
       },
@@ -23,14 +25,14 @@ const routes: RouteRecordRaw[] = [
         path: '/blog',
         meta: {
           title: '博客管理',
-          icon: 'akar-icons:book-close'
+          icon: iconRender('akar-icons:book-close')
         },
         component: () => import('@/views/blog/index.vue'),
         redirect: '/blog/post',
         children: [
           {
             name: 'Post',
-            path: 'blog/post',
+            path: '/blog/post',
             meta: {
               title: '博客列表'
             },
@@ -38,7 +40,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             name: 'Publish',
-            path: 'blog/publish',
+            path: '/blog/publish',
             meta: {
               title: '发布文章'
             },
@@ -46,7 +48,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             name: 'Meta',
-            path: 'blog/meta',
+            path: '/blog/meta',
             meta: {
               title: '分类/标签'
             },
@@ -54,7 +56,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             name: 'Link',
-            path: 'blog/link',
+            path: '/blog/link',
             meta: {
               title: '友链管理'
             },
@@ -68,7 +70,7 @@ const routes: RouteRecordRaw[] = [
         path: '/resource',
         meta: {
           title: '资源管理',
-          icon: 'akar-icons:folder'
+          icon: iconRender('akar-icons:folder')
         },
         component: () => import('@/views/resource/index.vue')
       },
@@ -78,7 +80,7 @@ const routes: RouteRecordRaw[] = [
         path: '/message',
         meta: {
           title: '评论留言',
-          icon: 'akar-icons:chat-dots'
+          icon: iconRender('akar-icons:chat-dots')
         },
         component: () => import('@/views/message/index.vue')
       },
@@ -88,7 +90,7 @@ const routes: RouteRecordRaw[] = [
         path: '/author',
         meta: {
           title: '作者信息',
-          icon: 'akar-icons:person'
+          icon: iconRender('akar-icons:person')
         },
         component: () => import('@/views/author/index.vue')
       },
@@ -98,14 +100,14 @@ const routes: RouteRecordRaw[] = [
         path: '/system',
         meta: {
           title: '系统管理',
-          icon: 'akar-icons:settings-horizontal'
+          icon: iconRender('akar-icons:settings-horizontal')
         },
         component: () => import('@/views/system/index.vue'),
         redirect: '/system/web/index',
         children: [
           {
             name: 'SystemWeb',
-            path: 'system/web/index',
+            path: '/system/web/index',
             meta: {
               title: '前台设置'
             },
@@ -113,7 +115,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             name: 'SystemAdmin',
-            path: 'system/admin/index',
+            path: '/system/admin/index',
             meta: {
               title: '后台设置'
             },
@@ -121,16 +123,20 @@ const routes: RouteRecordRaw[] = [
           },
           {
             name: 'Config',
-            path: 'system/admin/index',
+            path: '/system/config/index',
             meta: {
               title: '配置管理'
             },
-            component: () => import('@/views/system/admin/index.vue')
+            component: () => import('@/views/system/config/index.vue')
           }
         ]
       }
     ]
   }
 ]
+
+export function iconRender(icon: string) {
+  return () => h(ElIcon, null, { default: () => h(Icon, { icon }) })
+}
 
 export default routes

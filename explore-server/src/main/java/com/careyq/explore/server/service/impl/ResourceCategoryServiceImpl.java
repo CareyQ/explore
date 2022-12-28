@@ -1,6 +1,7 @@
 package com.careyq.explore.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.careyq.explore.common.exception.UserException;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.ResourceCategory;
 import com.careyq.explore.server.mapper.ResourceCategoryMapper;
@@ -44,6 +45,9 @@ public class ResourceCategoryServiceImpl extends ServiceImpl<ResourceCategoryMap
     @Override
     public ResourceCategoryVO getDetail(Long id) {
         ResourceCategory category = this.getById(id);
+        if (category == null) {
+            throw new UserException("该资源分类不存在");
+        }
         ResourceCategoryVO vo = new ResourceCategoryVO();
         vo.setId(category.getId())
                 .setName(category.getName())

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -34,6 +35,17 @@ public class GlobalExceptionHandler {
     public Result<?> exception(Exception e) {
         log.error("全局异常", e);
         return Result.fail("服务维护中...", getOutMsg(e));
+    }
+
+    @ExceptionHandler(UserException.class)
+    public Result<?> exception(UserException e) {
+        return Result.fail(e.getMsg());
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public Result<?> exception(MissingServletRequestParameterException e) {
+        log.error("请求参数缺失: {} \n\n异常堆栈--->StackTrace：", e.getMessage(), e);
+        return new Result<>(ResultCodeEnum.PARAMS_ERROR, getOutMsg(e), "请求参数【" + e.getParameterName() + "】缺失");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

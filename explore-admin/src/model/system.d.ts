@@ -19,3 +19,4 @@ type Page<T = any> = {
   size: number
   total: 0
 }
+

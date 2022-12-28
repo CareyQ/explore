@@ -1,7 +1,9 @@
 package com.careyq.explore.server.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.server.entity.Config;
+import com.careyq.explore.server.vo.ConfigVO;
 
 /**
  * <p>
@@ -20,4 +22,6 @@ public interface ConfigService extends IService<Config> {
      * @return 值
      */
     String getConfigValue(Integer code);
+
+    IPage<ConfigVO> getPage(Integer current, Integer size);
 }

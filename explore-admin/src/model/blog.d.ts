@@ -50,14 +50,14 @@ type ArticlePage = {
   likes: number
 }
 
-type AttachmentCategory = {
+type ResourceCategory = {
   id: number
   name: string
   isEncrypt: boolean
   isShow: boolean
 }
 
-type AttachmentCategoryDetail = {
+type ResourceCategoryDetail = {
   id: number
   name: string
   categoryDesc: string
@@ -65,7 +65,7 @@ type AttachmentCategoryDetail = {
   isShow: boolean
 }
 
-type Attachment = {
+type Resource = {
   id: number
   name: string
   type: string

@@ -7,7 +7,7 @@ import ElementPlus from 'element-plus'
 import plugins from '@/plugins'
 import './router/permission'
 
-import 'element-plus/theme-chalk/src/message.scss'
+// import 'element-plus/theme-chalk/src/message.scss'
 import '@/assets/font/font.css'
 import '@/assets/scss/element.scss'
 import '@/assets/scss/common.scss'

@@ -7,6 +7,7 @@ const router = useRouter()
 
 const defaultRouter = ref(router.currentRoute.value.path)
 const menus = computed(() => routeStore.routes)
+console.log(router.options.routes[0].children)
 </script>
 
 <template>
@@ -24,9 +25,11 @@ const menus = computed(() => routeStore.routes)
       </div>
     </div>
     <hr />
-    <el-menu router :default-active="defaultRouter">
-      <MenuItem :item="item" v-for="item in menus" :key="item.path" />
-    </el-menu>
+    <el-scrollbar>
+      <el-menu router :default-active="defaultRouter">
+        <MenuItem :item="item" v-for="item in router.options.routes[0].children" :key="item.path" />
+      </el-menu>
+    </el-scrollbar>
   </aside>
 </template>
 
@@ -72,5 +75,9 @@ const menus = computed(() => routeStore.routes)
     font-size: 12px;
     opacity: 0.8;
   }
+}
+
+.el-scrollbar {
+  height: calc(100vh - 180px);
 }
 </style>
