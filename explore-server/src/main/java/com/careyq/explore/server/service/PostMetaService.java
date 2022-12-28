@@ -3,7 +3,7 @@ package com.careyq.explore.server.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.PostMeta;
-import com.careyq.explore.server.vo.CategoryVO;
+import com.careyq.explore.server.vo.PostMetaVO;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public interface PostMetaService extends IService<PostMeta> {
      *
      * @return 分类列表
      */
-    List<CategoryVO> getCategories();
+    List<PostMetaVO> getCategories();
 
     /**
      * 根据 id 删除分类

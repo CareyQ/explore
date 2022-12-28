@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
-import com.careyq.explore.server.dto.AttachmentPageDTO;
+import com.careyq.explore.server.dto.ResourcePageDTO;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.entity.Resource;
 import com.careyq.explore.server.vo.ResourcePageVO;
@@ -45,7 +45,7 @@ public interface ResourceService extends IService<Resource> {
      * @param dto 分页筛选参数
      * @return 分页结果
      */
-    IPage<ResourcePageVO> getPage(AttachmentPageDTO dto);
+    IPage<ResourcePageVO> getPage(ResourcePageDTO dto);
 
     /**
      * 获取附件详情

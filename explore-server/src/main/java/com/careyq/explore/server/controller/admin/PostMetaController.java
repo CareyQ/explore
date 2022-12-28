@@ -3,7 +3,7 @@ package com.careyq.explore.server.controller.admin;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.PostMeta;
 import com.careyq.explore.server.service.PostMetaService;
-import com.careyq.explore.server.vo.CategoryVO;
+import com.careyq.explore.server.vo.PostMetaVO;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +42,7 @@ public class PostMetaController {
      * @return 结果
      */
     @GetMapping("/list")
-    public Result<List<CategoryVO>> getCategories() {
+    public Result<List<PostMetaVO>> getCategories() {
         return Result.success(postMetaService.getCategories());
     }
 

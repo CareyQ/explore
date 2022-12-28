@@ -3,7 +3,7 @@ package com.careyq.explore.server.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
-import com.careyq.explore.server.dto.AttachmentPageDTO;
+import com.careyq.explore.server.dto.ResourcePageDTO;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.service.ResourceService;
 import com.careyq.explore.server.vo.ResourceVO;
@@ -57,7 +57,7 @@ public class ResourceController {
      * @return 分页结果
      */
     @PostMapping("/page")
-    public Result<IPage<ResourcePageVO>> getAttachmentPage(@RequestBody @Validated AttachmentPageDTO dto) {
+    public Result<IPage<ResourcePageVO>> getPage(@RequestBody @Validated ResourcePageDTO dto) {
         return Result.success(resourceService.getPage(dto));
     }
 

@@ -3,7 +3,7 @@ package com.careyq.explore.server.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.careyq.explore.server.dto.AttachmentPageDTO;
+import com.careyq.explore.server.dto.ResourcePageDTO;
 import com.careyq.explore.server.entity.Resource;
 import com.careyq.explore.server.vo.ResourcePageVO;
 import com.careyq.explore.server.vo.ResourceVO;
@@ -36,7 +36,7 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @param dto  参数
      * @return 分页结果
      */
-    IPage<ResourcePageVO> selectAttachmentPage(Page<ResourcePageVO> page, @Param("dto") AttachmentPageDTO dto);
+    IPage<ResourcePageVO> selectAttachmentPage(Page<ResourcePageVO> page, @Param("dto") ResourcePageDTO dto);
 
     /**
      * 根据 ID 查询

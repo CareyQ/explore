@@ -10,7 +10,7 @@ import com.careyq.explore.common.util.FileUtil;
 import com.careyq.explore.common.util.StrUtil;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
-import com.careyq.explore.server.dto.AttachmentPageDTO;
+import com.careyq.explore.server.dto.ResourcePageDTO;
 import com.careyq.explore.server.enmus.BatchOperateTypeEnum;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.entity.Resource;
@@ -124,7 +124,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public IPage<ResourcePageVO> getPage(AttachmentPageDTO dto) {
+    public IPage<ResourcePageVO> getPage(ResourcePageDTO dto) {
         return baseMapper.selectAttachmentPage(new Page<>(dto.getCurrent(), dto.getSize()), dto);
     }
 

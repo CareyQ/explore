@@ -5,7 +5,7 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.entity.PostMeta;
 import com.careyq.explore.server.mapper.PostMetaMapper;
 import com.careyq.explore.server.service.PostMetaService;
-import com.careyq.explore.server.vo.CategoryVO;
+import com.careyq.explore.server.vo.PostMetaVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class PostMetaServiceImpl extends ServiceImpl<PostMetaMapper, PostMeta> i
 
     @Override
     public Result<Boolean> saveMeta(PostMeta meta) {
-        Integer exists = baseMapper.selectIsExists(meta.getName(), meta.getSlug(), meta.getId());
+        Integer exists = baseMapper.selectIsExists(meta);
         if (exists != null) {
             return Result.fail("名称或别名已存在");
         }
@@ -32,8 +32,8 @@ public class PostMetaServiceImpl extends ServiceImpl<PostMetaMapper, PostMeta> i
     }
 
     @Override
-    public List<CategoryVO> getCategories() {
-        return baseMapper.selectCategories();
+    public List<PostMetaVO> getCategories() {
+        return baseMapper.selectMetaList();
     }
 
     @Override

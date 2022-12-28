@@ -35,4 +35,9 @@ public class ResourcePageVO {
      */
     private String type;
 
+    /**
+     * 是否是封面
+     */
+    private Boolean isCover;
+
 }

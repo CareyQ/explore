@@ -2,7 +2,7 @@ package com.careyq.explore.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.careyq.explore.server.entity.PostMeta;
-import com.careyq.explore.server.vo.CategoryVO;
+import com.careyq.explore.server.vo.PostMetaVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,21 +21,17 @@ public interface PostMetaMapper extends BaseMapper<PostMeta> {
     /**
      * 查询名称或别名是否已存在
      *
-     * @param name      名称
-     * @param slug     别名
-     * @param id        主键
+     * @param meta PostMeta
      * @return 结果
      */
-    Integer selectIsExists(@Param("name") String name,
-                           @Param("slug") String slug,
-                           @Param("id") Long id);
+    Integer selectIsExists(@Param("meta") PostMeta meta);
 
     /**
      * 查询分类
      *
      * @return 分类列表
      */
-    List<CategoryVO> selectCategories();
+    List<PostMetaVO> selectMetaList();
 
     /**
      * 根据分类查询文章是否存在

@@ -13,12 +13,17 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class CategoryVO {
+public class PostMetaVO {
 
     /**
      * 主键
      */
     private Long id;
+
+    /**
+     * 类型
+     */
+    private Integer type;
 
     /**
      * 分类名称
@@ -31,18 +36,8 @@ public class CategoryVO {
     private String alias;
 
     /**
-     * 浏览量
-     */
-    private Long hits;
-
-    /**
      * 文章数
      */
     private Long count;
-
-    /**
-     * 排序
-     */
-    private Integer sort;
 
 }

@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class BlogPost extends BaseModel<BlogPost> {
+public class Post extends BaseModel<Post> {
 
     /**
      * 类型：0：文章 1：片刻

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.ArticleDTO;
 import com.careyq.explore.server.dto.ArticlePageDTO;
-import com.careyq.explore.server.entity.BlogPost;
+import com.careyq.explore.server.entity.Post;
 import com.careyq.explore.server.vo.ArticlePageVO;
 
 /**
@@ -16,7 +16,7 @@ import com.careyq.explore.server.vo.ArticlePageVO;
  * @author CareyQ
  * @since 2022-08-19
  */
-public interface BlogPostService extends IService<BlogPost> {
+public interface BlogPostService extends IService<Post> {
 
     /**
      * 保存文章

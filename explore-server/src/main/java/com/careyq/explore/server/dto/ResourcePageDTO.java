@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 文章 DTO
+ * 资源分页筛选 DTO
  * </p>
  *
  * @author CareyQ
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AttachmentPageDTO extends PageDTO {
+public class ResourcePageDTO extends PageDTO {
 
     /**
      * 文件分类 ID
