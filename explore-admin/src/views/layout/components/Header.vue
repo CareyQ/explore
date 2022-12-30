@@ -3,7 +3,7 @@ const router = useRouter()
 const routers = computed(() => {
   const routes = router.currentRoute.value.matched
   routes.forEach((e) => {
-    if (e.meta.title === 'Layout') {
+    if (e.name === 'Layout') {
       e.meta.title = '首页'
     }
   })

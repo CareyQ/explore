@@ -37,3 +37,7 @@ export const post = <T>(url: string, params?: object): Promise<Result<T>> => {
 export const put = <T>(url: string, params?: object): Promise<Result<T>> => {
   return axios.put(url, params)
 }
+
+export const del = <T>(url: string, params?: object): Promise<Result<T>> => {
+  return axios.delete(url, { params })
+}

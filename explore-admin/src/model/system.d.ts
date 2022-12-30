@@ -20,3 +20,10 @@ type Page<T = any> = {
   total: 0
 }
 
+/** 配置 */
+type Config = {
+  id: string | number
+  code: string | number
+  value: string
+  configDesc: string
+}

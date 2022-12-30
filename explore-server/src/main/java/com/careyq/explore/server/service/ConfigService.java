@@ -23,5 +23,20 @@ public interface ConfigService extends IService<Config> {
      */
     String getConfigValue(Integer code);
 
+    /**
+     * 查询配置分页
+     *
+     * @param current 当前页
+     * @param size    页面大小
+     * @return 分页
+     */
     IPage<ConfigVO> getPage(Integer current, Integer size);
+
+    /**
+     * 保存配置
+     *
+     * @param config 配置
+     * @return 结果
+     */
+    boolean saveConfig(Config config);
 }

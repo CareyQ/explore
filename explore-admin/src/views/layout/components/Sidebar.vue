@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { useRouteStore } from '@/stores/modules/route'
 import MenuItem from './MenuItem.vue'
 
-const routeStore = useRouteStore()
 const router = useRouter()
-
 const defaultRouter = ref(router.currentRoute.value.path)
-const menus = computed(() => routeStore.routes)
-console.log(router.options.routes[0].children)
 </script>
 
 <template>

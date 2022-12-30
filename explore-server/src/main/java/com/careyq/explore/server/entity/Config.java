@@ -1,6 +1,8 @@
 package com.careyq.explore.server.entity;
 
 import com.careyq.explore.common.entity.BaseModel;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,6 +25,7 @@ public class Config extends BaseModel<Config> {
     /**
      * 配置 code
      */
+    @NotNull(message = "配置 code 不能为空")
     private Integer code;
 
     /**
@@ -33,6 +36,7 @@ public class Config extends BaseModel<Config> {
     /**
      * 配置值
      */
+    @NotBlank(message = "配置值不能为空")
     private String value;
 
 
