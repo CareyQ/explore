@@ -1,6 +1,0 @@
-export * from './api/category'
-export * from './api/menu'
-export * from './api/tag'
-export * from './api/article'
-export * from './api/resource'
-export * from './api/config'

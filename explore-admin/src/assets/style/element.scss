@@ -1,0 +1,52 @@
+:root {
+  --el-menu-item-font-size: 1.6rem;
+}
+
+#app {
+  .el-menu {
+    border: none;
+
+    .el-menu-item,
+    .el-sub-menu__title {
+      border-radius: .8rem;
+    }
+
+  }
+
+  .el-menu-item.is-active {
+    color: white;
+    background-color: var(--el-color-primary);
+  }
+
+  .el-card {
+    border: none;
+    --el-card-border-radius: 1.6rem;
+
+    .el-card__header {
+      border: none;
+      padding-bottom: 0;
+    }
+  }
+
+  .page-body {
+    .el-pagination {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+.el-message {
+  --el-message-padding: 1rem 2rem;
+}
+
+.el-message--success {
+  --el-message-bg-color: #2dce89;
+  --el-message-border-color: #2dce89;
+  --el-message-text-color: white;
+}
+
+.el-message--error {
+  --el-message-bg-color: #d03050;
+  --el-message-border-color: #d03050;
+  --el-message-text-color: white;
+}

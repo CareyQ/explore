@@ -1,0 +1,15 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with ($colors: ('primary': ('base': #344767)));
+
+$primary-color: #344767;
+$bg-color: #f9f9fb;
+$white-color: #fff;
+$dark-color: #212529;
+$green-color: #2dce89;
+$red-color: #d03050;
+$yellow-color: #f0a020;
+$link-color: #1890ff;
+
+$box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+$border-radius: 1.6rem;
+
+$bg-img: url('http://zhongguose.com/img/texture.png');
