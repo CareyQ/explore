@@ -1,5 +1,6 @@
 :root {
   --el-menu-item-font-size: 1.6rem;
+  --border-radius: 1.6rem
 }
 
 #app {
@@ -20,11 +21,15 @@
 
   .el-card {
     border: none;
-    --el-card-border-radius: 1.6rem;
+    --el-card-border-radius: var(--border-radius);
 
     .el-card__header {
       border: none;
       padding-bottom: 0;
+    }
+
+    .el-form.el-form--inline .el-form-item {
+      margin-bottom: 0;
     }
   }
 
@@ -32,6 +37,18 @@
     .el-pagination {
       margin-top: 1.5rem;
     }
+  }
+
+  .el-dialog {
+    --el-dialog-border-radius: var(--border-radius)
+  }
+
+  .el-tabs__item.is-active {
+    font-weight: bold;
+  }
+
+  .el-alert__title {
+    line-height: unset;
   }
 }
 

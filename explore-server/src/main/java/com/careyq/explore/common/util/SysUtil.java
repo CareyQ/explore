@@ -31,6 +31,6 @@ public class SysUtil {
         if (StrUtil.isBlank(path) || path.contains(HTTP_STR)) {
             return path;
         }
-        return ConfigUtil.getConfig(ConfigEnum.DOMAIN.getCode()) + StrUtil.SLASH + path;
+        return ConfigUtil.getConfig(ConfigEnum.RESOURCE_DOMAIN.getCode()) + StrUtil.SLASH + path;
     }
 }

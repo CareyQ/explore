@@ -1,5 +1,6 @@
 package com.careyq.explore.server.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.careyq.explore.common.entity.BaseModel;
 import com.careyq.explore.common.util.DigestUtil;
 import com.careyq.explore.common.util.StrUtil;
@@ -58,6 +59,12 @@ public class Resource extends BaseModel<Resource> {
     private Integer width;
 
     /**
+     * 临时索引
+     */
+    @TableField(exist = false)
+    private Integer index;
+
+    /**
      * 构建路径
      *
      * @param prefix    前缀
@@ -66,7 +73,7 @@ public class Resource extends BaseModel<Resource> {
      */
     public void builderPath(String prefix, String fileName, String extension) {
         this.path = prefix
-                + DigestUtil.md5Hex(fileName + System.currentTimeMillis())
+                + DigestUtil.md5Hex16(fileName + System.currentTimeMillis())
                 + StrUtil.DOT
                 + extension;
     }

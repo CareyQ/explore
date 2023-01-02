@@ -26,7 +26,7 @@ public enum FilePathEnum {
     /**
      * 其他附件路径
      */
-    OTHER(2, "other/", "其他附件路径");
+    RESOURCE(2, "resource/", "资源文件路径");
 
     private final Integer code;
 

@@ -26,7 +26,7 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @param categoryId 分类 ID
      * @return 结果
      */
-    @Select("select 1 from attachment where is_del = 0 and category_id = #{categoryId} limit 1;")
+    @Select("select 1 from resource where is_del = 0 and category_id = #{categoryId} limit 1;")
     Integer selectExistByCategory(@Param("categoryId") Long categoryId);
 
     /**
@@ -44,6 +44,6 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @param id 附件 ID
      * @return 结果
      */
-    @Select("select id, name, type, path, size, height, width, create_time from attachment where id = #{id}")
+    @Select("select id, name, type, path, size, height, width, create_time from resource where id = #{id}")
     ResourceVO selectAttachment(@Param("id") Long id);
 }

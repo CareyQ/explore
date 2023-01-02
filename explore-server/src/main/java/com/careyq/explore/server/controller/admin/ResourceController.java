@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * <p>
  * 资源表 控制层
@@ -36,7 +38,18 @@ public class ResourceController {
      */
     @PostMapping("/upload")
     public Result<Boolean> upload(@RequestPart MultipartFile file, Long categoryId) {
-        return Result.success(resourceService.uploadFile(file, categoryId, FilePathEnum.OTHER));
+        return Result.success(resourceService.uploadFile(file, categoryId, FilePathEnum.RESOURCE));
+    }
+
+    /**
+     * 批量上传文件
+     *
+     * @param files 文件
+     * @return 结果
+     */
+    @PostMapping("/batch/upload")
+    public Result<Boolean> batchUpload(@RequestPart List<MultipartFile> files, Long categoryId) {
+        return Result.success(resourceService.batchUploadFile(files, categoryId), "上传成功");
     }
 
     /**

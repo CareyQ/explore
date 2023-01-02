@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.careyq.explore.server.entity.Config;
 import com.careyq.explore.server.vo.ConfigVO;
 
+import java.util.List;
+
 /**
  * <p>
  * 配置表 服务类
@@ -39,4 +41,12 @@ public interface ConfigService extends IService<Config> {
      * @return 结果
      */
     boolean saveConfig(Config config);
+
+    /**
+     * 批量保存配置
+     *
+     * @param configs 配置
+     * @return 结果
+     */
+    boolean batchSaveConfig(List<Config> configs);
 }

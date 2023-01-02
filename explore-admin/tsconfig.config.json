@@ -1,12 +1,23 @@
 {
   "extends": "@vue/tsconfig/tsconfig.node.json",
-  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*", "env.d.ts", "src/**/*", "src/**/*.vue", "./auto-imports.d.ts"],
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "playwright.config.*",
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "./App.vue",
+    "./auto-imports.d.ts"
+  ],
   "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
     "baseUrl": ".",
     "composite": true,
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["node", "unplugin-icons/types/vue",]
+    "types": ["node", "unplugin-icons/types/vue"]
   }
 }

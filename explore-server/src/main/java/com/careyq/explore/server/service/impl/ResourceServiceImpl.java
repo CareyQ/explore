@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.careyq.explore.common.enums.IEnum;
 import com.careyq.explore.common.exception.UserException;
+import com.careyq.explore.common.util.CollUtil;
 import com.careyq.explore.common.util.ConfigUtil;
 import com.careyq.explore.common.util.FileUtil;
 import com.careyq.explore.common.util.StrUtil;
@@ -12,6 +13,7 @@ import com.careyq.explore.common.vo.Result;
 import com.careyq.explore.server.dto.AttachmentBatchOperateDTO;
 import com.careyq.explore.server.dto.ResourcePageDTO;
 import com.careyq.explore.server.enmus.BatchOperateTypeEnum;
+import com.careyq.explore.server.enmus.ConfigEnum;
 import com.careyq.explore.server.enmus.FilePathEnum;
 import com.careyq.explore.server.entity.Resource;
 import com.careyq.explore.server.mapper.ResourceMapper;
@@ -30,9 +32,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * <p>
@@ -46,8 +47,6 @@ import java.util.Objects;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
-    private static final String LOCATION = "D:\\Files\\";
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean uploadFile(MultipartFile file, Long categoryId,  FilePathEnum pathEnum) {
@@ -56,6 +55,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         }
         String filename = file.getOriginalFilename();
         if (StrUtil.isBlank(filename)) {
+            throw new UserException("文件名称不能为空");
+        }
+        String resourcePath = ConfigUtil.getConfig(ConfigEnum.RESOURCE_PATH.getCode());
+        if (StrUtil.isBlank(resourcePath)) {
             throw new UserException("文件名称不能为空");
         }
         Resource resource = new Resource();
@@ -76,7 +79,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             throw new UserException("文件转换图片失败");
         }
         resource.insert();
-        File localFile = FileUtil.buildFile(LOCATION + resource.getPath());
+        File localFile = FileUtil.buildFile(resourcePath + resource.getPath());
         try {
             file.transferTo(localFile);
         } catch (IOException e) {
@@ -84,6 +87,78 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             throw new UserException("文件写入本地失败");
         }
         return true;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean batchUploadFile(List<MultipartFile> files, Long categoryId) {
+        if (CollUtil.isEmpty(files)) {
+            throw new UserException("上传的文件不能为空");
+        }
+        if (categoryId == null) {
+            categoryId = ConfigUtil.getResourceCategory();
+        }
+        String resourcePath = ConfigUtil.getConfig(ConfigEnum.RESOURCE_PATH.getCode());
+        if (StrUtil.isBlank(resourcePath)) {
+            throw new UserException("请先配置资源存储路径");
+        }
+
+        List<Resource> resources = new ArrayList<>();
+        Map<Integer, MultipartFile> tempMap = new HashMap<>(files.size());
+        int index = 0;
+        for (MultipartFile file : files) {
+            String filename = file.getOriginalFilename();
+            if (StrUtil.isBlank(filename)) {
+                throw new UserException("文件名称不能为空");
+            }
+            if (filename != null && filename.length() > 50) {
+                throw new UserException("文件名称不可超过 50 字");
+            }
+
+            Resource resource = new Resource();
+            resource.setName(filename)
+                    .setCategoryId(categoryId)
+                    .setType(MediaType.valueOf(Objects.requireNonNull(file.getContentType())).getType())
+                    .setSize(file.getSize())
+                    .setIndex(index);
+            resource.builderPath(FilePathEnum.RESOURCE.getPath() + categoryId + "/", filename, FileUtil.extName(filename));
+
+            try {
+                BufferedImage image = ImageIO.read(file.getInputStream());
+                if (Objects.nonNull(image)) {
+                    resource.setHeight(image.getWidth())
+                            .setWidth(image.getHeight());
+                }
+            } catch (IOException e) {
+                log.error("文件转换 image 异常，文件名：{}", file.getOriginalFilename(), e);
+            }
+            tempMap.put(index, file);
+            index++;
+
+
+            resources.add(resource);
+        }
+
+
+        boolean res = this.saveBatch(resources);
+        if (res) {
+            List<CompletableFuture<Void>> futures = new ArrayList<>();
+            for (Resource resource : resources) {
+                MultipartFile file = tempMap.get(resource.getIndex());
+                CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                    File localFile = FileUtil.buildFile(resourcePath + resource.getPath());
+                    try {
+                        file.transferTo(localFile);
+                    } catch (IOException e) {
+                        log.error("文件写入本地异常", e);
+                        throw new UserException("文件写入本地失败");
+                    }
+                });
+                futures.add(future);
+            }
+            futures.forEach(CompletableFuture::join);
+        }
+        return res;
     }
 
     public static String getBasename(String filename) {

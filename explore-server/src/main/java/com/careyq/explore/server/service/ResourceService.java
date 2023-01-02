@@ -11,6 +11,8 @@ import com.careyq.explore.server.vo.ResourcePageVO;
 import com.careyq.explore.server.vo.ResourceVO;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * <p>
  * 资源表 服务类
@@ -30,6 +32,15 @@ public interface ResourceService extends IService<Resource> {
      * @return 结果
      */
     boolean uploadFile(MultipartFile file, Long categoryId, FilePathEnum pathEnum);
+
+    /**
+     * 批量上传文件
+     *
+     * @param files       文件
+     * @param categoryId 文件分类
+     * @return 结果
+     */
+    boolean batchUploadFile(List<MultipartFile> files, Long categoryId);
 
     /**
      * 指定分类下是否存在附件

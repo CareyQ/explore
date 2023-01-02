@@ -58,7 +58,6 @@ hr {
   border: 0;
 }
 
-
 .flex {
   display: flex;
 }
@@ -67,6 +66,16 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
 }
 
 .card {

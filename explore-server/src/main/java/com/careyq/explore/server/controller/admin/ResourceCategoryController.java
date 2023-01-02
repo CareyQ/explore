@@ -34,8 +34,7 @@ public class ResourceCategoryController {
      */
     @PostMapping("/save")
     public Result<Boolean> saveResourceCategory(@RequestBody @Validated ResourceCategory category) {
-        resourceCategoryService.saveOrUpdate(category);
-        return Result.success("保存成功");
+        return resourceCategoryService.saveResourceCategory(category);
     }
 
     /**

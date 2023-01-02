@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- * 文件分类表 服务类
+ * 资源分类表 服务类
  * </p>
  *
  * @author CareyQ
@@ -19,22 +19,30 @@ import java.util.List;
 public interface ResourceCategoryService extends IService<ResourceCategory> {
 
     /**
-     * 删除文件分类
+     * 保存资源分类
      *
-     * @param id 文件分类 ID
+     * @param category 资源分类
+     * @return 结果
+     */
+    Result<Boolean> saveResourceCategory(ResourceCategory category);
+
+    /**
+     * 删除资源分类
+     *
+     * @param id 资源分类 ID
      * @return 结果
      */
     Result<Boolean> delResourceCategory(Long id);
 
     /**
-     * 获取文件分类列表
+     * 获取资源分类列表
      *
      * @return 分类列表
      */
     List<ResourceCategoryPageVO> getList();
 
     /**
-     * 获取文件分类详情
+     * 获取资源分类详情
      *
      * @param id 分类 ID
      * @return 详情
