@@ -18,6 +18,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@iconify-json/ci": "^1.1.9",
     "@iconify-json/ic": "^1.1.10",
     "@iconify-json/icon-park-solid": "^1.1.5",
     "@iconify-json/uis": "^1.1.3",

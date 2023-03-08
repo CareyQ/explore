@@ -41,6 +41,15 @@ const saveConfig = async (configs: Config[]) => {
 onMounted(() => {
   getResourceLocalConfig(selectionCode.value)
 })
+
+const handleLocalPath = (localPathConfig: Config) => {
+  let path = localPathConfig.value.replaceAll('\\', '\/')
+  if (!path.endsWith('/')) {
+    path = path + '/'
+  }
+  localPathConfig.value = path
+  return localPathConfig
+}
 </script>
 
 <template>
@@ -57,7 +66,9 @@ onMounted(() => {
               <el-input v-model="config.localPath.value" />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="saveConfig([config.localDomain, config.localPath])">保存</el-button>
+              <el-button type="primary" @click="saveConfig([config.localDomain, handleLocalPath(config.localPath)])"
+                >保存</el-button
+              >
             </el-form-item>
           </el-form>
         </el-card>

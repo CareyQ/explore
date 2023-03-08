@@ -10,11 +10,14 @@ import type {
   TabPaneName
 } from 'element-plus'
 import axios from '@/util/axios'
+import ResourceDetail from './ResourceDetail.vue'
 
 const selection = ref()
 const delTab = ref()
 const resourceCategoryRef = ref()
 const uploadBtnText = ref('确认上传')
+const selectionFile = ref<any[]>([])
+const selectionText = ref('当页全选')
 
 const tabsData = ref<ResourceCategory[]>([])
 const resources = ref<Resource[]>([])
@@ -26,6 +29,9 @@ const saveDialogVisible = ref(false)
 const uploadDialogVisible = ref(false)
 const resourceCategoryLoading = ref(false)
 const uploadBtnLoading = ref(false)
+const delBtnEnable = ref(false)
+const showId = ref()
+const detailVisible = ref(false)
 
 const resourceCategoryRules = {
   name: [{ required: true, message: '请输入分类名称', trigger: 'change' }]
@@ -163,6 +169,45 @@ onMounted(async () => {
 const categoryId = computed(() => {
   return selection.value
 })
+
+const checkBoxHandle = (resourceId: any) => {
+  const index = selectionFile.value.indexOf(resourceId)
+
+  if (index >= 0) {
+    selectionFile.value.splice(index, 1)
+  } else {
+    selectionFile.value.push(resourceId)
+  }
+}
+
+const selectAll = () => {
+  if (selectionText.value === '当页全选') {
+    selectionFile.value = []
+    resources.value.forEach((e) => {
+      selectionFile.value.push(e.id)
+    })
+    selectionText.value = '取消选择'
+  } else {
+    selectionFile.value = []
+  }
+}
+
+const batchOperate = async (type: number) => {
+  const params = {
+    ids: selectionFile.value,
+    operationType: type
+  }
+  const res = (await axios.post('/resource/batch/operate', params)) as Res
+  if (res.code === 0) {
+    ElMessage.success(res.showMsg)
+    getResourceCategories()
+  }
+}
+
+const showDetail = (id: string) => {
+  showId.value = id
+  detailVisible.value = true
+}
 </script>
 
 <template>
@@ -177,6 +222,12 @@ const categoryId = computed(() => {
                 <UisUploadAlt />
               </el-icon>
               上 传
+            </el-button>
+            <el-button type="warning" v-if="selectionFile.length > 0" @click="selectAll">
+              {{ selectionText }}
+            </el-button>
+            <el-button type="danger" v-if="selectionFile.length > 0" :disabled="delBtnEnable" @click="batchOperate(0)">
+              删除
             </el-button>
           </div>
           <div>
@@ -209,9 +260,14 @@ const categoryId = computed(() => {
           <el-tab-pane :name="item.id" v-for="(item, index) in tabsData" :key="index" :label="item.name">
             <el-row :gutter="14" v-if="resources && resources.length > 0">
               <el-col v-for="(item, index) in resources" :key="index" :span="4">
-                <div class="file-item">
+                <div class="file-item" @click="showDetail(item.id)">
                   <div class="checkBox">
-                    <input type="checkbox" :id="item.id" @click="" />
+                    <input
+                      type="checkbox"
+                      :id="item.id"
+                      :checked="selectionFile.indexOf(item.id) >= 0"
+                      @click="checkBoxHandle(item.id)"
+                    />
                     <label :for="item.id" />
                   </div>
 
@@ -221,12 +277,14 @@ const categoryId = computed(() => {
                       class="img"
                       :style="`background-image: url(${item?.path});`"
                     ></div>
-                    <span v-else class="cover-text flex-align-center">{{
-                      item.name.substring(item?.name.lastIndexOf('.') + 1)
-                    }}</span>
+                    <span v-else class="cover-text flex-align-center">
+                      {{ item.name.substring(item?.name.lastIndexOf('.') + 1) }}
+                    </span>
                   </div>
                   <div class="name" @click="">
-                    <span>{{ item.name }}</span>
+                    <el-tooltip :content="item.name">
+                      <span>{{ item.name }}</span>
+                    </el-tooltip>
                   </div>
                 </div>
               </el-col>
@@ -304,6 +362,8 @@ const categoryId = computed(() => {
         </span>
       </template>
     </el-dialog>
+
+    <ResourceDetail :id="showId" :visible="detailVisible" @visible="(value) => (detailVisible = value)" />
   </div>
 </template>
 
