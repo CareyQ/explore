@@ -21,9 +21,12 @@ spring:
       min-idle: 5
       max-active: 20
       max-wait: 60000
-      test-while-idle: true
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 30000
+      testOnBorrow: false
+      testOnReturn: false
+      testWhileIdle: true
+      validation-query: SELECT 1 FROM DUAL
   # Redis 配置
   data:
     redis:

@@ -85,6 +85,13 @@ public class ResourceController {
         return Result.success(resourceService.getDetail(id));
     }
 
+    /**
+     * 批量操作资源
+     *
+     * @param dto 操作参数
+     * @return 结果
+     */
+    @PostMapping("/batch/operate")
     public Result<Boolean> batchOperate(@RequestBody @Validated AttachmentBatchOperateDTO dto) {
         return resourceService.batchOperate(dto);
     }
